@@ -11,7 +11,16 @@ public class Board {
 		{'X', ' ', 'I', ' ', 'I', ' ', 'X', 'K', ' ', 'X'},
 		{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}};
 
-
+	public void play(){
+		Scanner sc = new Scanner(System.in);
+		
+		
+		
+		
+	}
+	
+	
+	
 
 
 	public static void main(String[] args) {

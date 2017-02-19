@@ -73,14 +73,18 @@ public class Game{
 	}
 	
 	//vê se o jogador é casso e consequentemente perde o jogo
-	public boolean gameover (char over) {
-		if((board[hero[0]+1][hero[1]]==over) || (board[hero[0]][hero[1]+1]==over)
+	public int WinOrLoose (char over) {
+		
+		if (hero[1]==0 && (hero[0]==5 || hero[0]==6)){
+			return 1;
+		}
+		else if((board[hero[0]+1][hero[1]]==over) || (board[hero[0]][hero[1]+1]==over)
 			|| (board[hero[0]-1][hero[1]]==over) || (board[hero[0]][hero[1]-1]==over)){
 			System.out.println("Game Over!!!");
-			return true;
+			return -1;
 		}
-		return false;
-	}
+		return 0;
+	} 
 	
 	//trata da primera parte do jogo
 	public boolean firstLevel () {
@@ -95,7 +99,7 @@ public class Game{
 		System.out.println();
 		
 		while (move(hero) != 'q'){
-			if(gameover('G')==true){return false;}
+			if(WinOrLoose('G')==-1){return false;}
 			move(guard);
 			for (int i=0; i<board.length; i++){
 				for (int j=0; j<board[0].length; j++){
@@ -103,21 +107,20 @@ public class Game{
 					System.out.print(' ');
 				}			
 				System.out.println();
-			}
+			} 
 			System.out.println();
-			if (hero[1]==0 && (hero[0]==5 || hero[0]==6)){
-				System.out.println("Parabéns! Passou de Nível!!!");
-				return true;
-			}
-			if(gameover('G')==true){return false;}
+			if(WinOrLoose('G')==-1){return false;}
+			else if(WinOrLoose('G')==1){return true;}
 		}
+		System.out.println("Erro!!!");
 		return false;
-		
 	}
 	
 	public static void main(String[] args) {
 		Game jogo = new Game ();
 		System.out.println("Use:	 'w' 'a' 's' 'd' para se mover.\n");
-		jogo.firstLevel();
+		if(jogo.firstLevel()){
+			System.out.println("Parabéns! Passou de Nível!!!");
+		}
 	}
 }

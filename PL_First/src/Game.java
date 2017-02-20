@@ -14,26 +14,49 @@ public class Game{
 						{'X', ' ', 'I', ' ', 'I', ' ', 'X', 'k', ' ', 'X'},
 						{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'} };
 
-	char [][] board2 = {{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
-						{'I', ' ', ' ', ' ', 'O', ' ', ' ', ' ', 'k', 'X'},
-						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-						{'X', 'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-						{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}};
+	char [][] board2 = {{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
+						{'I', ' ', ' ', ' ', 'O', ' ', ' ', 'k', 'X'},
+						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', 'H', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}};
 
 	int hero[] = {1,1};
 	int guard[] = {1,8};
 	int ogre[] = {1,4};
+	int club[] = {7,7};
 	char guardtraject[] = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
 	char direction;
 	int i=0;
 	char heroLetter, guardLetter, ogreLetter; 
 	int count = 0;
 	boolean herowithkey=false;
+	
+	public void printboard(char [][] board){
+		for (int i=0; i<board.length; i++){
+			for (int j=0; j<board[0].length; j++){
+				System.out.print(board[i][j]);
+				System.out.print(' ');
+			}			
+			System.out.println();
+		} 	
+	}
+	
+	public char randomdirection(){
+		Random rn = new Random();
+		int range = 4 - 1 + 1;
+		int randomNum =  rn.nextInt(range) + 1;
+
+		if (randomNum==1){return 'w';}
+		else if (randomNum==2){return 'a';}
+		else if (randomNum==3){return 's';}
+		else if (randomNum==4){return 'd';}
+		
+		return ' ';
+	}
 	
 	//move os intervenientes
 	public void direcao (int person0, int person1, int person[], char [][] board){
@@ -77,15 +100,48 @@ public class Game{
 				}
 				
 			}else if (person == ogre){
-				if(board[1][8]=='$'){board[1][8]='k';}
-				else {board[person[0]][person[1]]=' ';}
+				if(board[1][7]=='$' && person[0]==1 && person[1]==7){board[1][7]='k';
+				}else if (board[1][7]=='O'){board[1][7]=' ';}
 				
-				if (person0 == 1 && person1 == 8 && !herowithkey){ogreLetter = '$';} 
+				if(person[0]!=1 || person[1]!=7){board[person[0]][person[1]]=' ';}
+				if (person0 == 1 && person1 == 7 && !herowithkey){ogreLetter = '$';} 
 				
 				person[0]=person0;
 				person[1]=person1;
 				board[person[0]][person[1]]=ogreLetter;
 				
+			}else if (person == club){	
+				if(board[1][7]=='$' && person[0]==1 && person[1]==7 && (ogre[0]!=1 || ogre[1]!=7)){board[1][7]='k';
+				}else if (board[1][7]=='*'){board[1][7]=' ';}
+				
+				if((person[0]!=1 || person[1]!=7) && board[person[0]][person[1]]=='*'){board[person[0]][person[1]]=' ';}
+				
+				direction=randomdirection();
+				while((direction=='w' && ogre[0]==1)||(direction=='a' && ogre[1]==1)
+					||(direction=='d' && ogre[1]==7)||(direction=='s' && ogre[0]==7)){
+					direction=randomdirection();
+				}
+				switch (direction){
+					case 'w':
+						person[0]=ogre[0]-1;
+						person[1]=ogre[1];
+						break;
+					case 'a':
+						person[0]=ogre[0];
+						person[1]=ogre[1]-1;
+						break;
+					case 'd':
+						person[0]=ogre[0];
+						person[1]=ogre[1]+1;
+						break;
+					case 's':
+						person[0]=ogre[0]+1;
+						person[1]=ogre[1];
+						break;			
+				}
+				if (person[0] == 1 && person[1] == 7 && !herowithkey){board[person[0]][person[1]]='$';
+				}else board[person[0]][person[1]]='*'; 
+		
 			}else if (person == guard){
 				board[person[0]][person[1]]=' ';
 				person[0]=person0;
@@ -109,7 +165,6 @@ public class Game{
 				heroLetter='H';
 			}
 
-
 		} else if (person==guard){
 
 			direction=guardtraject[i];
@@ -119,14 +174,7 @@ public class Game{
 
 		} else if (person==ogre){
 
-			Random rn = new Random();
-			int range = 4 - 1 + 1;
-			int randomNum =  rn.nextInt(range) + 1;
-
-			if (randomNum==1){direction='w';}
-			else if (randomNum==2){direction='a';}
-			else if (randomNum==3){direction='s';}
-			else if (randomNum==4){direction='d';}
+			direction=randomdirection();
 			ogreLetter = 'O';
 		}
 
@@ -164,28 +212,16 @@ public class Game{
 	//trata da primera parte do jogo
 	public boolean firstLevel () {
 
-		for (int i=0; i<board1.length; i++){
-			for (int j=0; j<board1[0].length; j++){
-				System.out.print(board1[i][j]);
-				System.out.print(' ');
-			}	 		
-			System.out.println();
-		}
+		printboard(board1);
 		System.out.println();
 
 		while (move(hero, board1) != 'q'){
-			if(WinOrLoose('G', board1)==-1){return false;}
+			if(WinOrLoose('G', board1)==-1){printboard(board1);return false;}
 			move(guard, board1);
-			for (int i=0; i<board1.length; i++){
-				for (int j=0; j<board1[0].length; j++){
-					System.out.print(board1[i][j]);
-					System.out.print(' ');
-				}			
-				System.out.println();
-			} 
+			printboard(board1);
 			System.out.println();
 			if(WinOrLoose('G', board1)==-1){return false;}
-			else if(WinOrLoose('G', board1)==1){return true;}
+			if(WinOrLoose('G', board1)==1){return true;}
 		}
 		System.out.println("Erro!!!");
 		return false;
@@ -194,31 +230,24 @@ public class Game{
 	//trata da segunda parte do jogo
 	public boolean secondLevel () {
 
-		hero[0] = 8;
+		hero[0] = 7;
 		hero[1] = 1;
 
-		for (int i=0; i<board2.length; i++){
-			for (int j=0; j<board2[0].length; j++){
-				System.out.print(board2[i][j]);
-				System.out.print(' ');
-			}	 		
-			System.out.println();
-		}
+		printboard(board2);
 		System.out.println();
 
 		while (move(hero, board2) != 'q'){
-			if(WinOrLoose('O', board2)==-1){return false;}
+			if(WinOrLoose('O', board2)==-1){printboard(board2);return false;}
+			if(WinOrLoose('*', board2)==-1){printboard(board2);return false;}
+			if(WinOrLoose('$', board2)==-1){printboard(board2);return false;}
 			move(ogre, board2);
-			for (int i=0; i<board2.length; i++){
-				for (int j=0; j<board2[0].length; j++){
-					System.out.print(board2[i][j]);
-					System.out.print(' ');
-				}			
-				System.out.println();
-			} 
+			direcao (3, 3, club, board2);
+			printboard(board2);
 			System.out.println();
 			if(WinOrLoose('O', board2)==-1){return false;}
-			else if(WinOrLoose('O', board2)==1){return true;}
+			if(WinOrLoose('*', board2)==-1){printboard(board2);return false;}
+			if(WinOrLoose('$', board2)==-1){printboard(board2);return false;}
+			if(WinOrLoose('O', board2)==1){return true;}
 		}
 		System.out.println("Erro!!!");
 		return false;

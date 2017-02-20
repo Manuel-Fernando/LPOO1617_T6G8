@@ -3,27 +3,27 @@ import java.util.Scanner;
 
 
 public class Game{
-	char [][] board = { {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
-			{'X', 'H', ' ', ' ', 'I', ' ', 'X', ' ', 'G', 'X'},
-			{'X', 'X', 'X', ' ', 'X', 'X', 'X', ' ', ' ', 'X'},
-			{'X', ' ', 'I', ' ', 'I', ' ', 'X', ' ', ' ', 'X'},
-			{'X', 'X', 'X', ' ', 'X', 'X', 'X', ' ', ' ', 'X'},
-			{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'X', 'X', 'X', ' ', 'X', 'X', 'X', 'X', ' ', 'X'},
-			{'X', ' ', 'I', ' ', 'I', ' ', 'X', 'k', ' ', 'X'},
-			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'} };
+	char [][] board1 = {{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
+						{'X', 'H', ' ', ' ', 'I', ' ', 'X', ' ', 'G', 'X'},
+						{'X', 'X', 'X', ' ', 'X', 'X', 'X', ' ', ' ', 'X'},
+						{'X', ' ', 'I', ' ', 'I', ' ', 'X', ' ', ' ', 'X'},
+						{'X', 'X', 'X', ' ', 'X', 'X', 'X', ' ', ' ', 'X'},
+						{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', 'X', 'X', ' ', 'X', 'X', 'X', 'X', ' ', 'X'},
+						{'X', ' ', 'I', ' ', 'I', ' ', 'X', 'k', ' ', 'X'},
+						{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'} };
 
-	char [][] board2 = { {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
-			{'I', ' ', ' ', ' ', 'O', ' ', ' ', ' ', 'k', 'X'},
-			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'X', 'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}};
+	char [][] board2 = {{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
+						{'I', ' ', ' ', ' ', 'O', ' ', ' ', ' ', 'k', 'X'},
+						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', 'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+						{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}};
 
 	int hero[] = {1,1};
 	int guard[] = {1,8};
@@ -33,8 +33,72 @@ public class Game{
 	int i=0;
 	char heroLetter, guardLetter, ogreLetter; 
 	int count = 0;
+	boolean herowithkey=false;
+	
+	//move os intervenientes
+	public void direcao (int person0, int person1, int person[], char [][] board){
+		
+		if ((board[person0][person1] != 'X') && ((board[person0][person1] != 'I') || (herowithkey && person==hero))){
+			
+			if (person == hero){
+				if (board == board1){						
+					if (board[person0][person1] == 'k') {
+						board[5][0]='S';
+						board[6][0]='S';
+					}
+					board[person[0]][person[1]]=' ';
+					person[0]=person0;
+					person[1]=person1;
+					board[person[0]][person[1]]=heroLetter;
+					
+				} else if (board == board2) {
+					
+					if (board[person0][person1] == 'k') {
+						heroLetter = 'K';
+						herowithkey=true;
+					}
+					
+					if (person0 == 1 && person1 == 0){
+						if (count == 1){
+							board[person[0]][person[1]]=' ';
+							person[0]=person0;
+							person[1]=person1;
+							board[person[0]][person[1]]=heroLetter;
+						} else {
+							count=1;
+							board[1][0] = 'S';
+						}
+					} else {
+						board[person[0]][person[1]]=' ';
+						person[0]=person0;
+						person[1]=person1;
+						board[person[0]][person[1]]=heroLetter;
+					}
+				}
+				
+			}else if (person == ogre){
+				if(board[1][8]=='$'){board[1][8]='k';}
+				else {board[person[0]][person[1]]=' ';}
+				
+				if (person0 == 1 && person1 == 8 && !herowithkey){ogreLetter = '$';} 
+				
+				person[0]=person0;
+				person[1]=person1;
+				board[person[0]][person[1]]=ogreLetter;
+				
+			}else if (person == guard){
+				board[person[0]][person[1]]=' ';
+				person[0]=person0;
+				person[1]=person1;
+				board[person[0]][person[1]]=guardLetter;
+			}else {
+				System.out.print("Erro!!!");
+				return;
+			}	
+		}
+	}
 
-	// trata do movimento pelo tabuleiro de qualquer dos intervientes 
+	//trata do movimento pelo tabuleiro de qualquer dos intervientes 
 	public char move (int person[], char [][] board){
 
 		if (person==hero){
@@ -67,248 +131,24 @@ public class Game{
 		}
 
 		switch (direction){
-		case 'w':
-			if ((board[person[0]-1][person[1]] != 'X') && (board[person[0]-1][person[1]] != 'I') ){
-				
-				if (person == hero){
-					
-					if (board == this.board){						
-						if (board[person[0]-1][person[1]] == 'k') {
-							for (int i=0; i<board.length; i++){
-								for (int j=0; j<board[0].length; j++){
-									if (board[i][j]=='I'&& j==0){
-										board[i][j]='S';
-									}
-								}			
-							} 
-						}
-						
-						board[person[0]][person[1]]=' ';
-						person[0]--;
-						board[person[0]][person[1]]=heroLetter;
-						
-					} else if (board == this.board2) {
-						
-						if (board[person[0]-1][person[1]] == 'k') {
-							heroLetter = 'K';
-						}
-						
-						if (person[0]-1 == 1 && person[1] == 0){
-							if (count == 1){
-								board[person[0]][person[1]]=' ';
-								person[0]--;
-								board[person[0]][person[1]]=heroLetter;
-							} else {
-								count++;
-								board[person[0]-1][person[1]] = 'S';
-							}
-						} else {
-							board[person[0]][person[1]]=' ';
-							person[0]--;
-							board[person[0]][person[1]]=heroLetter;
-						}
-					}
-					
-				} else if (person == ogre){
-					if (person[0]-1 == 1 && person[1] == 8){
-						ogreLetter = '$';
-					} 
-					
-					board[person[0]][person[1]]=' ';
-					person[0]--;
-					board[person[0]][person[1]]=ogreLetter;
-					
-				} else {
-					board[person[0]][person[1]]=' ';
-					person[0]--;
-					board[person[0]][person[1]]=guardLetter;
-				}
-				
-			}
-			break;
-		case 'a':
-			if ((board[person[0]][person[1]-1] != 'X')) {
-
-				if (person == hero){
-					if (board == this.board){	
-						if (board[person[0]][person[1]-1] != 'I'){
-							if (board[person[0]][person[1]-1] == 'k'){
-								for (int i=0; i<board.length; i++){
-									for (int j=0; j<board[0].length; j++){
-										if (board[i][j]=='I'&& j==0){
-											board[i][j]='S';
-										}
-
-									}			
-								} 
-							}
-							board[person[0]][person[1]]=' ';
-							person[1]--;
-							board[person[0]][person[1]]=heroLetter;
-						}
-					} else if (board == this.board2){	
-						
-						if (board[person[0]][person[1]-1] == 'k') {
-							heroLetter = 'K';
-						}
-
-						if (person[0] == 1 && person[1]-1 == 0){
-							if (count == 1){
-								board[person[0]][person[1]]=' ';
-								person[1]--;
-								board[person[0]][person[1]]=heroLetter;
-							} else {
-								count++;
-								board[person[0]][person[1]-1] = 'S';
-							}
-						} else {
-							board[person[0]][person[1]]=' ';
-							person[1]--;
-							board[person[0]][person[1]]=heroLetter;
-						}
-					}
-					
-				} else if (person == ogre){
-					if (board[person[0]][person[1]-1] != 'I'){
-						
-						if (person[0] == 1 && person[1]-1 == 8){
-							ogreLetter = '$';
-						}
-
-						board[person[0]][person[1]]=' ';
-						person[1]--;
-						board[person[0]][person[1]]=ogreLetter;
-					}
-				} else {
-					board[person[0]][person[1]]=' ';
-					person[1]--;
-					board[person[0]][person[1]]=guardLetter;
-				}
-				
-			} 
-			break;
-		case 'd':
-			if ((board[person[0]][person[1]+1] != 'X') && (board[person[0]][person[1]+1] != 'I') ){
-				if (person == hero){
-
-					if (board==this.board){
-						if (board[person[0]][person[1]+1] == 'k'){
-							for (int i=0; i<board.length; i++){
-								for (int j=0; j<board[0].length; j++){
-									if (board[i][j]=='I'&& j==0){
-										board[i][j]='S';
-									}
-
-								}			
-							} 
-						}
-						
-						board[person[0]][person[1]]=' ';
-						person[1]++;
-						board[person[0]][person[1]]=heroLetter;
-						
-					} else if (board==this.board2){
-						
-						if (board[person[0]][person[1]+1] == 'k') {
-							heroLetter = 'K';
-						}
-						
-						if (person[0] == 1 && person[1]+1 == 0){
-							if (count == 1){
-								board[person[0]][person[1]]=' ';
-								person[1]++;
-								board[person[0]][person[1]]=heroLetter;
-							} else {
-								count++;
-								board[person[0]][person[1]+1] = 'S';
-							}
-						} else {
-							board[person[0]][person[1]]=' ';
-							person[1]++;
-							board[person[0]][person[1]]=heroLetter;
-						}
-						
-					}
-					
-				}else if (person == ogre){
-					if (person[0] == 1 && person[1]+1 == 8){
-						ogreLetter = '$';
-					}
-					board[person[0]][person[1]]=' ';
-					person[1]++;
-					board[person[0]][person[1]]=ogreLetter;
-					
-				} else {
-					board[person[0]][person[1]]=' ';
-					person[1]++;
-					board[person[0]][person[1]]=guardLetter;
-				}
-				
-			} 
-			break;
-		case 's':
-			if ((board[person[0]+1][person[1]] != 'X') && (board[person[0]+1][person[1]] != 'I') ){
-				if (person == hero){
-
-					if (board==this.board){
-						if (board[person[0]+1][person[1]] == 'k'){
-							for (int i=0; i<board.length; i++){
-								for (int j=0; j<board[0].length; j++){
-									if (board[i][j]=='I'&& j==0){
-										board[i][j]='S';
-									}
-								}			
-							} 
-						}
-						board[person[0]][person[1]]=' ';
-						person[0]++;
-						board[person[0]][person[1]]=heroLetter;
-						
-					} else if (board==this.board2){
-						
-						if (board[person[0]+1][person[1]] == 'k') {
-							heroLetter = 'K';
-						}
-						
-						if (person[0]+1 == 1 && person[1] == 0){
-							if (count == 1){
-								board[person[0]][person[1]]=' ';
-								person[0]++;
-								board[person[0]][person[1]]=heroLetter;
-							} else {
-								count++;
-								board[person[0]+1][person[1]] = 'S';
-							}
-						} else {
-							board[person[0]][person[1]]=' ';
-							person[0]++;
-							board[person[0]][person[1]]=heroLetter;
-						}
-					}
-					
-				}else if (person == ogre){
-					if (person[0]+1 == 1 && person[1] == 8){
-						ogreLetter = '$';
-					}
-					board[person[0]][person[1]]=' ';
-					person[0]++;
-					board[person[0]][person[1]]=ogreLetter;
-					
-				} else {
-					board[person[0]][person[1]]=' ';
-					person[0]++;
-					board[person[0]][person[1]]=guardLetter;
-				}
-				
-			} 
-			break;			
+			case 'w':
+				direcao (person[0]-1, person[1], person, board);
+				break;
+			case 'a':
+				direcao (person[0], person[1]-1, person, board);
+				break;
+			case 'd':
+				direcao (person[0], person[1]+1, person, board);
+				break;
+			case 's':
+				direcao (person[0]+1, person[1], person, board);
+				break;			
 		}
 		return direction;
 	}
 
-	//vê se o jogador é casso e consequentemente perde o jogo
+	//vï¿½ se o jogador perde ou ganha o jogo
 	public int WinOrLoose (char over, char [][] board) {	
-
 
 		if (hero[1]==0 && (hero[0]==5 || hero[0]==6 || hero[0]==1)){
 			return 1;
@@ -324,34 +164,34 @@ public class Game{
 	//trata da primera parte do jogo
 	public boolean firstLevel () {
 
-		for (int i=0; i<board.length; i++){
-			for (int j=0; j<board[0].length; j++){
-				System.out.print(board[i][j]);
+		for (int i=0; i<board1.length; i++){
+			for (int j=0; j<board1[0].length; j++){
+				System.out.print(board1[i][j]);
 				System.out.print(' ');
 			}	 		
 			System.out.println();
 		}
 		System.out.println();
 
-		while (move(hero, board) != 'q'){
-			if(WinOrLoose('G', board)==-1){return false;}
-			move(guard, board);
-			for (int i=0; i<board.length; i++){
-				for (int j=0; j<board[0].length; j++){
-					System.out.print(board[i][j]);
+		while (move(hero, board1) != 'q'){
+			if(WinOrLoose('G', board1)==-1){return false;}
+			move(guard, board1);
+			for (int i=0; i<board1.length; i++){
+				for (int j=0; j<board1[0].length; j++){
+					System.out.print(board1[i][j]);
 					System.out.print(' ');
 				}			
 				System.out.println();
 			} 
 			System.out.println();
-			if(WinOrLoose('G', board)==-1){return false;}
-			else if(WinOrLoose('G', board)==1){return true;}
+			if(WinOrLoose('G', board1)==-1){return false;}
+			else if(WinOrLoose('G', board1)==1){return true;}
 		}
 		System.out.println("Erro!!!");
 		return false;
 	}
 
-	//trata da primera parte do jogo
+	//trata da segunda parte do jogo
 	public boolean secondLevel () {
 
 		hero[0] = 8;
@@ -389,12 +229,10 @@ public class Game{
 		Game jogo = new Game ();
 		System.out.println("Use:	 'w' 'a' 's' 'd' para se mover.\n");
 		if(jogo.firstLevel()){
-			System.out.println("Parabéns! Passou de Nível!!!");
-
+			System.out.println("Parabï¿½ns! Passou de Nï¿½vel!!!");
 			if(jogo.secondLevel()){
-				System.out.println("Parabéns! Ganhou!!!");
+				System.out.println("Parabï¿½ns! Ganhou!!!");
 			}
 		}
-
 	}
 }

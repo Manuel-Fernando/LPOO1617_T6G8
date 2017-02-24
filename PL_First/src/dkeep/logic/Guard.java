@@ -3,7 +3,7 @@ package dkeep.logic;
 public class Guard extends Entidade{
 
 	
-	Guard(int PosXi, int PosYi){
+	public Guard(int PosXi, int PosYi){
 		posX=PosXi;
 		posY=PosYi;
 		letter='G';

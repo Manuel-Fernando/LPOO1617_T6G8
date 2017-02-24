@@ -2,7 +2,7 @@ package dkeep.logic;
 
 public class MapLevel1 extends Map {
 	
-	MapLevel1(){
+	public MapLevel1(){
 		char [][]board1 = {{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
 							{'X', 'H', ' ', ' ', 'I', ' ', 'X', ' ', 'G', 'X'},
 							{'X', 'X', 'X', ' ', 'X', 'X', 'X', ' ', ' ', 'X'},

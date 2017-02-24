@@ -3,7 +3,7 @@ package dkeep.logic;
 public class Heroi extends Entidade{
 
 	
-	Heroi(int PosXi, int PosYi){
+	public Heroi(int PosXi, int PosYi){
 		posX=PosXi;
 		posY=PosYi;
 		letter='H';
@@ -11,6 +11,7 @@ public class Heroi extends Entidade{
 	
 	int count = 0;
 	boolean herowithkey = false;
+	
 	public void direcao (int posinX, int posinY, Map m, int mapLevel ){
 		if ((m.searchElement(posinX, posinY) != 'X') && ((m.searchElement(posinX, posinY) != 'I') || herowithkey)){
 

@@ -31,7 +31,9 @@ public class Ogre extends Entidade{
 	
 		if ((m.searchElement(posinX, posinY) != 'X') && ((m.searchElement(posinX, posinY) != 'I'))){
 			
-			if(m.searchElement(1, 7)=='$' && posX==1 && posY==7){m.writeElement(1, 7, 'k');
+			if(m.searchElement(1, 7)=='$' && posX==1 && posY==7){
+				m.writeElement(1, 7, 'k');
+				letter = 'O';
 			}else if (m.searchElement(1, 7)=='O'){m.writeElement(1, 7, ' ');}
 			
 			if(posX!=1 || posY!=7){m.writeElement(posX, posY, ' ');}

@@ -5,7 +5,7 @@ import java.util.Random;
 public class Ogre extends Entidade{
 
 	
-	Ogre(int PosXi, int PosYi){
+	public Ogre(int PosXi, int PosYi){
 		posX=PosXi;
 		posY=PosYi;
 		letter='O';
@@ -46,7 +46,7 @@ public class Ogre extends Entidade{
 			if(m.searchElement(1, 7)=='$' && posXclub==1 && posYclub==7 && (posX!=1 || posY!=7)){m.writeElement(1, 7, 'k');
 			}else if (m.searchElement(1, 7)=='*'){m.writeElement(1, 7, ' ');}
 			
-			if((posXclub!=1 || posYclub!=7) && m.searchElement(posXclub, posYclub)=='*'){m.writeElement(posX, posY, ' ');}
+			if((posXclub!=1 || posYclub!=7) && m.searchElement(posXclub, posYclub)=='*'){m.writeElement(posXclub, posYclub, ' ');}
 			
 			char direction=randomdirection();
 			while((direction=='w' && posX==1)||(direction=='a' && posY==1)

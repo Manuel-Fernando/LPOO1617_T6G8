@@ -5,7 +5,7 @@ public class Map {
 	char [][] board; 
 	
 	/*
-	 * Método para retornar o elemento de uma dada posição no quadro
+	 * Mï¿½todo para retornar o elemento de uma dada posiï¿½ï¿½o no quadro
 	 */
 	
 	public char searchElement(int x, int y) {
@@ -13,7 +13,7 @@ public class Map {
 	}
 	
 	/*
-	 * Método para alterar um elemento numa dada posição
+	 * Mï¿½todo para alterar um elemento numa dada posiï¿½ï¿½o
 	 */
 	
 	public void writeElement(int x, int y, char element){
@@ -21,7 +21,7 @@ public class Map {
 	}
 	
 	/*
-	 * Método para imprimir o quadro
+	 * Mï¿½todo para imprimir o quadro
 	 */
 	
 	public void printBoard(){
@@ -31,7 +31,7 @@ public class Map {
 				System.out.print(' ');
 			}			
 			System.out.println();
-		} 	
+		} 	System.out.println();
 	}
 }
 

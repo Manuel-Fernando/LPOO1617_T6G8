@@ -12,7 +12,7 @@ public class Heroi extends Entidade{
 	int count = 0;
 	boolean herowithkey = false;
 	
-	public void direcao (int posinX, int posinY, Map m, int mapLevel ){
+	private void direcao (int posinX, int posinY, Map m, int mapLevel ){
 		if ((m.searchElement(posinX, posinY) != 'X') && ((m.searchElement(posinX, posinY) != 'I') || herowithkey)){
 
 			if (mapLevel == 1){						
@@ -53,7 +53,7 @@ public class Heroi extends Entidade{
 	}
 
 	
-	public void Movimento(char dir, int mapLevel, Map m){
+	protected void Movimento(char dir, int mapLevel, Map m){
 		if (letter != 'K') {
 			letter='H';
 		}

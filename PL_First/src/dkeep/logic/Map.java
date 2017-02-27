@@ -8,7 +8,7 @@ public class Map {
 	 * M�todo para retornar o elemento de uma dada posi��o no quadro
 	 */
 	
-	public char searchElement(int x, int y) {
+	protected char searchElement(int x, int y) {
 		return board[x][y];
 	}
 	
@@ -16,7 +16,7 @@ public class Map {
 	 * M�todo para alterar um elemento numa dada posi��o
 	 */
 	
-	public void writeElement(int x, int y, char element){
+	protected void writeElement(int x, int y, char element){
 		board[x][y]=element;	
 	}
 

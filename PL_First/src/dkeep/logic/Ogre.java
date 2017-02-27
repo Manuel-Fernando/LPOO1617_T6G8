@@ -11,7 +11,7 @@ public class Ogre extends Entidade{
 		letter='O';
 	}
 	
-	public char randomdirection(){
+	private char randomdirection(){
 		Random rn = new Random();
 		int range = 4 - 1 + 1;
 		int randomNum =  rn.nextInt(range) + 1;
@@ -27,7 +27,7 @@ public class Ogre extends Entidade{
 	int posXclub=3;
 	int posYclub=3;
 	
-	public void direcao (int posinX, int posinY, Map m, int mapLevel ){
+	private void direcao (int posinX, int posinY, Map m, int mapLevel ){
 	
 		if ((m.searchElement(posinX, posinY) != 'X') && ((m.searchElement(posinX, posinY) != 'I'))){
 			
@@ -78,6 +78,7 @@ public class Ogre extends Entidade{
 				
 		}
 	}
+	
 	public void Movimento(int mapLevel, Map m){
 		
 		char dir=randomdirection();

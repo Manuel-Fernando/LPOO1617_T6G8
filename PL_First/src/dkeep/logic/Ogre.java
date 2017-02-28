@@ -24,31 +24,76 @@ public class Ogre extends Entidade{
 		return ' ';
 	}
 	
+	private boolean findHero(Map m, int x, int y){
+		if((m.searchElement(x+1, y) == 'H') || (m.searchElement(x, y+1) == 'H') || (m.searchElement(x-1, y) == 'H') || (m.searchElement(x, y-1) == 'H')){return true;}
+		if((m.searchElement(x+1, y) == 'A') || (m.searchElement(x, y+1) == 'A') || (m.searchElement(x-1, y) == 'A') || (m.searchElement(x, y-1) == 'A')){return true;}
+		if((m.searchElement(x+1, y) == 'K') || (m.searchElement(x, y+1) == 'K') || (m.searchElement(x-1, y) == 'K') || (m.searchElement(x, y-1) == 'K')){return true;}
+		return false;
+	}
+	
 	int posXclub=3;
 	int posYclub=3;
+	int dontmove=0;
 	
-	private void direcao (int posinX, int posinY, Map m, int mapLevel ){
+	private void direcao (int posinX, int posinY, Map m, boolean herowithclub, boolean herowithkey){
 	
 		if ((m.searchElement(posinX, posinY) != 'X') && ((m.searchElement(posinX, posinY) != 'I'))){
+			//se ja passaram as duas jogadas, liberta o ogre
+			if(dontmove==3){
+				dontmove=0;
+				letter='O';
+			}
 			
-			if(m.searchElement(1, 7)=='$' && posX==1 && posY==7){
-				m.writeElement(1, 7, 'k');
-				letter = 'O';
-			}else if (m.searchElement(1, 7)=='O'){m.writeElement(1, 7, ' ');}
+			//apagar posicao antiga
+			if (posX==1 && posY==7 && !herowithkey){
+				m.writeElement(posX, posY, 'k');
+			}else if(posX==7 && posY==5 && !herowithclub){
+				m.writeElement(posX, posY, '+');
+			}else if(m.searchElement(posX, posY) != '*') {
+				m.writeElement(posX, posY, ' ');
+			}
 			
-			if(posX!=1 || posY!=7){m.writeElement(posX, posY, ' ');}
-			if (posinX == 1 && posinY == 7 && ((m.searchElement(1, 7) == 'k' || m.searchElement(1, 7) == '*'))){letter = '$';} 
+			//se heroi a beira com taco reinicia contagem
+			if(findHero(m, posX, posY) && herowithclub){
+				dontmove=1;
+			}
+			
+			// posicao igual a antiga
+			if(dontmove==1 || dontmove==2){
+				dontmove++;
+				posinX=posX;
+				posinY=posY;
+				letter='8';
+			}
+			
+			//escrever posicao nova
+			if (posinX==1 && posinY==7 && !herowithkey){
+				m.writeElement(posinX, posinY, '$');
+			}else {
+				if(findHero(m, posinX, posinY) && herowithclub){
+					dontmove=1;
+					letter='8';
+				}
+				m.writeElement(posinX, posinY, letter);
+			}
 			
 			posX=posinX;
 			posY=posinY;
-			m.writeElement(posX, posY, letter);
+
+			
+			
 			
 			//Club part
 			
-			if(m.searchElement(1, 7)=='$' && posXclub==1 && posYclub==7 && (posX!=1 || posY!=7)){m.writeElement(1, 7, 'k');
-			}else if (m.searchElement(1, 7)=='*'){m.writeElement(1, 7, ' ');}
+			//apagar posicao antiga
+			if (posXclub==1 && posYclub==7 && !herowithkey && !(posX==1 && posY==7)){
+				m.writeElement(posXclub, posYclub, 'k');
+			}else if(posXclub==7 && posYclub==5 && !herowithclub && !(posX==7 && posY==5)){
+				m.writeElement(posXclub, posYclub, '+');
+			}else if(!(posXclub==posX && posYclub==posY)){
+				m.writeElement(posXclub, posYclub, ' ');
+			}
 			
-			if((posXclub!=1 || posYclub!=7) && m.searchElement(posXclub, posYclub)=='*'){m.writeElement(posXclub, posYclub, ' ');}
 			
 			char direction=randomdirection();
 			while((direction=='w' && posX==1)||(direction=='a' && posY==1)
@@ -73,28 +118,28 @@ public class Ogre extends Entidade{
 					posYclub=posY;
 					break;			
 			}
-			if (posXclub == 1 && posYclub == 7 && ((m.searchElement(1, 7) == 'k' || m.searchElement(1, 7) == '*'))){m.writeElement(posXclub, posYclub, '$');
+			if (posXclub == 1 && posYclub == 7 && !herowithkey){m.writeElement(posXclub, posYclub, '$');
 			}else m.writeElement(posXclub, posYclub, '*'); 
-				
+
 		}
 	}
-	
-	public void Movimento(int mapLevel, Map m){
+
+	public void Movimento(int mapLevel, Map m, boolean heroclub, boolean herokey){
 		
 		char dir=randomdirection();
 		
 		switch (dir){
 		case 'w':
-			direcao (posX-1, posY, m, mapLevel);
+			direcao (posX-1, posY, m, heroclub, herokey);
 			break;
 		case 'a':
-			direcao (posX, posY-1, m, mapLevel);
+			direcao (posX, posY-1, m, heroclub, herokey);
 			break;
 		case 'd':
-			direcao (posX, posY+1, m, mapLevel);
+			direcao (posX, posY+1, m, heroclub, herokey);
 			break;
 		case 's':
-			direcao (posX+1, posY, m, mapLevel);
+			direcao (posX+1, posY, m, heroclub, herokey);
 			break;			
 		}
 	}

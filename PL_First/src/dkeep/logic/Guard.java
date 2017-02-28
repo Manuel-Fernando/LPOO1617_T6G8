@@ -12,12 +12,6 @@ public class Guard extends Entidade{
 	}
 
 	
-	/*
-	public Guard(){
-		letter='G';
-	}
-	*/
-	
 	protected void setposX(int PosXi){
 		posX=PosXi;
 	}

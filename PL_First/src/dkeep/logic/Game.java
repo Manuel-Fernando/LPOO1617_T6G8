@@ -6,12 +6,17 @@ public class Game {
 	MapLevel1 board1 = new MapLevel1();
 	MapLevel2 board2 = new MapLevel2();
 	GameState loose = new GameState();
+	
 	Guard rookie = new Rookie(1,8);
 	Guard suspicious = new Suspicious(1,8);
 	Guard drunken = new Drunken(1,8);
+	
 	Heroi hero1 = new Heroi(1,1);
 	Heroi hero2 = new Heroi(7,1);
-	Ogre ogre = new Ogre (1,4);
+	
+	Ogre ogre = new Ogre(1,4);
+	Ogre ogre1 = new Ogre(4,4);
+
 	int nivel = 1;
 	int estado = 0;
 
@@ -40,13 +45,20 @@ public class Game {
 
 			hero2.Movimento(dir, 2, board2);
 			if(loose.WinOrLoose(ogre.getLetter(), board2, hero2)==1){return 4;}
-			if(loose.WinOrLoose(ogre.getLetter(), board2, hero2)==-1){return -2;}
+			if(!hero2.herowithclub){
+				if(loose.WinOrLoose(ogre.getLetter(), board2, hero2)==-1){return -2;}
+				if(loose.WinOrLoose('$', board2, hero2)==-1){return -2;}
+			}
 			if(loose.WinOrLoose('*', board2, hero2)==-1){return -2;}
-			if(loose.WinOrLoose('$', board2, hero2)==-1){return -2;}	
-			ogre.Movimento(2, board2);
-			if(loose.WinOrLoose(ogre.getLetter(), board2, hero2)==-1){return -2;}
+			if(board2.searchElement(hero2.getX(), hero2.getY()) == '*'){return -2;}	
+			ogre.Movimento(2, board2, hero2.herowithclub, hero2.herowithkey);
+			ogre1.Movimento(2, board2, hero2.herowithclub, hero2.herowithkey);
+			if(!hero2.herowithclub){
+				if(loose.WinOrLoose(ogre.getLetter(), board2, hero2)==-1){return -2;}
+				if(loose.WinOrLoose('$', board2, hero2)==-1){return -2;}
+			}
 			if(loose.WinOrLoose('*', board2, hero2)==-1){return -2;}
-			if(loose.WinOrLoose('$', board2, hero2)==-1){return -2;}	
+			if(board2.searchElement(hero2.getX(), hero2.getY()) == '*'){return -2;}	
 			return 3;
 	}
 	

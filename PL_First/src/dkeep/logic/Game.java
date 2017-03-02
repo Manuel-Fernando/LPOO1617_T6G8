@@ -1,5 +1,6 @@
 package dkeep.logic;
 
+import java.util.ArrayList;
 
 public class Game {
 	
@@ -16,6 +17,8 @@ public class Game {
 	
 	Ogre ogre = new Ogre(1,4);
 	Ogre ogre1 = new Ogre(4,4);
+	
+	ArrayList <Ogre> ogres = new ArrayList <Ogre>(2);
 
 	int nivel = 1;
 	int estado = 0;
@@ -41,20 +44,21 @@ public class Game {
 
 	}
 
-	public int level2(char dir){
+	public int level2(char dir, ArrayList <Ogre> ogres){
 
 			hero2.Movimento(dir, 2, board2);
-			if(loose.WinOrLoose(ogre.getLetter(), board2, hero2)==1){return 4;}
+			if(loose.WinOrLoose((ogres.get(0)).getLetter(), board2, hero2)==1){return 4;}
+			if(loose.WinOrLoose((ogres.get(0)).getLetter(), board2, hero2)==1){return 4;}
 			if(!hero2.herowithclub){
-				if(loose.WinOrLoose(ogre.getLetter(), board2, hero2)==-1){return -2;}
+				if(loose.WinOrLoose((ogres.get(0)).getLetter(), board2, hero2)==-1){return -2;}
 				if(loose.WinOrLoose('$', board2, hero2)==-1){return -2;}
 			}
 			if(loose.WinOrLoose('*', board2, hero2)==-1){return -2;}
 			if(board2.searchElement(hero2.getX(), hero2.getY()) == '*'){return -2;}	
-			ogre.Movimento(2, board2, hero2.herowithclub, hero2.herowithkey);
-			ogre1.Movimento(2, board2, hero2.herowithclub, hero2.herowithkey);
+			(ogres.get(0)).Movimento(2, board2, hero2.herowithclub, hero2.herowithkey);
+			(ogres.get(1)).Movimento(2, board2, hero2.herowithclub, hero2.herowithkey);
 			if(!hero2.herowithclub){
-				if(loose.WinOrLoose(ogre.getLetter(), board2, hero2)==-1){return -2;}
+				if(loose.WinOrLoose((ogres.get(0)).getLetter(), board2, hero2)==-1){return -2;}
 				if(loose.WinOrLoose('$', board2, hero2)==-1){return -2;}
 			}
 			if(loose.WinOrLoose('*', board2, hero2)==-1){return -2;}
@@ -64,6 +68,9 @@ public class Game {
 	
 	public int jogo(char direc){
 		
+		ogres.add(ogre);
+		ogres.add(ogre1);
+		
 		if (nivel==1){
 			estado = level1(direc, drunken);
 			if(estado==2){
@@ -71,7 +78,7 @@ public class Game {
 			}
 		}
 		else if (nivel==2){
-			estado = level2(direc);
+			estado = level2(direc, ogres);
 		}
 		return estado;
 	}

@@ -18,8 +18,13 @@ public class Heroi extends Entidade{
 
 			if (mapLevel == 1){						
 				if (m.searchElement(posinX, posinY) == 'k') {
-					m.writeElement(5, 0, 'S');
-					m.writeElement(6, 0, 'S');
+					for (int i=0; i<m.board.length; i++){
+						for (int j=0; j<m.board[0].length; j++){
+							if(m.searchElement(i, j)=='I'){
+								m.writeElement(i, j, 'S');
+							}
+						}			
+					}
 				}
 				m.writeElement(posX, posY, ' ');
 				posX=posinX;
@@ -60,7 +65,7 @@ public class Heroi extends Entidade{
 	}
 
 
-	protected void Movimento(char dir, int mapLevel, Map m){
+	public void Movimento(char dir, int mapLevel, Map m){
 
 		switch (dir){
 		case 'w':

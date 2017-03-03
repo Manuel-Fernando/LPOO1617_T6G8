@@ -21,7 +21,7 @@ public class GameState {
 
 	public int WinOrLoose (char over, Map m, Heroi h) {	
 
-		if (h.getY()==0 && (h.getX()==5 || h.getX()==6 || h.getX()==1)){
+		if (h.getY()==0){
 			return 1;
 		}
 		else if((m.searchElement(h.getX()+1, h.getY())==over) || (m.searchElement(h.getX(), h.getY()+1)==over)

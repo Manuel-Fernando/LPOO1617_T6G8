@@ -30,6 +30,7 @@ public class Game {
 	public char[][] tabuleiro2(){
 		return board2.board;
 	}
+	
 
 	public int level1(char dir, Guard g){		
 			

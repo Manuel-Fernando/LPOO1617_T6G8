@@ -124,7 +124,7 @@ public class Ogre extends Entidade{
 		}
 	}
 
-	public void Movimento(int mapLevel, Map m, boolean heroclub, boolean herokey){
+	public char Movimento(int mapLevel, Map m, boolean heroclub, boolean herokey){
 		
 		char dir=randomdirection();
 		
@@ -142,5 +142,6 @@ public class Ogre extends Entidade{
 			direcao (posX+1, posY, m, heroclub, herokey);
 			break;			
 		}
+		return dir;
 	}
 }	

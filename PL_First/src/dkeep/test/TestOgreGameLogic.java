@@ -48,7 +48,7 @@ public class TestOgreGameLogic {
 		}
 		assertEquals(mapa.searchElement(1, 0),'S');
 		hero.Movimento('a', 2, mapa);
-		assertEquals(mapa.searchElement(1, 0),'H');
+		assertEquals(mapa.searchElement(1, 0),'K');
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ public class TestOgreGameLogic {
 		}
 		assertEquals(mapa.searchElement(1, 0),'S');
 		hero.Movimento('a', 2, mapa);
-		assertEquals(mapa.searchElement(1, 0),'H');
+		assertEquals(mapa.searchElement(1, 0),'K');
 		assertTrue(estadoJogo.WinOrLoose ('O', mapa, hero)==1);
 	}
 }

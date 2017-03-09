@@ -25,7 +25,17 @@ public class TestOgreGameLogic {
 		hero.Movimento('d', 2, mapa);
 		hero.Movimento('a', 2, mapa);
 		assertEquals(mapa.searchElement(1, 6),'K');
+		assertTrue(hero.heroWithKey());
 		assertEquals(mapa.searchElement(1, 7),' ');
+	}
+	
+	@Test
+	public void testIfCatchesTheClub() {
+		MapLevel2 mapa = new MapLevel2();
+		Heroi hero = new Heroi(6,5);
+		hero.Movimento('s', 2, mapa);
+		assertEquals(mapa.searchElement(7, 5),'A');
+		assertTrue(hero.heroWithClub());
 	}
 	
 	@Test

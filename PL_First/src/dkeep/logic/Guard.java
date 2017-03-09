@@ -25,9 +25,10 @@ public class Guard extends Entidade{
 		compGuarda = cg;
 	}
 	
-	protected void Movimento (int mapLevel, Map m){
+	protected char Movimento (int mapLevel, Map m){
 
 		compGuarda.movimento();
+		return ' ';
 
 	}
 

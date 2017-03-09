@@ -6,10 +6,9 @@ public class Drunken extends comportamentoGuarda{
 
 	public Drunken(int PosXi, int PosYi) {
 		super(PosXi, PosYi);
-		// TODO Auto-generated constructor stub
 	}
 
-	protected void Movimento (int mapLevel, Map m){
+	public char Movimento (int mapLevel, Map m){
 		
 		//System.out.println("i inicial " + i);
 		char dir;
@@ -23,6 +22,8 @@ public class Drunken extends comportamentoGuarda{
 		if (randomNum==1){ //Sleep
 			
 			m.writeElement(getX(), getY(), 'g');
+			
+			return ' ';
 
 		} else {
 			
@@ -102,7 +103,12 @@ public class Drunken extends comportamentoGuarda{
 				break;			
 			}
 			
+			return dir;
+			
+			
 		}
+		
 	}
+	
 
 }

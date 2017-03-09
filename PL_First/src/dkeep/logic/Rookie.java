@@ -8,7 +8,7 @@ public class Rookie extends comportamentoGuarda {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected void Movimento (int mapLevel, Map m){
+	public char Movimento (int mapLevel, Map m){
 		
 		char dir = guardtraject[i];
 		i++;
@@ -28,6 +28,8 @@ public class Rookie extends comportamentoGuarda {
 			direcao (posX+1, posY, m, mapLevel);
 			break;			
 		}
+		
+		return dir;
 		
 	}
 

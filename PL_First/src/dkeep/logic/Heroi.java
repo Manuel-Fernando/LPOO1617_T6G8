@@ -84,10 +84,10 @@ public class Heroi extends Entidade{
 
 	}
 	
-	protected boolean heroWithKey(){
+	public boolean heroWithKey(){
 		return herowithkey;
 	}
-	protected boolean heroWithClub(){
+	public boolean heroWithClub(){
 		return herowithclub;
 	}
 

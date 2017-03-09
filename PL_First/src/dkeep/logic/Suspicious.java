@@ -12,7 +12,7 @@ public class Suspicious extends comportamentoGuarda {
 	char dir;
 	char[] guardInverse = {'d','w','w','w','w','d','d','d','d','d','d','w','a','a','a','a','a','a','a','s','s','s','s','s'};
 
-	protected void Movimento (int mapLevel, Map m){
+	public char Movimento (int mapLevel, Map m){
 		
 		if (count<5){
 			
@@ -61,7 +61,7 @@ public class Suspicious extends comportamentoGuarda {
 			break;			
 		}
 		
-
+		return dir;
 	}
 
 }

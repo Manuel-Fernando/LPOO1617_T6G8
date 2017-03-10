@@ -24,6 +24,10 @@ public class Map {
 		this.board=board;
 		
 	}
+	
+	public char [][] getBoard(){
+		return board;
+	}
 
 }
 

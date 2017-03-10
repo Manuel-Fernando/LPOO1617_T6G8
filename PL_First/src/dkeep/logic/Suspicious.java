@@ -12,6 +12,8 @@ public class Suspicious extends comportamentoGuarda {
 	char dir;
 	char[] guardInverse = {'d','w','w','w','w','d','d','d','d','d','d','w','a','a','a','a','a','a','a','s','s','s','s','s'};
 
+	public String getName(){return "Suspicious";}
+	
 	public char Movimento (int mapLevel, Map m){
 		
 		if (count<5){
@@ -24,7 +26,7 @@ public class Suspicious extends comportamentoGuarda {
 			count++;
 			
 		} else if (count>=5 && count<=8){
-			//System.out.println("i inicial atrás " + i);
+			//System.out.println("i inicial atrï¿½s " + i);
 			if (i==0){
 				i=23;
 				dir = guardInverse[i];
@@ -32,7 +34,7 @@ public class Suspicious extends comportamentoGuarda {
 				i--;
 				dir = guardInverse[i];
 			}
-			//System.out.println("i final atrás " + i);
+			//System.out.println("i final atrï¿½s " + i);
 		
 			count++;
 			

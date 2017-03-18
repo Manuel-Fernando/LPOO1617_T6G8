@@ -2,9 +2,12 @@ package dkeep.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import dkeep.logic.Drunken;
+import dkeep.logic.Game;
 import dkeep.logic.GameState;
 import dkeep.logic.Heroi;
 import dkeep.logic.Map;
@@ -15,49 +18,12 @@ import dkeep.logic.Rookie;
 import dkeep.logic.Suspicious;
 
 public class TestPITMutations {
-	
+
 	char [][]map={{'X','X','X','X','X'},
 			{'X','H',' ','G','X'},
 			{'I',' ',' ',' ','X'},
 			{'I','k',' ',' ','X'},
 			{'X','X','X','X','X'}};
-
-	@Test
-	public void testToCheckMoviment() {
-		MapLevel1 mapa = new MapLevel1();
-		Drunken d = new Drunken(1,8);
-		char guardDirection;
-		int posX = 1;
-		int posY = 8;
-		
-		boolean outcome1 = false, outcome2 = false, outcome3 = false, outcome4 = false, outcome5 = false;
-		while(!outcome1 || !outcome2 || !outcome3 || !outcome4 || !outcome5){
-			guardDirection = d.Movimento(1, mapa);
-			
-			if((guardDirection=='w')){
-				assertEquals(mapa.searchElement(posX-1, posY),'G');
-				posX--;
-				outcome1=true;
-			}else if(guardDirection=='a'){
-				assertEquals(mapa.searchElement(posX, posY-1),'G');
-				posY--;
-				outcome2=true;
-			}else if(guardDirection=='d'){
-				assertEquals(mapa.searchElement(posX, posY+1),'G');
-				posY++;
-				outcome3=true;
-			}else if(guardDirection=='s'){
-				assertEquals(mapa.searchElement(posX+1, posY),'G');
-				posX++;
-				outcome4=true;
-			}else if(guardDirection==' '){
-				assertEquals(mapa.searchElement(posX, posY),'g');
-				outcome5=true;
-			}
-		}
-		
-		
-	}
 
 	@Test
 	public void testMoveHeroIntoToFreeCell() {
@@ -68,7 +34,7 @@ public class TestPITMutations {
 		hero.Movimento('s', 1, mapa);
 		assertEquals(mapa.searchElement(2, 1),'H');
 	}
-	
+
 	@Test
 	public void testMoveHeroIntoToWall() {
 		Map mapa = new Map();
@@ -79,7 +45,7 @@ public class TestPITMutations {
 		assertEquals(mapa.searchElement(1, 1),'H');
 		assertEquals(mapa.searchElement(0, 1),'X');
 	}
-	
+
 	@Test
 	public void testHeroIsCapturedByGuard(){
 		Map mapa = new Map();
@@ -90,7 +56,7 @@ public class TestPITMutations {
 		hero.Movimento('d', 1, mapa);
 		assertTrue(estadoJogo.WinOrLoose ('G', mapa, hero)==-1);
 	}
-	
+
 	@Test
 	public void testMoveHeroPassesCloseDoor() {
 		Map mapa = new Map();
@@ -102,7 +68,7 @@ public class TestPITMutations {
 		assertEquals(mapa.searchElement(2, 0),'I');
 		assertEquals(mapa.searchElement(2, 1),'H');
 	}
-	
+
 	@Test
 	public void testMoveHeroCathTheKey() {
 		Map mapa = new Map();
@@ -114,7 +80,7 @@ public class TestPITMutations {
 		assertEquals(mapa.searchElement(2, 0),'S');
 		assertEquals(mapa.searchElement(3, 0),'S');
 	}
-	
+
 	@Test
 	public void testMoveHeroPassesLevel() {
 		Map mapa = new Map();
@@ -128,7 +94,7 @@ public class TestPITMutations {
 		assertEquals(mapa.searchElement(3, 0),'H');
 		assertTrue(estadoJogo.WinOrLoose ('G', mapa, hero)==1);
 	}
-	
+
 	@Test(timeout=1000)
 	public void testSomeRandomBehaviour() {
 		MapLevel2 mapa = new MapLevel2();
@@ -157,7 +123,7 @@ public class TestPITMutations {
 			}
 		}
 	}
-	
+
 	@Test
 	public void testIfLooseNearOgre() {
 		MapLevel2 mapa = new MapLevel2();
@@ -166,7 +132,7 @@ public class TestPITMutations {
 		hero.Movimento('d', 2, mapa);
 		assertTrue(estadoJogo.WinOrLoose ('O', mapa, hero)==-1);
 	}
-	
+
 	@Test
 	public void testIfCatchesTheKey() {
 		MapLevel2 mapa = new MapLevel2();
@@ -177,7 +143,7 @@ public class TestPITMutations {
 		assertTrue(hero.heroWithKey());
 		assertEquals(mapa.searchElement(1, 7),' ');
 	}
-	
+
 	@Test
 	public void testIfCatchesTheClub() {
 		MapLevel2 mapa = new MapLevel2();
@@ -186,7 +152,7 @@ public class TestPITMutations {
 		assertEquals(mapa.searchElement(7, 5),'A');
 		assertTrue(hero.heroWithClub());
 	}
-	
+
 	@Test
 	public void testIfHeroFailExitWithoutKey() {
 		MapLevel2 mapa = new MapLevel2();
@@ -196,7 +162,7 @@ public class TestPITMutations {
 		assertEquals(mapa.searchElement(1, 0),'I');
 		assertEquals(mapa.searchElement(1, 1),'H');
 	}
-	
+
 	@Test
 	public void testIfHeroExitWitTheKey() {
 		char percurso[] = {'w', 's', 'a', 'a', 'a', 'a', 'a', 'a', 'w', 'a'};
@@ -209,7 +175,7 @@ public class TestPITMutations {
 		hero.Movimento('a', 2, mapa);
 		assertEquals(mapa.searchElement(1, 0),'K');
 	}
-	
+
 	@Test
 	public void testIfHeroExitWitTheKeyAndWin() {
 		char percurso[] = {'w', 's', 'a', 'a', 'a', 'a', 'a', 'a', 'w', 'a'};
@@ -224,19 +190,82 @@ public class TestPITMutations {
 		assertEquals(mapa.searchElement(1, 0),'K');
 		assertTrue(estadoJogo.WinOrLoose ('O', mapa, hero)==1);
 	}
-	
+
 	@Test
-	public void test() {
+	public void testRookie() {
 		MapLevel1 mapa = new MapLevel1();
 		Rookie d = new Rookie(1,8);
 		char guardDirection;
+
+		guardDirection = d.Movimento(1, mapa);
+		assertEquals(mapa.searchElement(1, 7),'G');
+		guardDirection = d.Movimento(1, mapa);
+		assertEquals(mapa.searchElement(2, 7),'G');
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		assertEquals(mapa.searchElement(5, 7),'G');
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		assertEquals(mapa.searchElement(6, 1),'G');
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		assertEquals(mapa.searchElement(5, 8),'G');
+
+
+	}
+
+
+	@Test
+	public void test() {
+		MapLevel1 mapa = new MapLevel1();
+		Suspicious d = new Suspicious(1,8);
+		char guardDirection;
+		//			int posX = 1;
+		//			int posY = 8;
+
+		guardDirection = d.Movimento(1, mapa);
+		assertEquals(mapa.searchElement(1, 7),'G');
+		guardDirection = d.Movimento(1, mapa);
+		assertEquals(mapa.searchElement(2, 7),'G');
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);		
+		guardDirection = d.Movimento(1, mapa);
+		assertEquals(mapa.searchElement(5, 7),'G');	
+		guardDirection = d.Movimento(1, mapa);
+		assertEquals(mapa.searchElement(4, 7),'G');		
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		guardDirection = d.Movimento(1, mapa);
+		assertEquals(mapa.searchElement(1, 7),'G');		
+		guardDirection = d.Movimento(1, mapa);
+		assertEquals(mapa.searchElement(2, 7),'G');
+	}
+
+
+	@Test
+	public void testToCheckMoviment() {
+		MapLevel1 mapa = new MapLevel1();
+		Drunken d = new Drunken(1,8);
+		char guardDirection;
 		int posX = 1;
 		int posY = 8;
-		
-		boolean outcome1 = false, outcome2 = false, outcome3 = false, outcome4 = false;
-		while(!outcome1 || !outcome2 || !outcome3 || !outcome4){
+
+		boolean outcome1 = false, outcome2 = false, outcome3 = false, outcome4 = false, outcome5 = false;
+		while(!outcome1 || !outcome2 || !outcome3 || !outcome4 || !outcome5){
 			guardDirection = d.Movimento(1, mapa);
-			
+
 			if((guardDirection=='w')){
 				assertEquals(mapa.searchElement(posX-1, posY),'G');
 				posX--;
@@ -253,45 +282,35 @@ public class TestPITMutations {
 				assertEquals(mapa.searchElement(posX+1, posY),'G');
 				posX++;
 				outcome4=true;
+			}else if(guardDirection==' '){
+				assertEquals(mapa.searchElement(posX, posY),'g');
+				outcome5=true;
 			}
 		}
-
 	}
-	
+
 	@Test
-	public void test1() {
-		MapLevel1 mapa = new MapLevel1();
-		Suspicious d = new Suspicious(1,8);
-		char guardDirection;
-		int posX = 1;
-		int posY = 8;
-		int count = 0;
-
-		boolean outcome1 = false, outcome2 = false, outcome3 = false, outcome4 = false;
-		while (count < 7){
-			while(!outcome1 || !outcome2 || !outcome3 || !outcome4){
-				guardDirection = d.Movimento(1, mapa);
-
-				if((guardDirection=='w')){
-					assertEquals(mapa.searchElement(posX-1, posY),'G');
-					posX--;
-					outcome1=true;
-				}else if(guardDirection=='a'){
-					assertEquals(mapa.searchElement(posX, posY-1),'G');
-					posY--;
-					outcome2=true;
-				}else if(guardDirection=='d'){
-					assertEquals(mapa.searchElement(posX, posY+1),'G');
-					posY++;
-					outcome3=true;
-				}else if(guardDirection=='s'){
-					assertEquals(mapa.searchElement(posX+1, posY),'G');
-					posX++;
-					outcome4=true;
-				}
-			}
-			count++;
-		}
+	public void testlevel1() {
+		Game jogo = new Game();
+		int variavel = 0;
+		variavel = jogo.jogo('d', "Rookie", 2);
+		assertEquals(variavel, 1);		
 	}
 
+	@Test
+	public void testlevel2() {
+		Game jogo = new Game();
+		int variavel = 0;
+		Ogre ogre = new Ogre(1,4);
+		Ogre ogre1 = new Ogre(1,4);
+
+		ArrayList <Ogre> ogres = new ArrayList <Ogre>(5);
+
+		ogres.add(ogre);
+		ogres.add(ogre1);
+
+		variavel = jogo.level2('s', ogres, 2);
+		assertEquals(variavel, 3);		
+	}
 }
+

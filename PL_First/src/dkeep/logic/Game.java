@@ -25,6 +25,12 @@ public class Game {
 
 	int nivel = 1;
 	int estado = 0;
+	
+	char[][] tabuleiro = board1.board;
+	
+	public char[][] getTabuleiro(){
+		return tabuleiro;
+	}
 
 	public char[][] tabuleiro1(){
 		return board1.board;
@@ -71,7 +77,7 @@ public class Game {
 			return 3;
 	}
 	
-	public int jogo(char direc, String guardType,int numOgres){
+	public int jogo(char direc, String guardType, int numOgres){
 		
 		ogres.add(ogre);
 		ogres.add(ogre1);
@@ -85,8 +91,10 @@ public class Game {
 		else if(guardType=="Drunken"){guarda=drunken;}
 		
 		if (nivel==1){
+			tabuleiro = board1.board;
 			estado = level1(direc, guarda);
 			if(estado==2){
+				tabuleiro = board2.board;
 				nivel=2;
 			}
 		}

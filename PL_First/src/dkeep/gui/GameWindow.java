@@ -1,15 +1,37 @@
 package dkeep.gui;
 
-import java.awt.BorderLayout;
+import java.applet.Applet;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.IOException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
-public class GameWindow extends JFrame {
+import dkeep.logic.Game;
+import java.awt.Font;
 
-	private JPanel contentPane;
+public class GameWindow extends JFrame implements KeyListener{
+
+	private JFrame frame;
+	private JButton btnUp;
+	private JButton btnDown;
+	private JButton btnLeft;
+	private JButton btnRight;
+	private int variavel = 0;
+	private static char dir = ' ';
+	private static JLabel lblYouCanStart;
+	private JPanel panel;
+	private JPanel panel2;
+	private static Game jogo = new Game();
+	private static int number = 2;
+	private static String guard = "Rookie";
+	private JLabel lblGame;
 
 	/**
 	 * Launch the application.
@@ -18,8 +40,9 @@ public class GameWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GameWindow frame = new GameWindow();
-					frame.setVisible(true);
+					GameWindow window = new GameWindow(number, guard);
+					window.frame.setVisible(true);
+					window.frame.requestFocusInWindow();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -28,15 +51,216 @@ public class GameWindow extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the application.
+	 * @throws IOException 
 	 */
-	public GameWindow() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+	public GameWindow(int n, String g) throws IOException {
+		number = n;
+		guard = g;
+		initialize();
+		addKeyListener(this);
+		setFocusable(true);
+	}
+	
+	
+	public void checkGame (int var) throws IOException{
+		switch (variavel){
+		case -1:
+			frame.repaint();
+			lblYouCanStart.setText("Perdeu o Jogo!!!");
+			btnUp.setEnabled(false);
+			btnDown.setEnabled(false);
+			btnLeft.setEnabled(false);
+			btnRight.setEnabled(false);
+			
+			return;
+		case -2:
+			frame.repaint();
+			lblYouCanStart.setText("Perdeu o Jogo!!!");
+			btnUp.setEnabled(false);
+			btnDown.setEnabled(false);
+			btnLeft.setEnabled(false);
+			btnRight.setEnabled(false);
+			
+			return;
+		case 1:
+			frame.repaint();
+			break;
+		case 2:
+			panel.setVisible(false);
+			
+			panel2 = new GameView(jogo.getTabuleiro());
+			panel2.setBounds(10, 116, 361, 362);
+			frame.getContentPane().add(panel2);
+			
+			lblYouCanStart.setText("Nivel 2");
+			frame.repaint();
+			break;
+		case 3:
+			frame.repaint();
+			break;
+		case 4:
+			frame.repaint();
+			lblYouCanStart.setText("Ganhou o Jogo!!!");
+			btnUp.setEnabled(false);
+			btnDown.setEnabled(false);
+			btnLeft.setEnabled(false);
+			btnRight.setEnabled(false);
+			
+			return;
+		}					
+
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 */
+	private void initialize() throws IOException {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 658, 497);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
+	
+		JButton btnExit = new JButton("Exit");
+		btnExit.setBounds(467, 382, 117, 29);
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		frame.getContentPane().add(btnExit);
+		
+		btnUp = new JButton("Up");
+		btnUp.setBounds(467, 108, 117, 29);
+		btnUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dir='w';
+				variavel = jogo.jogo(dir, guard, number);
+				try {
+					checkGame(variavel);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		frame.getContentPane().add(btnUp);
+		
+		btnDown = new JButton("Down");
+		btnDown.setBounds(467, 258, 117, 29);
+		btnDown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dir='s';
+				variavel = jogo.jogo(dir, guard, number);
+				try {
+					checkGame(variavel);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		frame.getContentPane().add(btnDown);
+		
+		btnLeft = new JButton("Left");
+		btnLeft.setBounds(423, 186, 89, 29);
+		btnLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dir='a';
+				variavel = jogo.jogo(dir, guard, number);
+				try {
+					checkGame(variavel);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		frame.getContentPane().add(btnLeft);
+		
+		btnRight = new JButton("Right");
+		btnRight.setBounds(543, 186, 89, 29);
+		btnRight.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dir='d';
+				variavel = jogo.jogo(dir, guard, number);
+				try {
+					checkGame(variavel);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		frame.getContentPane().add(btnRight);
+		
+		lblYouCanStart = new JLabel("You can start a new game");
+		lblYouCanStart.setBounds(33, 434, 203, 16);
+		frame.getContentPane().add(lblYouCanStart);
+		
+		panel = new GameView(jogo.getTabuleiro());
+		panel.setBounds(32, 49, 361, 362);
+		frame.getContentPane().add(panel);
+		
+		lblGame = new JLabel("Game");
+		lblGame.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblGame.setBounds(319, 11, 55, 27);
+		frame.getContentPane().add(lblGame);
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {	
+		System.out.println("Key");
+		switch (e.getKeyCode()){
+		case KeyEvent.VK_LEFT:
+			dir='a';
+			variavel = jogo.jogo(dir, guard, number);
+			try {
+				checkGame(variavel);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			break;
+		case KeyEvent.VK_RIGHT:
+			dir='d';
+			variavel = jogo.jogo(dir, guard, number);
+			try {
+				checkGame(variavel);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			break;
+		case KeyEvent.VK_UP:
+			dir='w';
+			variavel = jogo.jogo(dir, guard, number);
+			try {
+				checkGame(variavel);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			break;
+		case KeyEvent.VK_DOWN:
+			dir='s';
+			variavel = jogo.jogo(dir, guard, number);
+			try {
+				checkGame(variavel);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			break;
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
 	}
 
 }

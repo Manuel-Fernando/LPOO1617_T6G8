@@ -40,6 +40,10 @@ public class Game {
 		return board2.board;
 	}
 	
+	public void setTabuleiro(char [][] t){
+		tabuleiro = t;
+	}
+	
 
 	public int level1(char dir, Guard g){		
 			
@@ -58,7 +62,6 @@ public class Game {
 
 			hero2.Movimento(dir, 2, board2);
 			if(loose.WinOrLoose((ogres.get(0)).getLetter(), board2, hero2)==1){return 4;}
-			//if(loose.WinOrLoose((ogres.get(0)).getLetter(), board2, hero2)==1){return 4;}
 			if(!hero2.herowithclub){
 				if(loose.WinOrLoose((ogres.get(0)).getLetter(), board2, hero2)==-1){return -2;}
 				if(loose.WinOrLoose('$', board2, hero2)==-1){return -2;}

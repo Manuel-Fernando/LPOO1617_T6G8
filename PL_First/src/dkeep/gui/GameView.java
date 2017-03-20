@@ -48,60 +48,45 @@ public class GameView extends JPanel{
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);				
-		//g.drawRect(143, 14, 500, 500);
-		//g.setColor(Color.BLUE);
 		
 		for (int i=0; i<board.length; i++){
 			for (int j=0; j<board[0].length; j++){
 				
 				switch(board[i][j]){
 				case 'X':
-					//g.fillRect (j+35*j, i+35*i, 35, 35);
-					//g.setColor(Color.WHITE);
 					g.drawImage(wall, j+35*j, i+35*i, 35, 35, this);
 					break;
 				case 'H':
-					//g.fillRect (i+35*i, j+35*j, 35, 35);
 					g.drawImage(hero, j+35*j, i+35*i, 35, 35, this);
 					break;
 				case 'G':
-					//g.fillRect (i+35*i, j+35*j, 35, 35);
 					g.drawImage(guard, j+35*j, i+35*i, 35, 35, this);
 					break;
 				case 'g':
-					//g.fillRect (i+35*i, j+35*j, 35, 35);
 					g.drawImage(guardAsleep,  j+35*j, i+35*i, 35, 35, this);
 					break;
 				case 'k':
-					//g.fillRect (i+35*i, j+35*j, 35, 35);
 					g.drawImage(key,  j+35*j, i+35*i, 35, 35, this);
 					break;
 				case 'I':
-					//g.fillRect (i+35*i, j+35*j, 35, 35);
 					g.drawImage(lock,  j+35*j, i+35*i, 35, 35, this);
 					break;
 				case 'S':
-					//g.fillRect (i+35*i, j+35*j, 35, 35);
 					g.drawImage(lockOpen,  j+35*j, i+35*i, 35, 35, this);
 					break;
 				case 'O':
-					//g.fillRect (i+35*i, j+35*j, 35, 35);
 					g.drawImage(ogre,  j+35*j, i+35*i, 35, 35, this);
 					break;
 				case '*':
-					//g.fillRect (i+35*i, j+35*j, 35, 35);
 					g.drawImage(club,  j+35*j, i+35*i, 35, 35, this);
 					break;
 				case '+':
-					//g.fillRect (i+35*i, j+35*j, 35, 35);
 					g.drawImage(shield,  j+35*j, i+35*i, 35, 35, this);
 					break;
 				case 'A':
-					//g.fillRect (i+35*i, j+35*j, 35, 35);
 					g.drawImage(heroA,  j+35*j, i+35*i, 35, 35, this);
 					break;
 				case 'K':
-					//g.fillRect (i+35*i, j+35*j, 35, 35);
 					g.drawImage(heroA,  j+35*j, i+35*i, 35, 35, this);
 					break;
 				default:

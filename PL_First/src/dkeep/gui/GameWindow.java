@@ -34,6 +34,7 @@ public class GameWindow extends JFrame{
 	private static int number = 2;
 	private static String guard = "Rookie";
 	private JLabel lblGame;
+	private char [][] board;
 
 	/**
 	 * Launch the application.
@@ -58,6 +59,17 @@ public class GameWindow extends JFrame{
 	public GameWindow(int n, String g) throws IOException {
 		number = n;
 		guard = g;
+		initialize();
+		panel.setFocusTraversalKeysEnabled(false);
+		panel.setFocusable(true);		
+		KeyLis key = new KeyLis();		
+		panel.addKeyListener(key);
+		panel.requestFocusInWindow();
+	}
+	
+	public GameWindow(char [][] b) throws IOException {
+		board = b;
+		jogo.setTabuleiro(board);
 		initialize();
 		panel.setFocusTraversalKeysEnabled(false);
 		panel.setFocusable(true);		

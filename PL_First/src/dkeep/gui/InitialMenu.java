@@ -48,9 +48,10 @@ public class InitialMenu extends JFrame {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 450, 365);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
 		
 		JLabel lblNum = new JLabel("Number of Ogres \r\n(max. 5)");
 		lblNum.setBounds(36, 74, 161, 14);
@@ -110,8 +111,27 @@ public class InitialMenu extends JFrame {
 			}
 		});
 		
-		btnNewGame.setBounds(172, 183, 100, 34);
+		btnNewGame.setBounds(172, 268, 100, 34);
 		frame.getContentPane().add(btnNewGame);
 		
+		JLabel lblCreateYourOwn = new JLabel("Create your own map for the game");
+		lblCreateYourOwn.setBounds(36, 187, 236, 14);
+		frame.getContentPane().add(lblCreateYourOwn);
+		
+		JButton btnCreate = new JButton("Create");
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					LevelCreator lvlMap = new LevelCreator();
+					lvlMap.setVisible(true);
+				} catch (IOException e) {
+					e.printStackTrace();
+				} 
+			}
+		});
+		btnCreate.setBounds(295, 183, 100, 28);
+		frame.getContentPane().add(btnCreate);
+		
 	}
+
 }

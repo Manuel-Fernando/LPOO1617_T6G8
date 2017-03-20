@@ -26,12 +26,11 @@ public class NewLevel extends JPanel{
 	private Image club;
 	private Image shield;
 	private Image heroA;
-	private Map newMap = new Map();
-	
-	public NewLevel(int n, int m) throws IOException{
+
+	public NewLevel(char [][]b) throws IOException{
 
 		try {
-			board = new char[n][m];	
+			this.board = b;
 			for (int i=0; i<board.length; i++){
 				for (int j=0; j<board[0].length; j++){
 					board[i][j]=' ';
@@ -52,18 +51,59 @@ public class NewLevel extends JPanel{
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.GRAY);
-		
+
 		for (int i=0; i<board.length; i++){
 			for (int j=0; j<board[0].length; j++){
-				g.fillRect (j+35*j, i+35*i, 35, 35);
-			}
-		}
-		
+				
+				switch(board[i][j]){
+				case 'X':
+					g.drawImage(wall, j+35*j, i+35*i, 35, 35, this);
+					break;
+				case 'H':
+					g.drawImage(hero, j+35*j, i+35*i, 35, 35, this);
+					break;
+				case 'G':
+					g.drawImage(guard, j+35*j, i+35*i, 35, 35, this);
+					break;
+				case 'g':
+					g.drawImage(guardAsleep,  j+35*j, i+35*i, 35, 35, this);
+					break;
+				case 'k':
+					g.drawImage(key,  j+35*j, i+35*i, 35, 35, this);
+					break;
+				case 'I':
+					g.drawImage(lock,  j+35*j, i+35*i, 35, 35, this);
+					break;
+				case 'S':
+					g.drawImage(lockOpen,  j+35*j, i+35*i, 35, 35, this);
+					break;
+				case 'O':
+					g.drawImage(ogre,  j+35*j, i+35*i, 35, 35, this);
+					break;
+				case '*':
+					g.drawImage(club,  j+35*j, i+35*i, 35, 35, this);
+					break;
+				case '+':
+					g.drawImage(shield,  j+35*j, i+35*i, 35, 35, this);
+					break;
+				case 'A':
+					g.drawImage(heroA,  j+35*j, i+35*i, 35, 35, this);
+					break;
+				case 'K':
+					g.drawImage(heroA,  j+35*j, i+35*i, 35, 35, this);
+					break;
+				case ' ':
+					g.setColor(Color.GRAY);
+					g.fillRect(j+35*j, i+35*i, 35, 35);		
+					break;
+				}
+			}			
+		} 
+
 	}
 
 }

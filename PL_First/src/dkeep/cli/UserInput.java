@@ -40,7 +40,7 @@ public class UserInput {
 
 		printBoard(jogo.tabuleiro1());
 		while(true){
-			variavel = jogo.jogo(readDirection(), "Rookie", 2);
+			variavel = jogo.jogo(readDirection(), "Rookie", 1);
 			switch (variavel){
 			case -1:
 				printBoard(jogo.tabuleiro1());

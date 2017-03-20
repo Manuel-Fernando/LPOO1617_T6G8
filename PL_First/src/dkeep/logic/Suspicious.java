@@ -1,11 +1,11 @@
 package dkeep.logic;
 
+import java.util.Random;
 
 public class Suspicious extends comportamentoGuarda {
 
 	public Suspicious(int PosXi, int PosYi) {
 		super(PosXi, PosYi);
-		// TODO Auto-generated constructor stub
 	}
 
 	int count=0;
@@ -13,20 +13,22 @@ public class Suspicious extends comportamentoGuarda {
 	char[] guardInverse = {'d','w','w','w','w','d','d','d','d','d','d','w','a','a','a','a','a','a','a','s','s','s','s','s'};
 
 	public String getName(){return "Suspicious";}
-	
+
 	public char Movimento (int mapLevel, Map m){
-		
-		if (count<5){
+
+		Random rn = new Random();
+		int range = 2 - 1 + 1;
+		int randomNum =  rn.nextInt(range) + 1;
+
+		if (randomNum==1){ // anda para a frente
 			
-			//System.out.println("i inicial frente " + i);
 			dir = guardtraject[i];
 			i++;
 			if (i==guardtraject.length){i=0;}
-			//System.out.println("i final frente " + i);
 			count++;
+
+		} else {  // anda para trás
 			
-		} else if (count>=5 && count<=8){
-			//System.out.println("i inicial atrï¿½s " + i);
 			if (i==0){
 				i=23;
 				dir = guardInverse[i];
@@ -34,19 +36,9 @@ public class Suspicious extends comportamentoGuarda {
 				i--;
 				dir = guardInverse[i];
 			}
-			//System.out.println("i final atrï¿½s " + i);
-		
-			count++;
 			
-		} else{	
-			//System.out.println("i inicial pausa " + i);
-			count=0;
-			dir = guardtraject[i];
-			i++;
-			if (i==guardtraject.length){i=0;}
-			//System.out.println("i final pausa " + i);
-		}
-		
+			count++;
+		}		
 		
 		switch (dir){
 		case 'w':

@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -16,7 +18,7 @@ import javax.swing.JPanel;
 import dkeep.logic.Game;
 import java.awt.Font;
 
-public class GameWindow extends JFrame implements KeyListener{
+public class GameWindow extends JFrame{
 
 	private JFrame frame;
 	private JButton btnUp;
@@ -27,7 +29,7 @@ public class GameWindow extends JFrame implements KeyListener{
 	private static char dir = ' ';
 	private static JLabel lblYouCanStart;
 	private JPanel panel;
-	private JPanel panel2;
+	private JPanel panel2; 
 	private static Game jogo = new Game();
 	private static int number = 2;
 	private static String guard = "Rookie";
@@ -42,7 +44,6 @@ public class GameWindow extends JFrame implements KeyListener{
 				try {
 					GameWindow window = new GameWindow(number, guard);
 					window.frame.setVisible(true);
-					window.frame.requestFocusInWindow();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -58,8 +59,11 @@ public class GameWindow extends JFrame implements KeyListener{
 		number = n;
 		guard = g;
 		initialize();
-		addKeyListener(this);
-		setFocusable(true);
+		panel.setFocusTraversalKeysEnabled(false);
+		panel.setFocusable(true);		
+		KeyLis key = new KeyLis();		
+		panel.addKeyListener(key);
+		panel.requestFocusInWindow();
 	}
 	
 	
@@ -67,7 +71,7 @@ public class GameWindow extends JFrame implements KeyListener{
 		switch (variavel){
 		case -1:
 			frame.repaint();
-			lblYouCanStart.setText("Perdeu o Jogo!!!");
+			lblYouCanStart.setText("Game Over!!!");
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
 			btnLeft.setEnabled(false);
@@ -76,7 +80,7 @@ public class GameWindow extends JFrame implements KeyListener{
 			return;
 		case -2:
 			frame.repaint();
-			lblYouCanStart.setText("Perdeu o Jogo!!!");
+			lblYouCanStart.setText("Game Over!!!");
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
 			btnLeft.setEnabled(false);
@@ -90,18 +94,25 @@ public class GameWindow extends JFrame implements KeyListener{
 			panel.setVisible(false);
 			
 			panel2 = new GameView(jogo.getTabuleiro());
-			panel2.setBounds(10, 116, 361, 362);
+			panel2.setBounds(32, 49, 361, 362);
 			frame.getContentPane().add(panel2);
 			
-			lblYouCanStart.setText("Nivel 2");
+			lblYouCanStart.setText("Level 1: Get the key that unlocks the door while avoiding the ogre.");
 			frame.repaint();
+			
+			panel2.setFocusTraversalKeysEnabled(false);
+			panel2.setFocusable(true);		
+			KeyLis key = new KeyLis();		
+			panel2.addKeyListener(key);
+			panel2.requestFocusInWindow();
+			
 			break;
 		case 3:
 			frame.repaint();
 			break;
 		case 4:
 			frame.repaint();
-			lblYouCanStart.setText("Ganhou o Jogo!!!");
+			lblYouCanStart.setText("You won!!!");
 			btnUp.setEnabled(false);
 			btnDown.setEnabled(false);
 			btnLeft.setEnabled(false);
@@ -179,7 +190,7 @@ public class GameWindow extends JFrame implements KeyListener{
 		});
 
 		frame.getContentPane().add(btnLeft);
-		
+
 		btnRight = new JButton("Right");
 		btnRight.setBounds(543, 186, 89, 29);
 		btnRight.addActionListener(new ActionListener() {
@@ -195,72 +206,77 @@ public class GameWindow extends JFrame implements KeyListener{
 		});
 
 		frame.getContentPane().add(btnRight);
-		
-		lblYouCanStart = new JLabel("You can start a new game");
-		lblYouCanStart.setBounds(33, 434, 203, 16);
+
+		lblYouCanStart = new JLabel("Level 1: Get the key that unlocks the door while avoiding the guard.");
+		lblYouCanStart.setBounds(33, 434, 422, 16);
 		frame.getContentPane().add(lblYouCanStart);
-		
+
 		panel = new GameView(jogo.getTabuleiro());
 		panel.setBounds(32, 49, 361, 362);
 		frame.getContentPane().add(panel);
-		
+
 		lblGame = new JLabel("Game");
 		lblGame.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblGame.setBounds(319, 11, 55, 27);
 		frame.getContentPane().add(lblGame);
-		
+
 	}
 
-	@Override
-	public void keyPressed(KeyEvent e) {	
-		System.out.println("Key");
-		switch (e.getKeyCode()){
-		case KeyEvent.VK_LEFT:
-			dir='a';
-			variavel = jogo.jogo(dir, guard, number);
-			try {
-				checkGame(variavel);
-			} catch (IOException e1) {
-				e1.printStackTrace();
+	class KeyLis implements KeyListener{
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			switch (e.getKeyCode()){
+			case KeyEvent.VK_LEFT:
+				dir='a';
+				variavel = jogo.jogo(dir, guard, number);
+				try {
+					checkGame(variavel);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				break;
+			case KeyEvent.VK_RIGHT:
+				dir='d';
+				variavel = jogo.jogo(dir, guard, number);
+				try {
+					checkGame(variavel);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				break;
+			case KeyEvent.VK_UP:
+				dir='w';
+				variavel = jogo.jogo(dir, guard, number);
+				try {
+					checkGame(variavel);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				break;
+			case KeyEvent.VK_DOWN:
+				dir='s';
+				variavel = jogo.jogo(dir, guard, number);
+				try {
+					checkGame(variavel);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				break;
 			}
-			break;
-		case KeyEvent.VK_RIGHT:
-			dir='d';
-			variavel = jogo.jogo(dir, guard, number);
-			try {
-				checkGame(variavel);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			break;
-		case KeyEvent.VK_UP:
-			dir='w';
-			variavel = jogo.jogo(dir, guard, number);
-			try {
-				checkGame(variavel);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			break;
-		case KeyEvent.VK_DOWN:
-			dir='s';
-			variavel = jogo.jogo(dir, guard, number);
-			try {
-				checkGame(variavel);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			break;
+
 		}
-	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		
-	}
+		@Override
+		public void keyReleased(KeyEvent e) {
 
-	@Override
-	public void keyTyped(KeyEvent e) {
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+
+		}
+
 	}
 
 }

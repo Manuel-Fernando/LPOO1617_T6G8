@@ -10,14 +10,11 @@ public class Drunken extends comportamentoGuarda{
 
 	public char Movimento (int mapLevel, Map m){
 		
-		//System.out.println("i inicial " + i);
 		char dir;
 
 		Random rn = new Random();
 		int range = 2 - 1 + 1;
 		int randomNum =  rn.nextInt(range) + 1;
-		
-		//System.out.println("sleep??  " + randomNum);
 		
 		if (randomNum==1){ //Sleep
 			
@@ -29,13 +26,9 @@ public class Drunken extends comportamentoGuarda{
 			
 			if (m.searchElement(getX(), getY())=='g'){
 				
-				//System.out.println("Mudar para G");
-				
 				rn = new Random();
 				range = 2 - 1 + 1;
 				randomNum =  rn.nextInt(range) + 1;
-				
-				//System.out.println("Sentido  " + randomNum);
 				
 				if (randomNum==1){ //mode-se para a frente
 					dir = guardtraject[i];
@@ -75,16 +68,12 @@ public class Drunken extends comportamentoGuarda{
 					i=23;
 				}
 				
-				//System.out.println("i final  " + i);
-				
 			} else {
 				dir = guardtraject[i];
 				i++;
 			}
 			
 			m.writeElement(getX(), getY(), 'G');
-			
-			//System.out.println("direção  " + dir);
 
 			if (i==guardtraject.length){i=0;}
 
@@ -105,10 +94,7 @@ public class Drunken extends comportamentoGuarda{
 			
 			return dir;
 			
-			
 		}
 		
 	}
-	
-
 }

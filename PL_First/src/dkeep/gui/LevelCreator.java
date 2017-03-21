@@ -38,14 +38,14 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 	private int finalposY;
 	private JPanel wall;
 	private JPanel ogre;
-	private JPanel guard;
+	private JPanel shield;
 	private JPanel hero;
 	private JPanel key;
 	private JPanel door;
 	private JLabel lblWall;
 	private JLabel lblOgre;
 	private JLabel lblHero;
-	private JLabel lblGuard;
+	private JLabel lblShield;
 	private JLabel lblDoor;
 	private JLabel lblKey;
 	private JLabel lblPleaseInsertW;
@@ -131,12 +131,12 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 					frame.remove(wall);
 					frame.remove(ogre);
 					frame.remove(hero);
-					frame.remove(guard);
+					frame.remove(shield);
 					frame.remove(lblWall);
 					frame.remove(lblKey);
 					frame.remove(lblDoor);
 					frame.remove(lblOgre);
-					frame.remove(lblGuard);
+					frame.remove(lblShield);
 					frame.remove(lblHero);
 					frame.remove(btnNewButton);
 					mapa.removeAll();
@@ -171,10 +171,10 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 					frame.add(hero);
 					hero.repaint();
 					
-					guard = new GuardIcon();
-					guard.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 276, 35, 35);
-					frame.add(guard);
-					guard.repaint();
+					shield = new ShieldIcon();
+					shield.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 276, 35, 35);
+					frame.add(shield);
+					shield.repaint();
 					
 					door = new DoorIcon();
 					door.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 336, 35, 35);
@@ -198,9 +198,9 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 					lblHero.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 247, 27, 14);
 					frame.add(lblHero);
 					
-					lblGuard = new JLabel("Guard");
-					lblGuard.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 314, 35, 14);
-					frame.add(lblGuard);
+					lblShield = new JLabel("Shield");
+					lblShield.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 314, 35, 14);
+					frame.add(lblShield);
 					
 					lblDoor = new JLabel("Door");
 					lblDoor.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 376, 35, 14);
@@ -214,7 +214,10 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 					btnNewButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							try {
-								GameWindow gamewindow = new GameWindow(newboard);
+								//
+								//Regras aqui??!!!
+								//
+								new GameWindow(newboard);
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
@@ -250,7 +253,7 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {  //Mover o icon até à posição desejada	
+	public void mouseDragged(MouseEvent e) {  //Mover o icon atï¿½ ï¿½ posiï¿½ï¿½o desejada	
 		
 		posX = e.getX();
 		posY = e.getY();
@@ -300,11 +303,11 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 
 			clickedIcon = ogre;
 			type = "ogre";
-		} else if (posX>=guard.getBounds().getMinX() && posX<=guard.getBounds().getMaxX() &&
-				posY>=guard.getBounds().getMaxY() && posY<=guard.getBounds().getMaxY()+35){
+		} else if (posX>=shield.getBounds().getMinX() && posX<=shield.getBounds().getMaxX() &&
+				posY>=shield.getBounds().getMaxY() && posY<=shield.getBounds().getMaxY()+35){
 
-			clickedIcon = guard;
-			type = "guard";
+			clickedIcon = shield;
+			type = "shield";
 		} else if (posX>=key.getBounds().getMinX() && posX<=key.getBounds().getMaxX() &&
 				posY>=key.getBounds().getMaxY() && posY<=key.getBounds().getMaxY()+35){
 
@@ -319,7 +322,7 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) { //Saber até onde o icon é levado
+	public void mouseReleased(MouseEvent e) { //Saber atï¿½ onde o icon ï¿½ levado
 		
 		finalposX = posX;
 		finalposY = posY;
@@ -336,9 +339,9 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 			newboard[boardposY][boardposX]='H';
 			hero.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 210, 35, 35);
 			break;
-		case "guard":
-			newboard[boardposY][boardposX]='G';
-			guard.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 276, 35, 35);
+		case "shield":
+			newboard[boardposY][boardposX]='+';
+			shield.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 276, 35, 35);
 			break;
 		case "ogre":
 			newboard[boardposY][boardposX]='O';

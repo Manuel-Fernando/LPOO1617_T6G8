@@ -8,19 +8,19 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class GuardIcon extends JPanel{
+public class ShieldIcon extends JPanel{
 	
-	private Image guard;
+	private Image shield;
 
-	public GuardIcon() throws IOException{
-		guard = ImageIO.read(new File("src/Imagens/Guard.png"));
+	public ShieldIcon() throws IOException{
+		shield = ImageIO.read(new File("src/Imagens/shield.jpg"));
 	}
 
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(guard, 0, 0, 35, 35, this);	
+		g.drawImage(shield, 0, 0, 35, 35, this);	
 	}
 
 }

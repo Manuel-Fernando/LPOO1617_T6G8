@@ -33,7 +33,8 @@ public class NewLevel extends JPanel{
 			this.board = b;
 			for (int i=0; i<board.length; i++){
 				for (int j=0; j<board[0].length; j++){
-					board[i][j]=' ';
+					if(i==0 || j== 0 || i==board.length-1 || j==board[0].length-1){board[i][j]='X';}
+					else {board[i][j]=' ';}
 				}
 			}			
 			wall = ImageIO.read(new File("src/Imagens/wall.jpeg"));

@@ -54,6 +54,11 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 	private String type;
 	private char [][] newboard;
 	JButton btnNewButton;
+	
+	private int heroiPresente;
+	private boolean closedBoard;
+	private boolean doorPresente;
+	private boolean keyPresente;
 
 	/**
 	 * Launch the application.
@@ -213,18 +218,30 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 					btnNewButton = new JButton("Save and Play");
 					btnNewButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
-							try {
-								//
-								//Regras aqui??!!!
-								//
-								new GameWindow(newboard);
-							} catch (IOException e) {
-								e.printStackTrace();
+
+							closedBoard=true;
+							heroiPresente=0;
+							for (int i=0; i<newboard.length; i++){
+								for (int j=0; j<newboard[0].length; j++){
+									if (newboard[i][j]=='H') {heroiPresente++;}
+									if (newboard[i][j]=='I') {doorPresente=true;}
+									if (newboard[i][j]=='k') {keyPresente=true;}
+									if((i==0 || j==0 || i==newboard.length-1 || j==newboard[0].length-1) && newboard[i][j]!='X' && newboard[i][j]!='I'){
+										closedBoard=false;
+									}
+								}
 							}
-							frame.setEnabled(false);
+							if((heroiPresente==1) && closedBoard && doorPresente && keyPresente){
+								try {
+									new GameWindow(newboard);
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+								frame.setEnabled(false);
+							}
 						}
 					});
-					
+
 					if ((int) (lblKey.getBounds().y + lblKey.getBounds().getHeight()+ 10) > (int) (mapa.getBounds().y + mapa.getBounds().getHeight()+ 10)){
 						btnNewButton.setBounds(230, (int) (lblKey.getBounds().y + lblKey.getBounds().getHeight()+ 10), 150, 35);
 					} else {

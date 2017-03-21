@@ -110,8 +110,10 @@ public class Ogre extends Entidade{
 			
 			
 			char direction=randomdirection();
-			while((direction=='w' && posX==1)||(direction=='a' && posY==1)
-				||(direction=='d' && posY==m.board[0].length-2)||(direction=='s' && posX==m.board.length-2)){
+			while((direction=='w' && (m.searchElement(posX-1, posY)=='X' || m.searchElement(posX-1, posY)=='I'))||
+				  (direction=='a' && (m.searchElement(posX, posY-1)=='X' || m.searchElement(posX, posY-1)=='I'))||
+				  (direction=='d' && (m.searchElement(posX, posY+1)=='X' || m.searchElement(posX, posY+1)=='I'))||
+				  (direction=='s' && (m.searchElement(posX+1, posY)=='X' || m.searchElement(posX+1, posY)=='I'))){
 				direction=randomdirection();
 			}
 			switch (direction){

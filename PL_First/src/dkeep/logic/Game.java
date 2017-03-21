@@ -103,23 +103,23 @@ public class Game {
 	public int level3(char dir, ArrayList <Ogre> ogres, int numOgres){
 
 		hero3.Movimento(dir, 2, board3);
-		if(loose.WinOrLoose((ogres.get(0)).getLetter(), board3, hero3)==1){return 4;}
+		if(loose.WinOrLoose((ogres.get(0)).getLetter(), board3, hero3)==1){return 6;}
 		if(!hero3.herowithclub){
-			if(loose.WinOrLoose((ogres.get(0)).getLetter(), board3, hero3)==-1){return -2;}
-			if(loose.WinOrLoose('$', board3, hero3)==-1){return -2;}
+			if(loose.WinOrLoose((ogres.get(0)).getLetter(), board3, hero3)==-1){return -3;}
+			if(loose.WinOrLoose('$', board3, hero3)==-1){return -3;}
 		}
-		if(loose.WinOrLoose('*', board3, hero3)==-1){return -2;}
-		if(board3.searchElement(hero3.getX(), hero3.getY()) == '*'){return -2;}	
+		if(loose.WinOrLoose('*', board3, hero3)==-1){return -3;}
+		if(board3.searchElement(hero3.getX(), hero3.getY()) == '*'){return -3;}	
 		for(int i=0; i<numOgres; i++){
 			(ogres.get(i)).Movimento(2, board3, hero3.herowithclub, hero3.herowithkey);
 		}
 		if(!hero3.herowithclub){
-			if(loose.WinOrLoose((ogres.get(0)).getLetter(), board3, hero3)==-1){return -2;}
-			if(loose.WinOrLoose('$', board3, hero3)==-1){return -2;}
+			if(loose.WinOrLoose((ogres.get(0)).getLetter(), board3, hero3)==-1){return -3;}
+			if(loose.WinOrLoose('$', board3, hero3)==-1){return -3;}
 		}
-		if(loose.WinOrLoose('*', board3, hero3)==-1){return -2;}
-		if(board3.searchElement(hero3.getX(), hero3.getY()) == '*'){return -2;}	
-		return 3;
+		if(loose.WinOrLoose('*', board3, hero3)==-1){return -3;}
+		if(board3.searchElement(hero3.getX(), hero3.getY()) == '*'){return -3;}	
+		return 5;
 }
 	
 	public int jogo(char direc, String guardType, int numOgres){

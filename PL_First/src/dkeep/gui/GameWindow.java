@@ -89,6 +89,7 @@ public class GameWindow extends JFrame{
 			btnDown.setEnabled(false);
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
+			panel.setEnabled(false);
 			
 			return;
 		case -2:
@@ -98,10 +99,14 @@ public class GameWindow extends JFrame{
 			btnDown.setEnabled(false);
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
+			panel2.setEnabled(false);
+			panel.setEnabled(false);
 			
 			return;
 		case 1:
+			lblYouCanStart.setText("Level 1");
 			frame.repaint();
+			panel.requestFocusInWindow();
 			break;
 		case 2:
 			panel.setVisible(false);
@@ -109,9 +114,6 @@ public class GameWindow extends JFrame{
 			panel2 = new GameView(jogo.getTabuleiro());
 			panel2.setBounds(32, 49, 361, 362);
 			frame.getContentPane().add(panel2);
-			
-			lblYouCanStart.setText("Level 1: Get the key that unlocks the door while avoiding the ogre.");
-			frame.repaint();
 			
 			panel2.setFocusTraversalKeysEnabled(false);
 			panel2.setFocusable(true);		
@@ -121,7 +123,10 @@ public class GameWindow extends JFrame{
 			
 			break;
 		case 3:
+			lblYouCanStart.setText("Last Level");
 			frame.repaint();
+			panel.requestFocusInWindow();
+			panel2.requestFocusInWindow();
 			break;
 		case 4:
 			frame.repaint();
@@ -130,7 +135,8 @@ public class GameWindow extends JFrame{
 			btnDown.setEnabled(false);
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
-			
+			panel.setEnabled(false);
+			panel2.setEnabled(false);
 			return;
 		}					
 
@@ -220,7 +226,7 @@ public class GameWindow extends JFrame{
 
 		frame.getContentPane().add(btnRight);
 
-		lblYouCanStart = new JLabel("Level 1: Get the key that unlocks the door while avoiding the guard.");
+		lblYouCanStart = new JLabel("Level 1");
 		lblYouCanStart.setBounds(33, 434, 422, 16);
 		frame.getContentPane().add(lblYouCanStart);
 

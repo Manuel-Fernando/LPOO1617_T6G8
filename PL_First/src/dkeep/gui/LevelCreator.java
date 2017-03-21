@@ -155,7 +155,7 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 					mapa = new NewLevel(newboard);
 					frame.repaint();		
 					
-					mapa.setBounds(28, 88, n*38, m*38);
+					mapa.setBounds(28, 88, m*38, n*38);
 					
 					if ((int)(mapa.getBounds().getWidth()+mapa.getBounds().x+100)>640 || (int)(mapa.getBounds().getHeight()+mapa.getBounds().y+50)>550){
 						setBounds(100, 100, (int)(mapa.getBounds().getWidth()+mapa.getBounds().x+150), (int)(mapa.getBounds().getHeight()+mapa.getBounds().y+70));

@@ -70,6 +70,7 @@ public class GameWindow extends JFrame{
 	public GameWindow(char [][] b) throws IOException {
 		board = b;
 		jogo.setTabuleiro(board);
+		number=jogo.ogreNumber();
 		initialize();
 		panel.setFocusTraversalKeysEnabled(false);
 		panel.setFocusable(true);		

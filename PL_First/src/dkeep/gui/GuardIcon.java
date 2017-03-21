@@ -13,7 +13,7 @@ public class GuardIcon extends JPanel{
 	private Image guard;
 
 	public GuardIcon() throws IOException{
-		guard = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/Guard.png"));
+		guard = ImageIO.read(new File("src/Imagens/Guard.png"));
 	}
 
 

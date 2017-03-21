@@ -4,11 +4,25 @@ import java.util.Random;
 
 public class Ogre extends Entidade{
 
+	int keyPosx=1;
+	int keyPosy=7;
+	int armPosx=7;
+	int armPosy=5;
 	
 	public Ogre(int PosXi, int PosYi){
 		posX=PosXi;
 		posY=PosYi;
 		letter='O';
+	}
+	
+	public void setKeyPosition(int keyPosxi, int keyPosyi){
+		keyPosx=keyPosxi;
+		keyPosy=keyPosyi;
+	}
+	
+	public void setArmPosition(int armPosxi,int armPosyi){
+		armPosx=armPosxi;
+		armPosy=armPosyi;
 	}
 	
 	private char randomdirection(){
@@ -45,9 +59,9 @@ public class Ogre extends Entidade{
 			}
 			
 			//apagar posicao antiga
-			if (posX==1 && posY==7 && !herowithkey){
+			if (posX==keyPosx && posY== keyPosy && !herowithkey){
 				m.writeElement(posX, posY, 'k');
-			}else if(posX==7 && posY==5 && !herowithclub){
+			}else if(posX==armPosx && posY==armPosy && !herowithclub){
 				m.writeElement(posX, posY, '+');
 			}else if(m.searchElement(posX, posY) != '*') {
 				m.writeElement(posX, posY, ' ');
@@ -67,7 +81,7 @@ public class Ogre extends Entidade{
 			}
 			
 			//escrever posicao nova
-			if (posinX==1 && posinY==7 && !herowithkey){
+			if (posinX==keyPosx && posinY==keyPosy && !herowithkey){
 				m.writeElement(posinX, posinY, '$');
 			}else {
 				if(findHero(m, posinX, posinY) && herowithclub){
@@ -86,9 +100,9 @@ public class Ogre extends Entidade{
 			//Club part
 			
 			//apagar posicao antiga
-			if (posXclub==1 && posYclub==7 && !herowithkey && !(posX==1 && posY==7)){
+			if (posXclub==keyPosx && posYclub==keyPosy && !herowithkey && !(posX==keyPosx && posY==keyPosy)){
 				m.writeElement(posXclub, posYclub, 'k');
-			}else if(posXclub==7 && posYclub==5 && !herowithclub && !(posX==7 && posY==5)){
+			}else if(posXclub==armPosx && posYclub==armPosy && !herowithclub && !(posX==armPosx && posY==armPosy)){
 				m.writeElement(posXclub, posYclub, '+');
 			}else if(!(posXclub==posX && posYclub==posY)){
 				m.writeElement(posXclub, posYclub, ' ');
@@ -97,7 +111,7 @@ public class Ogre extends Entidade{
 			
 			char direction=randomdirection();
 			while((direction=='w' && posX==1)||(direction=='a' && posY==1)
-				||(direction=='d' && posY==7)||(direction=='s' && posX==7)){
+				||(direction=='d' && posY==m.board[0].length-2)||(direction=='s' && posX==m.board.length-2)){
 				direction=randomdirection();
 			}
 			switch (direction){
@@ -118,7 +132,7 @@ public class Ogre extends Entidade{
 					posYclub=posY;
 					break;			
 			}
-			if (posXclub == 1 && posYclub == 7 && !herowithkey){m.writeElement(posXclub, posYclub, '$');
+			if (posXclub == keyPosx && posYclub == keyPosy && !herowithkey){m.writeElement(posXclub, posYclub, '$');
 			}else m.writeElement(posXclub, posYclub, '*'); 
 
 		}

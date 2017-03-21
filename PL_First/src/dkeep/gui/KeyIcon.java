@@ -13,7 +13,7 @@ public class KeyIcon extends JPanel{
 	private Image key;
 
 	public KeyIcon() throws IOException{
-		key = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/key.jpg"));
+		key = ImageIO.read(new File("src/Imagens/key.jpg"));
 	}
 
 

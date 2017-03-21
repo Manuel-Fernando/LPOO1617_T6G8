@@ -13,7 +13,7 @@ public class OgreIcon extends JPanel{
 	private Image ogre;
 
 	public OgreIcon() throws IOException{
-		ogre = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/ogre.jpg"));
+		ogre = ImageIO.read(new File("src/Imagens/ogre.jpg"));
 	}
 
 

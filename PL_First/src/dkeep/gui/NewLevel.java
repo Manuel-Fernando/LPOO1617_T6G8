@@ -36,17 +36,17 @@ public class NewLevel extends JPanel{
 					board[i][j]=' ';
 				}
 			}			
-			wall = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/wall.jpeg"));
-			hero = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/hero.png"));
-			guard = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/Guard.png"));
-			key = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/key.jpg"));
-			lock = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/lock.png"));
-			lockOpen = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/lockOpen.jpeg"));
-			guardAsleep = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/guardAsleep.jpg"));
-			ogre = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/ogre.jpg"));
-			club = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/club.jpeg"));
-			shield = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/shield.jpg"));
-			heroA = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/heroA.jpg"));
+			wall = ImageIO.read(new File("src/Imagens/wall.jpeg"));
+			hero = ImageIO.read(new File("src/Imagens/hero.png"));
+			guard = ImageIO.read(new File("src/Imagens/Guard.png"));
+			key = ImageIO.read(new File("src/Imagens/key.jpg"));
+			lock = ImageIO.read(new File("src/Imagens/lock.png"));
+			lockOpen = ImageIO.read(new File("src/Imagens/lockOpen.jpeg"));
+			guardAsleep = ImageIO.read(new File("src/Imagens/guardAsleep.jpg"));
+			ogre = ImageIO.read(new File("src/Imagens/ogre.jpg"));
+			club = ImageIO.read(new File("src/Imagens/club.jpeg"));
+			shield = ImageIO.read(new File("src/Imagens/shield.jpg"));
+			heroA = ImageIO.read(new File("src/Imagens/heroA.jpg"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

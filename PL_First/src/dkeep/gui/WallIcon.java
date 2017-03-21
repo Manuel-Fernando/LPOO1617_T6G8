@@ -13,7 +13,7 @@ public class WallIcon extends JPanel{
 	private Image wall;
 
 	public WallIcon() throws IOException{
-		wall = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/wall.jpeg"));
+		wall = ImageIO.read(new File("src/Imagens/wall.jpeg"));
 	}
 
 

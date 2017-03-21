@@ -14,7 +14,7 @@ public class HeroIcon extends JPanel{
 	private Image hero;
 	
 	public HeroIcon() throws IOException{
-		hero = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/hero.png"));
+		hero = ImageIO.read(new File("src/Imagens/hero.png"));
 	}
 	
 	

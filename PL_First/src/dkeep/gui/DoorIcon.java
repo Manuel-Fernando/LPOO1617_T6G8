@@ -13,7 +13,7 @@ public class DoorIcon extends JPanel{
 	private Image door;
 
 	public DoorIcon() throws IOException{
-		door = ImageIO.read(new File("C:/Users/Utilizador/git/LPOO1617_T6G8/PL_First/src/Imagens/lock.png"));
+		door = ImageIO.read(new File("src/Imagens/lock.png"));
 	}
 
 

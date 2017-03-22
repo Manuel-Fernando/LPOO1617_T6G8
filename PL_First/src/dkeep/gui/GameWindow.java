@@ -120,7 +120,7 @@ public class GameWindow extends JFrame{
 		case 2:
 			panel.setVisible(false);
 			
-			panel2 = new GameView(jogo.getTabuleiro());
+			panel2 = new GameView(jogo.getTabuleiro(), false);
 			panel2.setBounds(32, 49, 361, 362);
 			frame.getContentPane().add(panel2);
 			
@@ -252,7 +252,7 @@ public class GameWindow extends JFrame{
 		lblYouCanStart.setBounds(33, 434, 422, 16);
 		frame.getContentPane().add(lblYouCanStart);
 
-		panel = new GameView(jogo.getTabuleiro());
+		panel = new GameView(jogo.getTabuleiro(), false);
 		panel.setBounds(32, 49, 361, 362);
 		frame.getContentPane().add(panel);
 

@@ -24,5 +24,22 @@ public class comportamentoGuarda extends Guard {
 				
 		}
 	}
+	
+	protected void movete(char dir, int mapLevel, Map m){
+		switch (dir){
+		case 'w':
+			direcao (posX-1, posY, m, mapLevel);
+			break;
+		case 'a':
+			direcao (posX, posY-1, m, mapLevel);
+			break;
+		case 'd':
+			direcao (posX, posY+1, m, mapLevel);
+			break;
+		case 's':
+			direcao (posX+1, posY, m, mapLevel);
+			break;			
+		}
+	}
 
 }

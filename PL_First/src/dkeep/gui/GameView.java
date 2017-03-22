@@ -25,10 +25,20 @@ public class GameView extends JPanel{
 	private Image shield;
 	private Image heroA;
 	
-	public GameView(char[][] board) throws IOException{
+	public GameView(char[][] board, boolean newLevel) throws IOException{
 		this.board = board;
 		
 		try {
+			
+			if(newLevel){
+				for (int i=0; i<board.length; i++){
+					for (int j=0; j<board[0].length; j++){
+						if(i==0 || j== 0 || i==board.length-1 || j==board[0].length-1){board[i][j]='X';}
+						else {board[i][j]=' ';}
+					}
+				}			
+			}
+			
 			wall = ImageIO.read(new File("src/Imagens/wall.jpeg"));
 			hero = ImageIO.read(new File("src/Imagens/hero.png"));
 			guard = ImageIO.read(new File("src/Imagens/Guard.png"));

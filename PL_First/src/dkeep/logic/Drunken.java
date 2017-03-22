@@ -33,9 +33,9 @@ public class Drunken extends comportamentoGuarda{
 				if (randomNum==1){ //mode-se para a frente
 					dir = guardtraject[i];
 					i++;
-				} else { //mode-se para trás
+				} else { //mode-se para trï¿½s
 
-					if(i==0){ //se for a primeira posição
+					if(i==0){ //se for a primeira posiï¿½ï¿½o
 						
 						dir = 's';
 						i = 23;
@@ -77,20 +77,7 @@ public class Drunken extends comportamentoGuarda{
 
 			if (i==guardtraject.length){i=0;}
 
-			switch (dir){
-			case 'w':
-				direcao (posX-1, posY, m, mapLevel);
-				break;
-			case 'a':
-				direcao (posX, posY-1, m, mapLevel);
-				break;
-			case 'd':
-				direcao (posX, posY+1, m, mapLevel);
-				break;
-			case 's':
-				direcao (posX+1, posY, m, mapLevel);
-				break;			
-			}
+			movete(dir, mapLevel, m);
 			
 			return dir;
 			

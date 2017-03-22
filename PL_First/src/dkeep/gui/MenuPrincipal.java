@@ -112,7 +112,7 @@ public class MenuPrincipal extends JFrame implements KeyListener{
 			//textArea.setText(printBoard(jogo.tabuleiro2()));
 			panel.setVisible(false);
 			
-			panel2 = new GameView(jogo.getTabuleiro());
+			panel2 = new GameView(jogo.getTabuleiro(), false);
 			panel2.setBounds(10, 116, 361, 362);
 			frame2.getContentPane().add(panel2);
 			
@@ -228,12 +228,12 @@ public class MenuPrincipal extends JFrame implements KeyListener{
 		lblYouCanStart.setBounds(33, 434, 203, 16);
 		frame2.getContentPane().add(lblYouCanStart);
 		
-		panel = new GameView(jogo.getTabuleiro());
+		panel = new GameView(jogo.getTabuleiro(), false);
 		panel.setBounds(32, 49, 361, 362);
 		frame2.getContentPane().add(panel);
 		
 		/*
-		 * Menu Inicial para ajustar definições jogo
+		 * Menu Inicial para ajustar definiï¿½ï¿½es jogo
 		 * 
 		 */
 		

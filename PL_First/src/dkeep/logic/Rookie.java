@@ -14,20 +14,7 @@ public class Rookie extends comportamentoGuarda {
 		i++;
 		if (i==guardtraject.length){i=0;}
 		
-		switch (dir){
-		case 'w':
-			direcao (posX-1, posY, m, mapLevel);
-			break;
-		case 'a':
-			direcao (posX, posY-1, m, mapLevel);
-			break;
-		case 'd':
-			direcao (posX, posY+1, m, mapLevel);
-			break;
-		case 's':
-			direcao (posX+1, posY, m, mapLevel);
-			break;			
-		}
+		movete(dir, mapLevel, m);
 		
 		return dir;
 		

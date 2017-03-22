@@ -27,7 +27,7 @@ public class Suspicious extends comportamentoGuarda {
 			if (i==guardtraject.length){i=0;}
 			count++;
 
-		} else {  // anda para trás
+		} else {  // anda para trï¿½s
 			
 			if (i==0){
 				i=23;
@@ -40,20 +40,7 @@ public class Suspicious extends comportamentoGuarda {
 			count++;
 		}		
 		
-		switch (dir){
-		case 'w':
-			direcao (posX-1, posY, m, mapLevel);
-			break;
-		case 'a':
-			direcao (posX, posY-1, m, mapLevel);
-			break;
-		case 'd':
-			direcao (posX, posY+1, m, mapLevel);
-			break;
-		case 's':
-			direcao (posX+1, posY, m, mapLevel);
-			break;			
-		}
+		movete(dir, mapLevel, m);
 		
 		return dir;
 	}

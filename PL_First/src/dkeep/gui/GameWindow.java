@@ -8,13 +8,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import dkeep.logic.FileCreator;
 import dkeep.logic.Game;
 import java.awt.Font;
 
@@ -22,6 +25,7 @@ public class GameWindow extends JFrame{
 
 	private JFrame frame;
 	private JButton btnUp;
+	private JButton saveGame;
 	private JButton btnDown;
 	private JButton btnLeft;
 	private JButton btnRight;
@@ -216,6 +220,23 @@ public class GameWindow extends JFrame{
 
 		frame.getContentPane().add(btnRight);
 
+		saveGame = new JButton("Save Game");
+		saveGame.setBounds(475, 320,  100, 29);
+		saveGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FileCreator file = new FileCreator();
+				
+				try {
+					file.saveGame(jogo.getTabuleiro());
+					JOptionPane.showMessageDialog(frame, "Game saved successfully!");
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		frame.getContentPane().add(saveGame);
+		
 		lblYouCanStart = new JLabel("Level 1");
 		lblYouCanStart.setBounds(33, 434, 422, 16);
 		frame.getContentPane().add(lblYouCanStart);

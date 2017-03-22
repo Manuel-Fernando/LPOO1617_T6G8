@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.DefaultComboBoxModel;
@@ -11,7 +12,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import dkeep.logic.FileReader;
 
 public class InitialMenu extends JFrame {
 
@@ -88,30 +92,34 @@ public class InitialMenu extends JFrame {
 				
 				String numOgres = textField.getText();
 				
-				if (numOgres==""){
-					lblChooseANumber.setVisible(true);
-					numOgres = textField.getText();
-				}
 				
-				numberOgres = Integer.parseInt(numOgres);
-				
-				if (numberOgres>5){
-					numberOgres = 5;
-				}
+				if (numOgres.isEmpty()){
+					JOptionPane.showMessageDialog(frame, "Please enter a number of Ogres!"); 
+					
+				} else {
+					
+					numberOgres = Integer.parseInt(numOgres);
+					
+					if (numberOgres>5){
+						JOptionPane.showMessageDialog(frame, "Please enter a valid number of Ogres! (between 1 and 5)");
+					} else {
+						int index = comboBox.getSelectedIndex();
+						typeGuard = (String) comboBox.getItemAt(index);
+						
+						
+						try {
+							GameWindow gameWindow = new GameWindow (numberOgres, typeGuard);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
 
-				int index = comboBox.getSelectedIndex();
-				typeGuard = (String) comboBox.getItemAt(index);
-				
-				
-				try {
-					GameWindow gameWindow = new GameWindow (numberOgres, typeGuard);
-				} catch (IOException e) {
-					e.printStackTrace();
 				}
+				
 			}
 		});
 		
-		btnNewGame.setBounds(172, 268, 100, 34);
+		btnNewGame.setBounds(190, 281, 100, 34);
 		frame.getContentPane().add(btnNewGame);
 		
 		JLabel lblCreateYourOwn = new JLabel("Create your own map for the game");
@@ -132,6 +140,28 @@ public class InitialMenu extends JFrame {
 		btnCreate.setBounds(295, 183, 100, 28);
 		frame.getContentPane().add(btnCreate);
 		
+		JButton btnLoadGame = new JButton("Load Game");
+		btnLoadGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					FileReader file = new FileReader();
+					try {
+						new GameWindow(file.loadGame());
+					} catch (IOException e) {
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(frame, "Game not loaded successfully!");
+					}
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnLoadGame.setBounds(295, 232, 100, 34);
+		frame.getContentPane().add(btnLoadGame);
+		
+		JLabel lblLoadYourGame = new JLabel("Load your game");
+		lblLoadYourGame.setBounds(36, 242, 179, 14);
+		frame.getContentPane().add(lblLoadYourGame);
+		
 	}
-
 }

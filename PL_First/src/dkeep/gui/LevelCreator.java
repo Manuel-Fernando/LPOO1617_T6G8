@@ -11,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 import dkeep.gui.GameWindow.KeyLis;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Graphics;
 
@@ -238,6 +240,8 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 									e.printStackTrace();
 								}
 								frame.setEnabled(false);
+							}else {
+								JOptionPane.showMessageDialog(frame, "You have to add walls, exit door, key, Ogres and 1 hero!");
 							}
 						}
 					});
@@ -247,7 +251,7 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 					} else {
 						btnNewButton.setBounds(230, (int) (mapa.getBounds().y + mapa.getBounds().getHeight()-10), 150, 35);
 					}
-					
+
 					frame.add(btnNewButton);
 					
 

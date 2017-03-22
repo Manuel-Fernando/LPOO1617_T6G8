@@ -13,17 +13,12 @@ public class Drunken extends comportamentoGuarda{
 		char dir;
 
 		Random rn = new Random();
-		int range = 2 - 1 + 1;
-		int randomNum =  rn.nextInt(range) + 1;
 
-		if (randomNum==1){ //Sleep
-
+		if (rn.nextInt(2)==0){ //Sleep
 			m.writeElement(getX(), getY(), 'g');
-
 			return ' ';
 
 		} else {
-
 			if (m.searchElement(getX(), getY())=='g'){dir=walkAfterSleep();}
 			else {
 				dir = guardtraject[i];

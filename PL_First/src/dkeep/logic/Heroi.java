@@ -19,7 +19,7 @@ public class Heroi extends Entidade{
 			else if (mapLevel == 2) {direcaoMapLevel2(posinX, posinY, m);}
 		}
 	}
-	
+	 
 	public void direcaoMapLevel1(int posinX, int posinY, Map m){					
 			if (m.searchElement(posinX, posinY) == 'k') {
 				for (int i=0; i<m.board.length; i++){
@@ -50,15 +50,7 @@ public class Heroi extends Entidade{
 		}
 
 		if (posinX == 1 && posinY == 0){
-			if (count == 1){
-				m.writeElement(posX, posY, ' ');
-				posX=posinX;
-				posY=posinY;
-				m.writeElement(posX, posY, letter);
-			} else {
-				count=1;
-				m.writeElement(1, 0, 'S');
-			}
+			openDoorLevel2 (m, posinX, posinY);
 		} else { 
 			m.writeElement(posX, posY, ' ');
 			posX=posinX;
@@ -66,6 +58,18 @@ public class Heroi extends Entidade{
 			m.writeElement(posX, posY, letter);
 		}
 		
+	}
+	
+	public void openDoorLevel2 (Map m, int posinX, int posinY){
+		if (count == 1){
+			m.writeElement(posX, posY, ' ');
+			posX=posinX;
+			posY=posinY;
+			m.writeElement(posX, posY, letter);
+		} else {
+			count=1;
+			m.writeElement(1, 0, 'S');
+		}
 	}
 
 	public void Movimento(char dir, int mapLevel, Map m){

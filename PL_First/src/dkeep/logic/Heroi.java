@@ -15,57 +15,58 @@ public class Heroi extends Entidade{
 	
 	private void direcao (int posinX, int posinY, Map m, int mapLevel ){
 		if ((m.searchElement(posinX, posinY) != 'X') && ((m.searchElement(posinX, posinY) != 'I') || herowithkey)){
-
-			if (mapLevel == 1){						
-				if (m.searchElement(posinX, posinY) == 'k') {
-//					m.writeElement(6, 0, 'S');
-//					m.writeElement(5, 0, 'S');
-					for (int i=0; i<m.board.length; i++){
-						for (int j=0; j<m.board[0].length; j++){
-							if(m.searchElement(i, j)=='I' && j==0){
-								m.writeElement(i, j, 'S');
-							}
-						}			
-					}
+			if (mapLevel == 1){direcaoMapLevel1(posinX, posinY, m);} 
+			else if (mapLevel == 2) {direcaoMapLevel2(posinX, posinY, m);}
+		}
+	}
+	
+	public void direcaoMapLevel1(int posinX, int posinY, Map m){					
+			if (m.searchElement(posinX, posinY) == 'k') {
+				for (int i=0; i<m.board.length; i++){
+					for (int j=0; j<m.board[0].length; j++){
+						if(m.searchElement(i, j)=='I' && j==0){
+							m.writeElement(i, j, 'S');
+						}
+					}			
 				}
+			}
+			m.writeElement(posX, posY, ' ');
+			posX=posinX;
+			posY=posinY;
+			m.writeElement(posX, posY, letter);
+		
+	}
+
+	public void direcaoMapLevel2(int posinX, int posinY, Map m){
+		if (m.searchElement(posinX, posinY) == '+') {
+			herowithclub = true;
+			if(herowithkey){letter = 'K';
+			}else
+				letter = 'A';
+		}
+		if (m.searchElement(posinX, posinY) == 'k') {
+			letter = 'K';
+			herowithkey=true;
+		}
+
+		if (posinX == 1 && posinY == 0){
+			if (count == 1){
 				m.writeElement(posX, posY, ' ');
 				posX=posinX;
 				posY=posinY;
 				m.writeElement(posX, posY, letter);
-
-			} else if (mapLevel == 2) {
-
-				if (m.searchElement(posinX, posinY) == '+') {
-					herowithclub = true;
-					if(herowithkey){letter = 'K';
-					}else
-						letter = 'A';
-				}
-				if (m.searchElement(posinX, posinY) == 'k') {
-					letter = 'K';
-					herowithkey=true;
-				}
-
-				if (posinX == 1 && posinY == 0){
-					if (count == 1){
-						m.writeElement(posX, posY, ' ');
-						posX=posinX;
-						posY=posinY;
-						m.writeElement(posX, posY, letter);
-					} else {
-						count=1;
-						m.writeElement(1, 0, 'S');
-					}
-				} else {
-					m.writeElement(posX, posY, ' ');
-					posX=posinX;
-					posY=posinY;
-					m.writeElement(posX, posY, letter);
-				}
+			} else {
+				count=1;
+				m.writeElement(1, 0, 'S');
 			}
+		} else { 
+			m.writeElement(posX, posY, ' ');
+			posX=posinX;
+			posY=posinY;
+			m.writeElement(posX, posY, letter);
 		}
+		
 	}
-
 
 	public void Movimento(char dir, int mapLevel, Map m){
 

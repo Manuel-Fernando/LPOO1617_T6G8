@@ -24,30 +24,12 @@ public class Drunken extends comportamentoGuarda{
 
 		} else {
 
-			if (m.searchElement(getX(), getY())=='g'){
-
-				rn = new Random(); 
-				range = 2 - 1 + 1;
-				randomNum =  rn.nextInt(range) + 1;
-
-				if (randomNum==1){ //mode-se para a frente
-					dir = guardtraject[i];
-					i++;
-				} else { //mode-se para tr�s
-					if(i==0){ //se for a primeira posi��o
-						dir = 's';
-						i = 23;
-
-					} else { //Andar de forma inversa
-						dir=invertWalking();
-						i = i-1;
-					}
-				}
-				if (i<0){i=23;}
-			} else {
+			if (m.searchElement(getX(), getY())=='g'){dir=walkAfterSleep();}
+			else {
 				dir = guardtraject[i];
 				i++;
 			}
+			
 			m.writeElement(getX(), getY(), 'G');
 			if (i==guardtraject.length){i=0;}
 			movete(dir, mapLevel, m);
@@ -56,6 +38,28 @@ public class Drunken extends comportamentoGuarda{
 		}
 
 	}
+	
+	public char walkAfterSleep(){
+		char dir;
+		Random rn = new Random(); 
+		if (rn.nextInt(2)==0){ //mode-se para a frente
+			dir = guardtraject[i];
+			i++;
+		} else { //mode-se para tr�s
+			if(i==0){ //se for a primeira posi��o
+				dir = 's';
+				i = 23;
+
+			} else { //Andar de forma inversa
+				dir=invertWalking();
+				i = i-1;
+			}
+		}
+		if (i<0){i=23;}
+		return dir;
+	}
+	
+	
 	public char invertWalking(){
 		char dir;
 		switch (guardtraject[i-1]){

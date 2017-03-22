@@ -57,15 +57,9 @@ public class Ogre extends Entidade{
 				dontmove=0;
 				letter='O';
 			}
-			
+			 
 			//apagar posicao antiga
-			if (posX==keyPosx && posY== keyPosy && !herowithkey){
-				m.writeElement(posX, posY, 'k');
-			}else if(posX==armPosx && posY==armPosy && !herowithclub){
-				m.writeElement(posX, posY, '+');
-			}else if(m.searchElement(posX, posY) != '*') {
-				m.writeElement(posX, posY, ' ');
-			}
+			clearOldOgrePosition(m, herowithclub, herowithkey);
 			
 			//se heroi a beira com taco reinicia contagem
 			if(findHero(m, posX, posY) && herowithclub){
@@ -79,7 +73,7 @@ public class Ogre extends Entidade{
 				posinY=posY;
 				letter='8';
 			}
-			
+
 			//escrever posicao nova
 			if (posinX==keyPosx && posinY==keyPosy && !herowithkey){
 				m.writeElement(posinX, posinY, '$');
@@ -90,60 +84,84 @@ public class Ogre extends Entidade{
 				}
 				m.writeElement(posinX, posinY, letter);
 			}
-			
+
 			posX=posinX;
 			posY=posinY;
-
-			
-			
-			
-			//Club part
-			
-			//apagar posicao antiga
-			if (posXclub==keyPosx && posYclub==keyPosy && !herowithkey && !(posX==keyPosx && posY==keyPosy)){
-				m.writeElement(posXclub, posYclub, 'k');
-			}else if(posXclub==armPosx && posYclub==armPosy && !herowithclub && !(posX==armPosx && posY==armPosy)){
-				m.writeElement(posXclub, posYclub, '+');
-			}else if(!(posXclub==posX && posYclub==posY)){
-				m.writeElement(posXclub, posYclub, ' ');
-			}
-			
-			
-			char direction=randomdirection();
-			while((direction=='w' && (m.searchElement(posX-1, posY)=='X' || m.searchElement(posX-1, posY)=='I'))||
-				  (direction=='a' && (m.searchElement(posX, posY-1)=='X' || m.searchElement(posX, posY-1)=='I'))||
-				  (direction=='d' && (m.searchElement(posX, posY+1)=='X' || m.searchElement(posX, posY+1)=='I'))||
-				  (direction=='s' && (m.searchElement(posX+1, posY)=='X' || m.searchElement(posX+1, posY)=='I'))){
-				direction=randomdirection();
-			}
-			switch (direction){
-				case 'w':
-					posXclub=posX-1;
-					posYclub=posY;
-					break;
-				case 'a':
-					posXclub=posX;
-					posYclub=posY-1;
-					break;
-				case 'd':
-					posXclub=posX;
-					posYclub=posY+1;
-					break;
-				case 's':
-					posXclub=posX+1;
-					posYclub=posY;
-					break;			
-			}
-			if (posXclub == keyPosx && posYclub == keyPosy && !herowithkey){m.writeElement(posXclub, posYclub, '$');
-			}else m.writeElement(posXclub, posYclub, '*'); 
-
 		}
+		clubDirection(m, herowithclub, herowithkey);
+		
+	}
+	
+	//Club part
+
+	private void clubDirection(Map m, boolean herowithclub, boolean herowithkey){
+
+		//apagar posicao antiga
+		clearOldClubPosition(m, herowithclub, herowithkey);
+
+
+		char direction=freeClubSpace(m);
+		switch (direction){
+		case 'w':
+			posXclub=posX-1;
+			posYclub=posY;
+			break;
+		case 'a':
+			posXclub=posX;
+			posYclub=posY-1;
+			break;
+		case 'd':
+			posXclub=posX;
+			posYclub=posY+1;
+			break;
+		case 's':
+			posXclub=posX+1;
+			posYclub=posY;
+			break;			
+		}
+		if (posXclub == keyPosx && posYclub == keyPosy && !herowithkey){m.writeElement(posXclub, posYclub, '$');
+		}else m.writeElement(posXclub, posYclub, '*'); 
+
+	} 
+
+	public char freeClubSpace(Map m){
+		char direction=randomdirection();
+		while((direction=='w' && (m.searchElement(posX-1, posY)=='X' || m.searchElement(posX-1, posY)=='I'))||
+				(direction=='a' && (m.searchElement(posX, posY-1)=='X' || m.searchElement(posX, posY-1)=='I'))||
+				(direction=='d' && (m.searchElement(posX, posY+1)=='X' || m.searchElement(posX, posY+1)=='I'))||
+				(direction=='s' && (m.searchElement(posX+1, posY)=='X' || m.searchElement(posX+1, posY)=='I'))){
+			direction=randomdirection();
+		}
+		return direction;
 	}
 
+	public void clearOldClubPosition(Map m, boolean herowithclub, boolean herowithkey){
+		if (posXclub==keyPosx && posYclub==keyPosy && !herowithkey && !(posX==keyPosx && posY==keyPosy)){
+			m.writeElement(posXclub, posYclub, 'k');
+		}else if(posXclub==armPosx && posYclub==armPosy && !herowithclub && !(posX==armPosx && posY==armPosy)){
+			m.writeElement(posXclub, posYclub, '+');
+		}else if(!(posXclub==posX && posYclub==posY)){
+			m.writeElement(posXclub, posYclub, ' ');
+		}
+
+	}
+
+	public void clearOldOgrePosition(Map m, boolean herowithclub, boolean herowithkey){
+		if (posX==keyPosx && posY== keyPosy && !herowithkey){
+			m.writeElement(posX, posY, 'k');
+		}else if(posX==armPosx && posY==armPosy && !herowithclub){
+			m.writeElement(posX, posY, '+');
+		}else if(m.searchElement(posX, posY) != '*') {
+			m.writeElement(posX, posY, ' ');
+		}
+
+	}
+
+
 	public char Movimento(int mapLevel, Map m, boolean heroclub, boolean herokey){
-		
+
 		char dir=randomdirection();
-		
+
 		switch (dir){
 		case 'w':
 			direcao (posX-1, posY, m, heroclub, herokey);

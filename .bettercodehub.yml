@@ -1,6 +1,3 @@
-exclude:
-- /PL_First/src/dkeep/cli/UserInput.java
-- /PL_First/src/dkeep/gui/.*
 component_depth: 1
 languages:
 - java

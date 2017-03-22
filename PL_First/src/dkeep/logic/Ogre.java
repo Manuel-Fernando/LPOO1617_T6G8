@@ -17,7 +17,7 @@ public class Ogre extends Entidade{
 	
 	public void setKeyPosition(int keyPosxi, int keyPosyi){
 		keyPosx=keyPosxi;
-		keyPosy=keyPosyi;
+		keyPosy=keyPosyi; 
 	}
 	
 	public void setArmPosition(int armPosxi,int armPosyi){
@@ -51,7 +51,6 @@ public class Ogre extends Entidade{
 	
 	private void direcao (int posin[], Map m, boolean herowithclub, boolean herowithkey){
 	
-		if ((m.searchElement(posin[0], posin[1]) != 'X') && ((m.searchElement(posin[0], posin[1]) != 'I'))){
 			//se ja passaram as duas jogadas, liberta o ogre
 			if(dontmove==3){
 				dontmove=0;
@@ -86,10 +85,7 @@ public class Ogre extends Entidade{
 			}
 
 			posX=posin[0];
-			posY=posin[1];
-		}
-		clubDirection(m, herowithclub, herowithkey);
-		
+			posY=posin[1];	
 	}
 	
 	//Club part
@@ -167,24 +163,22 @@ public class Ogre extends Entidade{
 		case 'w':
 			pos[0]=posX-1;
 			pos[1]=posY;
-			direcao (pos, m, heroclub, herokey);
 			break;
 		case 'a':
 			pos[0]=posX;
 			pos[1]=posY-1;
-			direcao (pos, m, heroclub, herokey);
 			break;
 		case 'd':
 			pos[0]=posX;
 			pos[1]=posY+1;
-			direcao (pos, m, heroclub, herokey);
 			break;
 		case 's':
 			pos[0]=posX+1;
 			pos[1]=posY;
-			direcao (pos, m, heroclub, herokey);
 			break;			
 		}
+		if ((m.searchElement(pos[0], pos[1]) != 'X') && ((m.searchElement(pos[0], pos[1]) != 'I'))){direcao (pos, m, heroclub, herokey);}
+		clubDirection(m, heroclub, herokey);
 		return dir;
 	}
 }	

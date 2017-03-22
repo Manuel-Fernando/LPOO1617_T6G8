@@ -124,7 +124,22 @@ public class Game {
 	
 	public int jogo(char direc, String guardType, int numOgres){
 
-
+		Guard guarda=iniciateBadCaracters(guardType);
+		
+		if (nivel==1){
+			tabuleiro = board1.board;
+			estado = level1(direc, guarda); 
+			if(estado==2){
+				tabuleiro = board2.board;
+				nivel=2;
+			}
+		}
+		else if (nivel==2){estado = level2(direc, ogres, numOgres);}
+		else if (nivel==3){estado = level3(direc, ogres, numOgres);}
+		return estado;
+	}
+	
+	public Guard iniciateBadCaracters(String guardType){
 		ogres.add(ogre);
 		ogres.add(ogre1);
 		ogres.add(ogre2);
@@ -135,22 +150,7 @@ public class Game {
 		if(guardType=="Suspicious"){guarda=suspicious;}
 		else if(guardType=="Rookie"){guarda=rookie;}
 		else if(guardType=="Drunken"){guarda=drunken;}
-
-
-		if (nivel==1){
-			tabuleiro = board1.board;
-			estado = level1(direc, guarda);
-			if(estado==2){
-				tabuleiro = board2.board;
-				nivel=2;
-			}
-		}
-		else if (nivel==2){
-			estado = level2(direc, ogres, numOgres);
-		}
-		else if (nivel==3){
-			estado = level3(direc, ogres, numOgres);
-		}
-		return estado;
+		
+		return guarda;
 	}
 }

@@ -49,9 +49,9 @@ public class Ogre extends Entidade{
 	int posYclub=3;
 	int dontmove=0;
 	
-	private void direcao (int posinX, int posinY, Map m, boolean herowithclub, boolean herowithkey){
+	private void direcao (int posin[], Map m, boolean herowithclub, boolean herowithkey){
 	
-		if ((m.searchElement(posinX, posinY) != 'X') && ((m.searchElement(posinX, posinY) != 'I'))){
+		if ((m.searchElement(posin[0], posin[1]) != 'X') && ((m.searchElement(posin[0], posin[1]) != 'I'))){
 			//se ja passaram as duas jogadas, liberta o ogre
 			if(dontmove==3){
 				dontmove=0;
@@ -69,24 +69,24 @@ public class Ogre extends Entidade{
 			// posicao igual a antiga
 			if(dontmove==1 || dontmove==2){
 				dontmove++;
-				posinX=posX;
-				posinY=posY;
+				posin[0]=posX;
+				posin[1]=posY;
 				letter='8';
 			}
 
 			//escrever posicao nova
-			if (posinX==keyPosx && posinY==keyPosy && !herowithkey){
-				m.writeElement(posinX, posinY, '$');
+			if (posin[0]==keyPosx && posin[1]==keyPosy && !herowithkey){
+				m.writeElement(posin[0], posin[1], '$');
 			}else {
-				if(findHero(m, posinX, posinY) && herowithclub){
+				if(findHero(m, posin[0], posin[1]) && herowithclub){
 					dontmove=1;
 					letter='8';
 				}
-				m.writeElement(posinX, posinY, letter);
+				m.writeElement(posin[0], posin[1], letter);
 			}
 
-			posX=posinX;
-			posY=posinY;
+			posX=posin[0];
+			posY=posin[1];
 		}
 		clubDirection(m, herowithclub, herowithkey);
 		
@@ -161,19 +161,28 @@ public class Ogre extends Entidade{
 	public char Movimento(int mapLevel, Map m, boolean heroclub, boolean herokey){
 
 		char dir=randomdirection();
+		int pos[]={0,0};
 
 		switch (dir){
 		case 'w':
-			direcao (posX-1, posY, m, heroclub, herokey);
+			pos[0]=posX-1;
+			pos[1]=posY;
+			direcao (pos, m, heroclub, herokey);
 			break;
 		case 'a':
-			direcao (posX, posY-1, m, heroclub, herokey);
+			pos[0]=posX;
+			pos[1]=posY-1;
+			direcao (pos, m, heroclub, herokey);
 			break;
 		case 'd':
-			direcao (posX, posY+1, m, heroclub, herokey);
+			pos[0]=posX;
+			pos[1]=posY+1;
+			direcao (pos, m, heroclub, herokey);
 			break;
 		case 's':
-			direcao (posX+1, posY, m, heroclub, herokey);
+			pos[0]=posX+1;
+			pos[1]=posY;
+			direcao (pos, m, heroclub, herokey);
 			break;			
 		}
 		return dir;

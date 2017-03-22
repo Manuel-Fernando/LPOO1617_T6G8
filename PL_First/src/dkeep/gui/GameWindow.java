@@ -83,6 +83,7 @@ public class GameWindow extends JFrame{
 	public void checkGame (int var) throws IOException{
 		switch (variavel){
 		case -1:
+		case -3:
 			frame.repaint();
 			lblYouCanStart.setText("Game Over!!!");
 			btnUp.setEnabled(false);
@@ -102,16 +103,7 @@ public class GameWindow extends JFrame{
 			panel2.setEnabled(false);
 			
 			return;
-		case -3:
-			frame.repaint();
-			lblYouCanStart.setText("Game Over!!!");
-			btnUp.setEnabled(false);
-			btnDown.setEnabled(false);
-			btnLeft.setEnabled(false);
-			btnRight.setEnabled(false);
-			panel.setEnabled(false);
-			
-			return;
+
 		case 1:
 			lblYouCanStart.setText("Level 1");
 			frame.repaint();
@@ -155,7 +147,7 @@ public class GameWindow extends JFrame{
 		case 6:
 			frame.repaint();
 			lblYouCanStart.setText("You won!!!");
-			btnUp.setEnabled(false);
+			btnUp.setEnabled(false); 
 			btnDown.setEnabled(false);
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
@@ -188,13 +180,7 @@ public class GameWindow extends JFrame{
 		btnUp.setBounds(467, 108, 117, 29);
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dir='w';
-				variavel = jogo.jogo(dir, guard, number);
-				try {
-					checkGame(variavel);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				goWhereSentYou('w');
 
 			}
 		});
@@ -204,13 +190,7 @@ public class GameWindow extends JFrame{
 		btnDown.setBounds(467, 258, 117, 29);
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dir='s';
-				variavel = jogo.jogo(dir, guard, number);
-				try {
-					checkGame(variavel);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				goWhereSentYou('s');
 			}
 		});
 
@@ -220,13 +200,7 @@ public class GameWindow extends JFrame{
 		btnLeft.setBounds(423, 186, 89, 29);
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dir='a';
-				variavel = jogo.jogo(dir, guard, number);
-				try {
-					checkGame(variavel);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				goWhereSentYou('a');
 			}
 		});
 
@@ -236,13 +210,7 @@ public class GameWindow extends JFrame{
 		btnRight.setBounds(543, 186, 89, 29);
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dir='d';
-				variavel = jogo.jogo(dir, guard, number);
-				try {
-					checkGame(variavel);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				goWhereSentYou('d');
 			}
 		});
 
@@ -269,40 +237,16 @@ public class GameWindow extends JFrame{
 		public void keyPressed(KeyEvent e) {
 			switch (e.getKeyCode()){
 			case KeyEvent.VK_LEFT:
-				dir='a';
-				variavel = jogo.jogo(dir, guard, number);
-				try {
-					checkGame(variavel);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				goWhereSentYou('a');
 				break;
 			case KeyEvent.VK_RIGHT:
-				dir='d';
-				variavel = jogo.jogo(dir, guard, number);
-				try {
-					checkGame(variavel);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				goWhereSentYou('d');
 				break;
 			case KeyEvent.VK_UP:
-				dir='w';
-				variavel = jogo.jogo(dir, guard, number);
-				try {
-					checkGame(variavel);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				goWhereSentYou('w');
 				break;
 			case KeyEvent.VK_DOWN:
-				dir='s';
-				variavel = jogo.jogo(dir, guard, number);
-				try {
-					checkGame(variavel);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				goWhereSentYou('s');
 				break;
 			}
 
@@ -318,6 +262,15 @@ public class GameWindow extends JFrame{
 
 		}
 
+	}
+	
+	public void goWhereSentYou(char direcao){
+		variavel = jogo.jogo(direcao, guard, number);
+		try {
+			checkGame(variavel);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 }

@@ -61,9 +61,7 @@ public class Ogre extends Entidade{
 			clearOldOgrePosition(m, herowithclub, herowithkey);
 			
 			//se heroi a beira com taco reinicia contagem
-			if(findHero(m, posX, posY) && herowithclub){
-				dontmove=1;
-			}
+			if(findHero(m, posX, posY) && herowithclub){ dontmove=1;}
 			
 			// posicao igual a antiga
 			if(dontmove==1 || dontmove==2){
@@ -74,18 +72,21 @@ public class Ogre extends Entidade{
 			}
 
 			//escrever posicao nova
-			if (posin[0]==keyPosx && posin[1]==keyPosy && !herowithkey){
-				m.writeElement(posin[0], posin[1], '$');
-			}else {
-				if(findHero(m, posin[0], posin[1]) && herowithclub){
-					dontmove=1;
-					letter='8';
-				}
-				m.writeElement(posin[0], posin[1], letter);
+			writeOgreNewPosition(posin, m, herowithclub, herowithkey);	
+	}
+	
+	public void writeOgreNewPosition(int posin[], Map m, boolean herowithclub, boolean herowithkey){
+		if (posin[0]==keyPosx && posin[1]==keyPosy && !herowithkey){m.writeElement(posin[0], posin[1], '$');}
+		else {
+			if(findHero(m, posin[0], posin[1]) && herowithclub){
+				dontmove=1;
+				letter='8';
 			}
-
-			posX=posin[0];
-			posY=posin[1];	
+			m.writeElement(posin[0], posin[1], letter);
+		}
+		posX=posin[0];
+		posY=posin[1];
+		
 	}
 	
 	//Club part

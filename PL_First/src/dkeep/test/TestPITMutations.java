@@ -154,11 +154,49 @@ public class TestPITMutations {
 		assertEquals(variavel, 3);		
 	}
 	
+
+	@Test
+	public void testlevel3() {
+		Game jogo = new Game();
+		int variavel = 0;
+		Ogre ogre = new Ogre(1,4);
+		Ogre ogre1 = new Ogre(1,4);
+
+		ArrayList <Ogre> ogres = new ArrayList <Ogre>(5);
+
+		ogres.add(ogre);
+		ogres.add(ogre1);
+		
+		char[][] board={{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
+				{'X', ' ', ' ', ' ', 'O', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', 'H', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}};
+		jogo.setTabuleiro(board);
+
+		variavel = jogo.level3('d', ogres, 2);
+		assertEquals(variavel, 5);		
+	}
+	
 	@Test(timeout=1000)
 	public void testSomeRandomBehaviour() {
 		MapLevel2 mapa = new MapLevel2();
+		char[][] board={{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', 'O', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}};
+		mapa.setBoard(board);
 		char ogreDirection;
-		int posX=1, posY=4;
+		int posX=4, posY=4; 
 		Ogre ogre = new Ogre(posX,posY);
 		boolean outcome1 = false, outcome2 = false, outcome3 = false, outcome4 = false;
 		while(!outcome1 || !outcome2 || !outcome3 || !outcome4){
@@ -167,7 +205,7 @@ public class TestPITMutations {
 				assertEquals(mapa.searchElement(posX-1, posY),'O');
 				posX--;
 				outcome1=true;
-			}else if(ogreDirection=='a' && ((mapa.searchElement(posX, posY-1)!='X') || (mapa.searchElement(posX, posY-1)!='I'))){
+			}else if(ogreDirection=='a' && (mapa.searchElement(posX, posY-1)!='X')){
 				assertEquals(mapa.searchElement(posX, posY-1),'O');
 				posY--;
 				outcome2=true;

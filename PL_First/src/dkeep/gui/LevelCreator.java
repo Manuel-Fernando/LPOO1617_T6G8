@@ -130,7 +130,7 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 		JButton btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				if (btnCreate.getText() == "Reset"){
 					frame.remove(mapa);
 					frame.remove(key);
@@ -148,121 +148,126 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 					frame.remove(btnNewButton);
 					mapa.removeAll();
 				}
-				
-				n = Integer.valueOf(altura.getText());
-				m = Integer.valueOf(largura.getText());
-				
-				try {
-					newboard = new char[n][m];
-					mapa = new GameView(newboard, true);
-					frame.repaint();		
-					
-					mapa.setBounds(28, 88, m*38, n*38);
-					
-					if ((int)(mapa.getBounds().getWidth()+mapa.getBounds().x+100)>640 || (int)(mapa.getBounds().getHeight()+mapa.getBounds().y+50)>550){
-						setBounds(100, 100, (int)(mapa.getBounds().getWidth()+mapa.getBounds().x+150), (int)(mapa.getBounds().getHeight()+mapa.getBounds().y+70));
-					}
-					
-					wall = new WallIcon();
-					wall.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 86, 35, 35);
-					frame.add(wall);
-					wall.repaint();
-					
-					ogre = new OgreIcon();
-					ogre.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 146, 35, 35);
-					frame.add(ogre);
-					ogre.repaint();
-					
-					hero = new HeroIcon();
-					hero.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 210, 35, 35);
-					frame.add(hero);
-					hero.repaint();
-					
-					shield = new ShieldIcon();
-					shield.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 276, 35, 35);
-					frame.add(shield);
-					shield.repaint();
-					
-					door = new DoorIcon();
-					door.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 336, 35, 35);
-					frame.add(door);
-					door.repaint();
-					
-					key = new KeyIcon();
-					key.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 396, 35, 35);
-					frame.add(key);
-					key.repaint();
-					
-					lblWall = new JLabel("Wall");
-					lblWall.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 123, 27, 14);
-					frame.add(lblWall);
-					
-					lblOgre = new JLabel("Ogre");
-					lblOgre.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 184, 46, 14);
-					frame.add(lblOgre);
-					
-					lblHero = new JLabel("Hero");
-					lblHero.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 247, 27, 14);
-					frame.add(lblHero);
-					
-					lblShield = new JLabel("Shield");
-					lblShield.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 314, 35, 14);
-					frame.add(lblShield);
-					
-					lblDoor = new JLabel("Door");
-					lblDoor.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 376, 35, 14);
-					frame.add(lblDoor);
-					
-					lblKey = new JLabel("Key");
-					lblKey.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 436, 35, 14);
-					frame.add(lblKey);
-					
-					btnNewButton = new JButton("Save and Play");
-					btnNewButton.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
 
-							closedBoard=true;
-							heroiPresente=0;
-							for (int i=0; i<newboard.length; i++){
-								for (int j=0; j<newboard[0].length; j++){
-									if (newboard[i][j]=='H') {heroiPresente++;}
-									if (newboard[i][j]=='I') {doorPresente=true;}
-									if (newboard[i][j]=='k') {keyPresente=true;}
-									if((i==0 || j==0 || i==newboard.length-1 || j==newboard[0].length-1) && newboard[i][j]!='X' && newboard[i][j]!='I'){
-										closedBoard=false;
+				if(altura.getText().isEmpty() || largura.getText().isEmpty()){
+					JOptionPane.showMessageDialog(frame, "Please insert valid numbers!");
+				} else {
+
+					n = Integer.valueOf(altura.getText());
+					m = Integer.valueOf(largura.getText());
+
+					try {
+						newboard = new char[n][m];
+						mapa = new GameView(newboard, true);
+						frame.repaint();		
+
+						mapa.setBounds(28, 88, m*38, n*38);
+
+						if ((int)(mapa.getBounds().getWidth()+mapa.getBounds().x+100)>640 || (int)(mapa.getBounds().getHeight()+mapa.getBounds().y+50)>550){
+							setBounds(100, 100, (int)(mapa.getBounds().getWidth()+mapa.getBounds().x+150), (int)(mapa.getBounds().getHeight()+mapa.getBounds().y+70));
+						}
+
+						wall = new WallIcon();
+						wall.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 86, 35, 35);
+						frame.add(wall);
+						wall.repaint();
+
+						ogre = new OgreIcon();
+						ogre.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 146, 35, 35);
+						frame.add(ogre);
+						ogre.repaint();
+
+						hero = new HeroIcon();
+						hero.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 210, 35, 35);
+						frame.add(hero);
+						hero.repaint();
+
+						shield = new ShieldIcon();
+						shield.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 276, 35, 35);
+						frame.add(shield);
+						shield.repaint();
+
+						door = new DoorIcon();
+						door.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 336, 35, 35);
+						frame.add(door);
+						door.repaint();
+
+						key = new KeyIcon();
+						key.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 396, 35, 35);
+						frame.add(key);
+						key.repaint();
+
+						lblWall = new JLabel("Wall");
+						lblWall.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 123, 27, 14);
+						frame.add(lblWall);
+
+						lblOgre = new JLabel("Ogre");
+						lblOgre.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 184, 46, 14);
+						frame.add(lblOgre);
+
+						lblHero = new JLabel("Hero");
+						lblHero.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 247, 27, 14);
+						frame.add(lblHero);
+
+						lblShield = new JLabel("Shield");
+						lblShield.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 314, 35, 14);
+						frame.add(lblShield);
+
+						lblDoor = new JLabel("Door");
+						lblDoor.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 376, 35, 14);
+						frame.add(lblDoor);
+
+						lblKey = new JLabel("Key");
+						lblKey.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 436, 35, 14);
+						frame.add(lblKey);
+
+						btnNewButton = new JButton("Save and Play");
+						btnNewButton.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+
+								closedBoard=true;
+								heroiPresente=0;
+								for (int i=0; i<newboard.length; i++){
+									for (int j=0; j<newboard[0].length; j++){
+										if (newboard[i][j]=='H') {heroiPresente++;}
+										if (newboard[i][j]=='I') {doorPresente=true;}
+										if (newboard[i][j]=='k') {keyPresente=true;}
+										if((i==0 || j==0 || i==newboard.length-1 || j==newboard[0].length-1) && newboard[i][j]!='X' && newboard[i][j]!='I'){
+											closedBoard=false;
+										}
 									}
 								}
-							}
-							if((heroiPresente==1) && closedBoard && doorPresente && keyPresente){
-								try {
-									new GameWindow(newboard);
-								} catch (IOException e) {
-									e.printStackTrace();
+								if((heroiPresente==1) && closedBoard && doorPresente && keyPresente){
+									try {
+										new GameWindow(newboard);
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
+									frame.setEnabled(false);
+								}else {
+									JOptionPane.showMessageDialog(frame, "You have to add walls, exit door, key, Ogres and 1 hero!");
 								}
-								frame.setEnabled(false);
-							}else {
-								JOptionPane.showMessageDialog(frame, "You have to add walls, exit door, key, Ogres and 1 hero!");
 							}
+						});
+
+						if ((int) (lblKey.getBounds().y + lblKey.getBounds().getHeight()+ 10) > (int) (mapa.getBounds().y + mapa.getBounds().getHeight()+ 10)){
+							btnNewButton.setBounds(230, (int) (lblKey.getBounds().y + lblKey.getBounds().getHeight()+ 10), 150, 35);
+						} else {
+							btnNewButton.setBounds(230, (int) (mapa.getBounds().y + mapa.getBounds().getHeight()-10), 150, 35);
 						}
-					});
 
-					if ((int) (lblKey.getBounds().y + lblKey.getBounds().getHeight()+ 10) > (int) (mapa.getBounds().y + mapa.getBounds().getHeight()+ 10)){
-						btnNewButton.setBounds(230, (int) (lblKey.getBounds().y + lblKey.getBounds().getHeight()+ 10), 150, 35);
-					} else {
-						btnNewButton.setBounds(230, (int) (mapa.getBounds().y + mapa.getBounds().getHeight()-10), 150, 35);
+						frame.add(btnNewButton);
+
+
+						frame.add(mapa);
+						frame.repaint();
+
+						btnCreate.setText("Reset");
+
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
-
-					frame.add(btnNewButton);
-					
-
-					frame.add(mapa);
-					frame.repaint();
-					
-					btnCreate.setText("Reset");
-					
-				} catch (IOException e) {
-					e.printStackTrace();
-				}	
+				}
 				
 			}
 		});
@@ -279,8 +284,10 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 		posX = e.getX();
 		posY = e.getY();
 		
-		clickedIcon.setBounds(posX-25, posY-45, 35, 35);
-		clickedIcon.repaint();
+		if (clickedIcon != null){
+			clickedIcon.setBounds(posX-25, posY-45, 35, 35);
+			clickedIcon.repaint();
+		}
 	}
 
 	@Override
@@ -339,6 +346,8 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 
 			clickedIcon = door;
 			type = "door";
+		} else {
+			type = "empty";
 		}
 	}
 
@@ -351,34 +360,38 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 		boardposX = (int) Math.ceil((finalposX - 28)/35);
 		boardposY = (int) Math.ceil((finalposY - 123)/35);
 		
-		switch(type){
-		case "wall":
-			newboard[boardposY][boardposX]='X';
-			wall.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 86, 35, 35);
-			break;
-		case "hero":
-			newboard[boardposY][boardposX]='H';
-			hero.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 210, 35, 35);
-			break;
-		case "shield":
-			newboard[boardposY][boardposX]='+';
-			shield.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 276, 35, 35);
-			break;
-		case "ogre":
-			newboard[boardposY][boardposX]='O';
-			ogre.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 146, 35, 35);
-			break;
-		case "key":
-			newboard[boardposY][boardposX]='k';
-			key.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 396, 35, 35);
-			break;
-		case "door":
-			newboard[boardposY][boardposX]='I';
-			door.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 336, 35, 35);
-			break;
-		}
-		
-		frame.repaint();
+		if (boardposX<= newboard[0].length && boardposY<= newboard.length){
 
+			switch(type){
+			case "wall":
+				newboard[boardposY][boardposX]='X';
+				wall.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 86, 35, 35);
+				break;
+			case "hero":
+				newboard[boardposY][boardposX]='H';
+				hero.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 210, 35, 35);
+				break;
+			case "shield":
+				newboard[boardposY][boardposX]='+';
+				shield.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 276, 35, 35);
+				break;
+			case "ogre":
+				newboard[boardposY][boardposX]='O';
+				ogre.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 146, 35, 35);
+				break;
+			case "key":
+				newboard[boardposY][boardposX]='k';
+				key.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 396, 35, 35);
+				break;
+			case "door":
+				newboard[boardposY][boardposX]='I';
+				door.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 336, 35, 35);
+				break;
+			case "empty":
+				break;	
+			}
+
+		}
+		frame.repaint();
 	}
 }

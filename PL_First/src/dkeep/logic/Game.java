@@ -52,14 +52,32 @@ public class Game {
 		tabuleiro = t; 
 		board3.setBoard(tabuleiro);
 		nivel=3;
+		
 		for (int i=0; i<tabuleiro.length; i++){
 			for (int j=0; j<tabuleiro[0].length; j++){
-				if(tabuleiro[i][j]=='H'){hero3 = new Heroi(i,j);}
-				else if(tabuleiro[i][j]=='O'){Ogre ogre = new Ogre(i,j);
-											  ogres.add(ogre);	
-											  ogreNumber++;} 
-				else if(tabuleiro[i][j]=='k'){for(Ogre x:ogres){x.setKeyPosition(i, j);}}
-				else if(tabuleiro[i][j]=='+'){for(Ogre x:ogres){x.setArmPosition(i, j);}}
+				if(tabuleiro[i][j]=='H'){
+					hero3 = new Heroi(i,j);
+				} else if(tabuleiro[i][j]=='A'){
+					hero3 = new Heroi(i,j); 
+					hero3.setHeroWithClub(true);
+					hero3.setLetter('A');
+				} else if (tabuleiro[i][j]=='K'){
+					hero3 = new Heroi(i,j); 
+				    hero3.setHeroWithKey(true);
+				    hero3.setLetter('K');
+				} else if(tabuleiro[i][j]=='O'){
+					Ogre ogre = new Ogre(i,j);
+					ogres.add(ogre);	
+					ogreNumber++;
+				} else if(tabuleiro[i][j]=='k'){
+					for(Ogre x:ogres){
+						x.setKeyPosition(i, j);
+					}
+				} else if(tabuleiro[i][j]=='+'){
+					for(Ogre x:ogres){
+						x.setArmPosition(i, j);
+					}
+				}
 			}
 		}			
 	}

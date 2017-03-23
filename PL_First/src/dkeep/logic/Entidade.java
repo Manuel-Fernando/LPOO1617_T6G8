@@ -18,5 +18,9 @@ public class Entidade {
 	protected char getLetter(){
 		return letter;
 	}
+	
+	protected void setLetter(char l){
+		letter = l;
+	}
 }
 

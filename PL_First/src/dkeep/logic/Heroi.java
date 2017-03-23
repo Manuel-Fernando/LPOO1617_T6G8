@@ -49,7 +49,7 @@ public class Heroi extends Entidade{
 			herowithkey=true;
 		}
 
-		if (posinX == 1 && posinY == 0){
+		if (posinX == 0 || posinY == 0 || posinX == m.board.length-1|| posinY == m.board[0].length-1){
 			openDoorLevel2 (m, posinX, posinY);
 		} else { 
 			m.writeElement(posX, posY, ' ');
@@ -68,7 +68,13 @@ public class Heroi extends Entidade{
 			m.writeElement(posX, posY, letter);
 		} else {
 			count=1;
-			m.writeElement(1, 0, 'S');
+			for (int i=0; i<m.board.length; i++){
+				for (int j=0; j<m.board[0].length; j++){
+					if(m.searchElement(i, j)=='I'){
+						m.writeElement(i, j, 'S');
+					}
+				}			
+			}
 		}
 	}
 
@@ -96,6 +102,14 @@ public class Heroi extends Entidade{
 	}
 	public boolean heroWithClub(){
 		return herowithclub;
+	}
+	
+	public void setHeroWithKey(boolean key){
+		herowithkey = key;
+	}
+	
+	public void setHeroWithClub(boolean arm){
+		herowithclub = arm;
 	}
 
 

@@ -140,8 +140,8 @@ public class Game {
 			if(loose.WinOrLoose((ogrezz.get(0)).getLetter(), board3, hero3)==-1){return true;}
 			if(loose.WinOrLoose('$', board3, hero3)==-1){return true;}
 		}
-		if(loose.WinOrLoose('*', board3, hero3)==-1){return false;}
-		if(board3.searchElement(hero3.getX(), hero3.getY()) == '*'){return false;}	
+		if(loose.WinOrLoose('*', board3, hero3)==-1){return true;}
+		if(board3.searchElement(hero3.getX(), hero3.getY()) == '*'){return true;}	
 		return false;
 	}	
 	

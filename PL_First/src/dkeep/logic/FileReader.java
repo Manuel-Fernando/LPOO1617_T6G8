@@ -16,7 +16,7 @@ public class FileReader {
 	
 	public FileReader() throws FileNotFoundException{
 		file = new File("game.txt");
-		input = new Scanner(file);
+		input = new Scanner(file); 
 		info = new Vector<String>();
 	}
 	
@@ -35,6 +35,11 @@ public class FileReader {
 			}
 		}
 		
+		return copyBoard(numLines, numCol);
+		
+	}
+	
+	public char[][] copyBoard(int numLines, int numCol){
 		board = new char[numLines-1][numCol];
 		
 		String line;
@@ -46,9 +51,7 @@ public class FileReader {
 				board[i][j]=line.charAt(j);
 			}
 		}
-		
 		return board;
-		
 	}
 
 }

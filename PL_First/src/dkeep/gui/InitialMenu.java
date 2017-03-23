@@ -47,7 +47,7 @@ public class InitialMenu extends JFrame {
 		initialize();
 	}
 
-	/**
+	/** 
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
@@ -98,21 +98,32 @@ public class InitialMenu extends JFrame {
 					
 				} else {
 					
-					numberOgres = Integer.parseInt(numOgres);
+					boolean validCaracter = true;
 					
-					if (numberOgres>5){
-						JOptionPane.showMessageDialog(frame, "Please enter a valid number of Ogres! (between 1 and 5)");
-					} else {
-						int index = comboBox.getSelectedIndex();
-						typeGuard = (String) comboBox.getItemAt(index);
-						
-						
-						try {
-							GameWindow gameWindow = new GameWindow (numberOgres, typeGuard);
-						} catch (IOException e) {
-							e.printStackTrace();
+					try { 
+						numberOgres = Integer.parseInt(numOgres);
+				    } catch(NumberFormatException e) { 
+				        validCaracter = false; 
+				    }
+					
+					if (validCaracter){
+						if (numberOgres>5){
+							JOptionPane.showMessageDialog(frame, "Please enter a valid number of Ogres! (between 1 and 5)");
+						} else {
+							int index = comboBox.getSelectedIndex();
+							typeGuard = (String) comboBox.getItemAt(index);
+							
+							
+							try {
+								GameWindow gameWindow = new GameWindow (numberOgres, typeGuard);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
+					} else {
+						JOptionPane.showMessageDialog(frame, "Please insert a number!");
 					}
+					
 
 				}
 				

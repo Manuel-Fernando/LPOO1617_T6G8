@@ -1,11 +1,6 @@
-XXXXXXXXXX
-X   I X  X
-XXX XXX  X
-X I I X  X
-XXX XXX  X
-I  G     X
-I        X
-XXX XXXX X
-X IHI Xk X
-XXXXXXXXXX
+XXXXX
+XH GX
+I   X
+Ik  X
+XXXXX
 

@@ -46,8 +46,6 @@ public class FileReader {
 		for (int i=0; i<info.size()-1; i++){
 			line = info.elementAt(i);
 			for (int j=0; j<numCol; j++){
-				System.out.println("i " + i);
-				System.out.println("j " + j);
 				board[i][j]=line.charAt(j);
 			}
 		}

@@ -11,8 +11,6 @@ public class Suspicious extends comportamentoGuarda {
 	char dir;
 	char[] guardInverse = {'d','w','w','w','w','d','d','d','d','d','d','w','a','a','a','a','a','a','a','s','s','s','s','s'};
 
-	public String getName(){return "Suspicious";}
-
 	public char Movimento (int mapLevel, Map m){
 
 		Random rn = new Random(); 

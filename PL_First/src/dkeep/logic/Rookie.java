@@ -5,7 +5,6 @@ public class Rookie extends comportamentoGuarda {
 
 	public Rookie(int PosXi, int PosYi) {
 		super(PosXi, PosYi);
-		// TODO Auto-generated constructor stub
 	}
 
 	public char Movimento (int mapLevel, Map m){

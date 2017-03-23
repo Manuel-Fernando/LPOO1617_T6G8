@@ -5,7 +5,7 @@ public class comportamentoGuarda extends Guard {
 
 	public comportamentoGuarda(int PosXi, int PosYi) {
 		super(PosXi, PosYi);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	int i=0;

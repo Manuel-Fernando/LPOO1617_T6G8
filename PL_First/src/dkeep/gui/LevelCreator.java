@@ -383,7 +383,7 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 			boardposX = (int) Math.ceil((finalposX - 28)/35);
 			boardposY = (int) Math.ceil((finalposY - 123)/35);
 
-			if (boardposX<= newboard[0].length && boardposY<= newboard.length){
+			if (boardposX< newboard[0].length && boardposY< newboard.length){
 
 				switch(type){
 				case "wall":

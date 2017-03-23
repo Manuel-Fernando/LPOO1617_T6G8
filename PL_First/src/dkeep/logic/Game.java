@@ -125,7 +125,7 @@ public class Game {
 		hero3.Movimento(dir, 2, board3);
 		if(loose.WinOrLoose((ogrezz.get(0)).getLetter(), board3, hero3)==1){return 6;}
 		if(ogreLevel3Loose(ogrezz)){return -3;}
-		
+		 
 
 		for(int i=0; i<numOgres; i++){
 			(ogrezz.get(i)).Movimento(2, board3, hero3.herowithclub, hero3.herowithkey);

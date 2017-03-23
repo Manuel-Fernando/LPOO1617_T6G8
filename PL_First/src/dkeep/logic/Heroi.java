@@ -51,7 +51,7 @@ public class Heroi extends Entidade{
 
 		if (posinX == 0 || posinY == 0 || posinX == m.board.length-1|| posinY == m.board[0].length-1){
 			openDoorLevel2 (m, posinX, posinY);
-		} else { 
+		} else if (m.searchElement(posinX, posinY) != 'I') { 
 			m.writeElement(posX, posY, ' ');
 			posX=posinX;
 			posY=posinY;
@@ -70,7 +70,7 @@ public class Heroi extends Entidade{
 			count=1;
 			for (int i=0; i<m.board.length; i++){
 				for (int j=0; j<m.board[0].length; j++){
-					if(m.searchElement(i, j)=='I'){
+					if(m.searchElement(i, j)=='I' && i==posinX && j==posinY){
 						m.writeElement(i, j, 'S');
 					}
 				}			

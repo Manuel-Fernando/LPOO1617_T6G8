@@ -95,6 +95,7 @@ public class GameWindow extends JFrame{
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
 			panel.setEnabled(false);
+			saveGame.setEnabled(false);
 			
 			return;
 		case -2:
@@ -105,6 +106,7 @@ public class GameWindow extends JFrame{
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
 			panel2.setEnabled(false);
+			saveGame.setEnabled(false);
 			
 			return;
 
@@ -142,6 +144,7 @@ public class GameWindow extends JFrame{
 			btnRight.setEnabled(false);
 			panel.setEnabled(false);
 			panel2.setEnabled(false);
+			saveGame.setEnabled(false);
 			return;
 		case 5:
 			lblYouCanStart.setText("Created Level");
@@ -156,6 +159,7 @@ public class GameWindow extends JFrame{
 			btnLeft.setEnabled(false);
 			btnRight.setEnabled(false);
 			panel.setEnabled(false);
+			saveGame.setEnabled(false);
 			return;
 		}
 	}

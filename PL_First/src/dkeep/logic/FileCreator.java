@@ -13,16 +13,23 @@ public class FileCreator {
 		file = new File("game.txt");
 	}
 	
-	public void saveGame(char[][]board) throws FileNotFoundException{
+	public void saveGame(char[][]board, String type, int number) throws FileNotFoundException{
 		
 		PrintWriter output = new PrintWriter(file);
 		
 		for (int i=0; i<board.length; i++){
 			for (int j=0; j<board[0].length; j++){
-				output.print(board[i][j]);
+				
+				if (board[i][j] == '*'){
+					output.print(' ');
+				} else{
+					output.print(board[i][j]);
+				}
 			}
 		  output.println();
-		} output.println(); 
+		} 
+		output.println(type); 
+		output.println(number);
 		
 		output.close();
 	}

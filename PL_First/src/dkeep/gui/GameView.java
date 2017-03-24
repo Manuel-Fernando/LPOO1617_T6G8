@@ -100,7 +100,7 @@ public class GameView extends JPanel{
 					g.drawImage(heroA,  j+35*j, i+35*i, 35, 35, this);
 					break;
 				default:
-					g.setColor(Color.WHITE);
+					g.setColor(Color.WHITE.darker());
 					g.fillRect(j+35*j, i+35*i, 35, 35);		
 					break;
 				}

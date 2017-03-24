@@ -8,8 +8,8 @@ public class comportamentoGuarda extends Guard {
 		
 	}
 
-	int i=0;
-	char guardtraject[] = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
+//	int i=0;
+//	char guardtraject[] = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
 
 	protected void movimento(){}
 	

@@ -13,6 +13,8 @@ public class FileReader {
 	private Scanner input;
 	private char[][] board;
 	private Vector<String> info;
+	private String type;
+	private int numOgres;
 	
 	public FileReader() throws FileNotFoundException{
 		file = new File("game.txt");
@@ -40,16 +42,28 @@ public class FileReader {
 	}
 	
 	public char[][] copyBoard(int numLines, int numCol){
-		board = new char[numLines-1][numCol];
+		board = new char[numLines-2][numCol];
 		
 		String line;
-		for (int i=0; i<info.size()-1; i++){
+		
+		for (int i=0; i<info.size()-2; i++){
 			line = info.elementAt(i);
 			for (int j=0; j<numCol; j++){
 				board[i][j]=line.charAt(j);
 			}
 		}
+		
+		type = info.elementAt(info.size()-2);
+		numOgres =Integer.valueOf(info.elementAt(info.size()-1));
 		return board;
+	}
+	
+	public String getGuardType(){
+		return type;
+	}
+	
+	public int getNumOgres(){
+		return numOgres;
 	}
 
 }

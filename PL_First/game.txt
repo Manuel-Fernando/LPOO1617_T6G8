@@ -1,9 +1,9 @@
-XXXXIXXX
-XO     X
+XXXXXXXX
+X    O*X
 X      X
 X      X
 X      X
-I      I
-X H  k X
-XXXXIXXX
+X      X
+X    K I
+XXXXXXXX
 

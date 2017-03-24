@@ -20,7 +20,7 @@ public class FileTest {
 	@Test
 	public void testFile() throws FileNotFoundException {
 		FileCreator fileC = new FileCreator();
-		fileC.saveGame(map);
+		fileC.saveGame(map, "Rookie",1);
 		
 		FileReader fileR = new FileReader();
 		char [][] map2 = fileR.loadGame();

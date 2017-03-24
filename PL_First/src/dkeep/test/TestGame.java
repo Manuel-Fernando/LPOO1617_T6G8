@@ -70,7 +70,7 @@ public class TestGame {
 	@Test
 	public void testlevel3() {
 		Game jogo = new Game();
-		jogo.setTabuleiro(map3);
+		jogo.setTabuleiro(map3, "Rookie");
 		
 		int variavel = 0;
 		Ogre ogre = new Ogre(1,4);
@@ -88,7 +88,7 @@ public class TestGame {
 	@Test
 	public void testSetTabuleiro() {
 		Game game = new Game();
-		game.setTabuleiro(map1);
+		game.setTabuleiro(map1, "Rookie");
 
 		char [][] map2 = game.getTabuleiro();
 

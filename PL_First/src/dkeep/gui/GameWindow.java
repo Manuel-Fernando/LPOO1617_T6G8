@@ -8,9 +8,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +22,12 @@ import javax.swing.JPanel;
 import dkeep.logic.FileCreator;
 import dkeep.logic.Game;
 import java.awt.Font;
+import java.awt.Image;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
+
+import java.awt.Color;
 
 public class GameWindow extends JFrame{
 
@@ -35,7 +43,7 @@ public class GameWindow extends JFrame{
 	private JPanel panel;
 	private JPanel panel2; 
 	private static Game jogo = new Game();
-	private static int number = 2;
+	private static int number = 0;
 	private static String guard = "Rookie";
 	private JLabel lblGame;
 	private char [][] board;
@@ -59,6 +67,7 @@ public class GameWindow extends JFrame{
 	/**
 	 * Create the application.
 	 * @throws IOException 
+	 * @wbp.parser.constructor
 	 */
 	public GameWindow(int n, String g) throws IOException {
 		number = n;
@@ -73,8 +82,22 @@ public class GameWindow extends JFrame{
 	
 	public GameWindow(char [][] b) throws IOException {
 		board = b;
-		jogo.setTabuleiro(board);
+		jogo.setTabuleiro(board, guard);
 		number=jogo.ogreNumber();
+		initialize();
+		panel.setFocusTraversalKeysEnabled(false);
+		panel.setFocusable(true);		
+		KeyLis key = new KeyLis();		
+		panel.addKeyListener(key);
+		panel.requestFocusInWindow();
+	}
+	
+	public GameWindow(char [][] b, String type, int n) throws IOException {
+		board = b;
+		guard = type;
+		jogo.setTabuleiro(board, guard);
+		number = n;
+		//number=jogo.ogreNumber();
 		initialize();
 		panel.setFocusTraversalKeysEnabled(false);
 		panel.setFocusable(true);		
@@ -87,6 +110,7 @@ public class GameWindow extends JFrame{
 	public void checkGame (int var) throws IOException{
 		switch (variavel){
 		case -1:
+			break;
 		case -3:
 			frame.repaint();
 			lblYouCanStart.setText("Game Over!!!");
@@ -119,18 +143,16 @@ public class GameWindow extends JFrame{
 			panel.setVisible(false);
 			
 			panel2 = new GameView(jogo.getTabuleiro(), false);
-			panel2.setBounds(32, 49, 361, 362);
+			panel2.setBounds(32, 49, 323, 323);
 			frame.getContentPane().add(panel2);
-			
+			lblYouCanStart.setText("Level 2");
 			panel2.setFocusTraversalKeysEnabled(false);
 			panel2.setFocusable(true);		
 			KeyLis key = new KeyLis();		
 			panel2.addKeyListener(key);
 			panel2.requestFocusInWindow();
-			
 			break;
 		case 3:
-			lblYouCanStart.setText("Level 2");
 			frame.repaint();
 			panel.requestFocusInWindow();
 			panel2.requestFocusInWindow();
@@ -169,14 +191,19 @@ public class GameWindow extends JFrame{
 	 * @throws IOException 
 	 */
 	private void initialize() throws IOException {
+		Image background = ImageIO.read(new File("src/Imagens/original.png"));
 		frame = new JFrame();
 		frame.setBounds(100, 100, 658, 497);
+		frame.setContentPane(new ImagePanel(background));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 	
 		JButton btnExit = new JButton("Exit");
-		btnExit.setBounds(467, 382, 117, 29);
+		btnExit.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnExit.setBackground(Color.GRAY.darker());
+		btnExit.setForeground(Color.WHITE);
+		btnExit.setBounds(470, 390, 100, 25);
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
@@ -185,7 +212,10 @@ public class GameWindow extends JFrame{
 		frame.getContentPane().add(btnExit);
 		
 		btnUp = new JButton("Up");
-		btnUp.setBounds(467, 108, 117, 29);
+		btnUp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnUp.setBackground(Color.GRAY.darker());
+		btnUp.setForeground(Color.WHITE);
+		btnUp.setBounds(490, 150, 60, 25);
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				goWhereSentYou('w');
@@ -195,7 +225,10 @@ public class GameWindow extends JFrame{
 		frame.getContentPane().add(btnUp);
 		
 		btnDown = new JButton("Down");
-		btnDown.setBounds(467, 258, 117, 29);
+		btnDown.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnDown.setBackground(Color.GRAY.darker());
+		btnDown.setForeground(Color.WHITE);
+		btnDown.setBounds(490, 250, 60, 25);
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				goWhereSentYou('s');
@@ -205,7 +238,10 @@ public class GameWindow extends JFrame{
 		frame.getContentPane().add(btnDown);
 		
 		btnLeft = new JButton("Left");
-		btnLeft.setBounds(423, 186, 89, 29);
+		btnLeft.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnLeft.setBackground(Color.GRAY.darker());
+		btnLeft.setForeground(Color.WHITE);
+		btnLeft.setBounds(435, 200, 60, 25);
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				goWhereSentYou('a');
@@ -215,7 +251,10 @@ public class GameWindow extends JFrame{
 		frame.getContentPane().add(btnLeft);
 
 		btnRight = new JButton("Right");
-		btnRight.setBounds(543, 186, 89, 29);
+		btnRight.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnRight.setBackground(Color.GRAY.darker());
+		btnRight.setForeground(Color.WHITE);
+		btnRight.setBounds(543, 200, 60, 25);
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				goWhereSentYou('d');
@@ -225,13 +264,16 @@ public class GameWindow extends JFrame{
 		frame.getContentPane().add(btnRight);
 
 		saveGame = new JButton("Save Game");
-		saveGame.setBounds(475, 320,  100, 29);
+		saveGame.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		saveGame.setBackground(Color.GRAY.darker());
+		saveGame.setForeground(Color.WHITE);
+		saveGame.setBounds(470, 340,  100, 25);
 		saveGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FileCreator file = new FileCreator();
 				
 				try {
-					file.saveGame(jogo.getTabuleiro());
+					file.saveGame(jogo.getTabuleiro(), guard, number);
 					JOptionPane.showMessageDialog(frame, "Game saved successfully!");
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
@@ -242,16 +284,20 @@ public class GameWindow extends JFrame{
 		frame.getContentPane().add(saveGame);
 		
 		lblYouCanStart = new JLabel("Level 1");
-		lblYouCanStart.setBounds(33, 434, 422, 16);
+		lblYouCanStart.setForeground(Color.WHITE);
+		lblYouCanStart.setFont(new Font("Tempus Sans ITC", Font.BOLD, 13));
+		lblYouCanStart.setBounds(33, 425, 422, 16);
 		frame.getContentPane().add(lblYouCanStart);
 
 		panel = new GameView(jogo.getTabuleiro(), false);
-		panel.setBounds(32, 49, 361, 362);
+		panel.setBounds(32, 49, 359, 359);
 		frame.getContentPane().add(panel);
 
-		lblGame = new JLabel("Game");
-		lblGame.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblGame.setBounds(319, 11, 55, 27);
+		lblGame = new JLabel("Dungeon Keep");
+		lblGame.setForeground(Color.WHITE);
+		lblGame.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGame.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblGame.setBounds(250, 11, 150, 27);
 		frame.getContentPane().add(lblGame);
 
 	}

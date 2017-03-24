@@ -6,7 +6,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.SoftBevelBorder;
 
 import dkeep.gui.GameWindow.KeyLis;
 
@@ -15,20 +17,24 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 
 import javax.swing.JTextField;
+import javax.swing.RootPaneContainer;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
 public class LevelCreator extends JFrame implements MouseMotionListener, MouseListener{
 
-	private JPanel frame;
+	private JFrame frame;
 	private JPanel mapa;
 	private JTextField altura;
 	private JTextField largura;
@@ -50,7 +56,6 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 	private JLabel lblShield;
 	private JLabel lblDoor;
 	private JLabel lblKey;
-	private JLabel lblPleaseInsertW;
 	private JPanel clickedIcon;
 	private int boardposX, boardposY;
 	private String type;
@@ -71,7 +76,7 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 			public void run() {
 				try {
 					LevelCreator frame = new LevelCreator();
-					frame.setVisible(true);
+					//frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -81,10 +86,10 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 	
 	public LevelCreator() throws IOException{
 		initialize();
-		this.setFocusable(true);			
-		this.addMouseListener(this);
-		this.addMouseMotionListener(this);
-		this.requestFocusInWindow();
+		frame.setFocusable(true);			
+		frame.addMouseListener(this);
+		frame.addMouseMotionListener(this);
+		frame.requestFocusInWindow();
 	}
 
 	/**
@@ -92,46 +97,54 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 	 * @return 
 	 * @throws IOException 
 	 */
-	public void initialize() throws IOException {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 604, 550);
-		frame = new JPanel();
-		frame.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(frame);
-		frame.setLayout(null);
+	public void initialize() throws IOException {		
+		Image background = ImageIO.read(new File("src/Imagens/original.png"));
+		frame = new JFrame();
+		
+		frame.setBounds(100, 100, 640, 550);
+		ImagePanel imagePanel = new ImagePanel(background);
+		frame.setContentPane(imagePanel);
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
 		
 		JLabel lblCreateYourOwn = new JLabel("Create your own Map");
-		lblCreateYourOwn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCreateYourOwn.setBounds(137, 11, 169, 22);
-		frame.add(lblCreateYourOwn);
+		lblCreateYourOwn.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCreateYourOwn.setForeground(Color.WHITE);
+		lblCreateYourOwn.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblCreateYourOwn.setBounds(225, 11, 200, 22);
+		frame.getContentPane().add(lblCreateYourOwn);
 		
 		JLabel lblSize = new JLabel("Size");
-		lblSize.setBounds(28, 49, 27, 14);
-		frame.add(lblSize);
+		lblSize.setForeground(Color.WHITE);
+		lblSize.setFont(new Font("Tempus Sans ITC", Font.BOLD, 11));
+		lblSize.setBounds(190, 49, 27, 14);
+		frame.getContentPane().add(lblSize);
 		
 		altura = new JTextField();
-		altura.setBounds(65, 46, 86, 20);
-		frame.add(altura);
+		altura.setBounds(225, 46, 50, 20);
+		frame.getContentPane().add(altura);
 		altura.setColumns(10);
 		
 		largura = new JTextField();
-		largura.setBounds(191, 46, 86, 20);
-		frame.add(largura);
+		largura.setBounds(300, 46, 50, 20);
+		frame.getContentPane().add(largura);
 		largura.setColumns(10);
 		
 		JLabel lblX = new JLabel("x");
-		lblX.setBounds(166, 49, 15, 14);
-		frame.add(lblX);
-		
-		lblPleaseInsertW = new JLabel("Please Insert W and H");
-		lblPleaseInsertW.setVisible(false);
-		lblPleaseInsertW.setBounds(149, 77, 46, 14);
-		frame.add(lblPleaseInsertW);
+		lblX.setForeground(Color.WHITE);
+		lblX.setFont(new Font("Tempus Sans ITC", Font.BOLD, 11));
+		lblX.setBounds(280, 49, 15, 14);
+		frame.getContentPane().add(lblX);
 		
 		JButton btnCreate = new JButton("Create");
+		btnCreate.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnCreate.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null)); 
+		btnCreate.setBackground(Color.GRAY.darker());
+		btnCreate.setForeground(Color.WHITE);
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
 				canCreate = true;
 
 				if (btnCreate.getText() == "Reset"){
@@ -177,67 +190,84 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 							mapa = new GameView(newboard, true);
 							frame.repaint();		
 
-							mapa.setBounds(28, 88, m*38, n*38);
+							mapa.setBounds(28, 88, m*36, n*36);
 
 							if ((int)(mapa.getBounds().getWidth()+mapa.getBounds().x+100)>640 || (int)(mapa.getBounds().getHeight()+mapa.getBounds().y+50)>550){
-								setBounds(100, 100, (int)(mapa.getBounds().getWidth()+mapa.getBounds().x+150), (int)(mapa.getBounds().getHeight()+mapa.getBounds().y+70));
+								System.out.println("aqui");
+								frame.setBounds(100, 100, (int)(mapa.getBounds().getWidth()+mapa.getBounds().x+150), (int)(mapa.getBounds().getHeight()+mapa.getBounds().y+70));
 							}
 
 							wall = new WallIcon();
 							wall.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 86, 35, 35);
-							frame.add(wall);
+							frame.getContentPane().add(wall);
 							wall.repaint();
 
 							ogre = new OgreIcon();
 							ogre.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 146, 35, 35);
-							frame.add(ogre);
+							frame.getContentPane().add(ogre);
 							ogre.repaint();
 
 							hero = new HeroIcon();
 							hero.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 210, 35, 35);
-							frame.add(hero);
+							frame.getContentPane().add(hero);
 							hero.repaint();
 
 							shield = new ShieldIcon();
 							shield.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 276, 35, 35);
-							frame.add(shield);
+							frame.getContentPane().add(shield);
 							shield.repaint();
 
 							door = new DoorIcon();
 							door.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 336, 35, 35);
-							frame.add(door);
+							frame.getContentPane().add(door);
 							door.repaint();
 
 							key = new KeyIcon();
 							key.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 396, 35, 35);
-							frame.add(key);
+							frame.getContentPane().add(key);
 							key.repaint();
 
 							lblWall = new JLabel("Wall");
+							lblWall.setFont(new Font("Tempus Sans ITC", Font.BOLD, 11));
+							lblWall.setForeground(Color.WHITE);
 							lblWall.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 123, 27, 14);
-							frame.add(lblWall);
+							frame.getContentPane().add(lblWall);
 
 							lblOgre = new JLabel("Ogre");
+							lblOgre.setFont(new Font("Tempus Sans ITC", Font.BOLD, 11));
+							lblOgre.setForeground(Color.WHITE);
 							lblOgre.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 184, 46, 14);
-							frame.add(lblOgre);
+							frame.getContentPane().add(lblOgre);
 
 							lblHero = new JLabel("Hero");
+							lblHero.setFont(new Font("Tempus Sans ITC", Font.BOLD, 11));
+							lblHero.setForeground(Color.WHITE);
 							lblHero.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 247, 27, 14);
-							frame.add(lblHero);
+							frame.getContentPane().add(lblHero);
 
 							lblShield = new JLabel("Shield");
+							lblShield.setFont(new Font("Tempus Sans ITC", Font.BOLD, 11));
+							lblShield.setForeground(Color.WHITE);
 							lblShield.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 314, 35, 14);
-							frame.add(lblShield);
+							frame.getContentPane().add(lblShield);
 
 							lblDoor = new JLabel("Door");
+							lblDoor.setFont(new Font("Tempus Sans ITC", Font.BOLD, 11));
+							lblDoor.setForeground(Color.WHITE);
 							lblDoor.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 376, 35, 14);
-							frame.add(lblDoor);
+							frame.getContentPane().add(lblDoor);
 
 							lblKey = new JLabel("Key");
+							lblKey.setFont(new Font("Tempus Sans ITC", Font.BOLD, 11));
+							lblKey.setForeground(Color.WHITE);
 							lblKey.setBounds((int)(mapa.getBounds().getWidth()+mapa.getBounds().x + 50), 436, 35, 14);
-							frame.add(lblKey);
+							frame.getContentPane().add(lblKey);
 
 							btnNewButton = new JButton("Save and Play");
+							btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+							btnNewButton.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null)); 
+							btnNewButton.setBackground(Color.GRAY.darker());
+							btnNewButton.setForeground(Color.WHITE);
 							btnNewButton.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent arg0) {
 
@@ -267,15 +297,15 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 							});
 
 							if ((int) (lblKey.getBounds().y + lblKey.getBounds().getHeight()+ 10) > (int) (mapa.getBounds().y + mapa.getBounds().getHeight()+ 10)){
-								btnNewButton.setBounds(230, (int) (lblKey.getBounds().y + lblKey.getBounds().getHeight()+ 10), 150, 35);
+								btnNewButton.setBounds(300, (int) (lblKey.getBounds().y + lblKey.getBounds().getHeight()+ 10), 90, 25);
 							} else {
-								btnNewButton.setBounds(230, (int) (mapa.getBounds().y + mapa.getBounds().getHeight()-10), 150, 35);
+								btnNewButton.setBounds(300, (int) (mapa.getBounds().y + mapa.getBounds().getHeight()-10), 90, 25);
 							}
 
-							frame.add(btnNewButton);
+							frame.getContentPane().add(btnNewButton);
 
 
-							frame.add(mapa);
+							frame.getContentPane().add(mapa);
 							frame.repaint();
 
 							btnCreate.setText("Reset");
@@ -293,8 +323,8 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 		});
 		
 		
-		btnCreate.setBounds(309, 45, 89, 23);
-		frame.add(btnCreate);
+		btnCreate.setBounds(380, 45, 89, 23);
+		frame.getContentPane().add(btnCreate);
 		
 	}
 

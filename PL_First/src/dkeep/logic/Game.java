@@ -12,6 +12,7 @@ public class Game {
 	Guard rookie = new Rookie(1,8);
 	Guard suspicious = new Suspicious(1,8);
 	Guard drunken = new Drunken(1,8);
+	Guard guard3;
 	
 	Heroi hero1 = new Heroi(1,1);
 	Heroi hero2 = new Heroi(7,1);
@@ -48,7 +49,7 @@ public class Game {
 		return ogreNumber;
 	}
 	
-	public void setTabuleiro(char [][] t){
+	public void setTabuleiro(char [][] t, String type){
 		tabuleiro = t; 
 		board3.setBoard(tabuleiro);
 		nivel=3;
@@ -57,6 +58,7 @@ public class Game {
 			for (int j=0; j<tabuleiro[0].length; j++){
 				if(tabuleiro[i][j]=='H'){
 					hero3 = new Heroi(i,j);
+					hero1 = new Heroi(i,j);
 				} else if(tabuleiro[i][j]=='A'){
 					hero3 = new Heroi(i,j); 
 					hero3.setHeroWithClub(true);
@@ -77,6 +79,20 @@ public class Game {
 					for(Ogre x:ogres){
 						x.setArmPosition(i, j);
 					}
+				} else if(tabuleiro[i][j]=='G'){
+					nivel=4;
+					board1.setBoard(tabuleiro);
+					if (type.equals("Rookie")){
+						guard3=new Rookie(1,8);
+						guard3.setposXY(i, j);
+					} else if (type.equals("Drunken")){
+						guard3=new Drunken(1,8);
+						guard3.setposXY(i, j);
+					} else if (type.equals("Suspicious")){
+						guard3=new Suspicious(1,8);
+						guard3.setposXY(i, j);
+					}
+					
 				}
 			}
 		}			
@@ -146,19 +162,30 @@ public class Game {
 	}	
 	
 	public int jogo(char direc, String guardType, int numOgres){
-
-		Guard guarda=iniciateBadCaracters(guardType);
 		
-		if (nivel==1){
-			tabuleiro = board1.board;
-			estado = level1(direc, guarda); 
-			if(estado==2){
-				tabuleiro = board2.board;
-				nivel=2;
+		if (nivel !=4){
+			Guard guarda=iniciateBadCaracters(guardType);
+			if (nivel==1){
+				tabuleiro = board1.board;
+				estado = level1(direc, guarda); 
+				if(estado==2){
+					tabuleiro = board2.board;
+					nivel=2;
+				}
 			}
+			else if (nivel==2){estado = level2(direc, ogres, numOgres);}
+			else if (nivel==3){estado = level3(direc, ogres, numOgres);}
+		} else {
+			if (nivel == 4){
+				estado = level1(direc, guard3); 
+				if(estado==2){
+					tabuleiro = board2.board;
+					nivel=2;
+				}
+			} 
 		}
-		else if (nivel==2){estado = level2(direc, ogres, numOgres);}
-		else if (nivel==3){estado = level3(direc, ogres, numOgres);}
+
+		
 		return estado;
 	}
 	

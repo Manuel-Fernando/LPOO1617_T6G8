@@ -1,9 +1,7 @@
-XXXXXXXX
-X    O*X
-X      X
-X      X
-X      X
-X      X
-X    K I
-XXXXXXXX
-
+XXXXX
+XH GX
+I   X
+Ik  X
+XXXXX
+Rookie
+1

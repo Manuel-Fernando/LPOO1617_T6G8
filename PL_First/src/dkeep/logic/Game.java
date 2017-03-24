@@ -119,11 +119,12 @@ public class Game {
 			if(levelTwoLoose(ogrezz)){return -2;}
 			
 			for(int i=0; i<numOgres; i++){
-				(ogrezz.get(i)).Movimento(2, board2, hero2.herowithclub, hero2.herowithkey);
+				boolean heroPackage[]={hero2.herowithclub,hero2.herowithkey};
+				(ogrezz.get(i)).Movimento(2, board2, heroPackage);
 			}
 			if(levelTwoLoose(ogrezz)){return -2;}
 			
-			return 3;
+			return 3; 
 	}
 	
 	public boolean levelTwoLoose(ArrayList <Ogre> ogrezz){
@@ -144,7 +145,8 @@ public class Game {
 		 
 
 		for(int i=0; i<numOgres; i++){
-			(ogrezz.get(i)).Movimento(2, board3, hero3.herowithclub, hero3.herowithkey);
+			boolean heroPackage[]={hero3.herowithclub,hero3.herowithkey};
+			(ogrezz.get(i)).Movimento(2, board3, heroPackage);
 		}
 		if(ogreLevel3Loose(ogrezz)){return -3;}
 		

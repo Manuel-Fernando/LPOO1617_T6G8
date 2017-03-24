@@ -30,7 +30,8 @@ public class TestOgreAleatority {
 		
 		boolean outcome1 = false, outcome2 = false, outcome3 = false, outcome4 = false;
 		while(!outcome1 || !outcome2 || !outcome3 || !outcome4){
-			ogreDirection=ogre.Movimento(2, mapa, false, false);
+			boolean nothing[]={false, false};
+			ogreDirection=ogre.Movimento(2, mapa, nothing);
 			if((ogreDirection=='w') && (mapa.searchElement(posX-1, posY)!='X')){
 				assertEquals(mapa.searchElement(posX-1, posY),'O');
 				posX--;

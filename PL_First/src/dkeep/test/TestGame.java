@@ -59,10 +59,10 @@ public class TestGame {
 		
 		ogre = new Ogre(6,1);
 		ogre1 = new Ogre(6,1);
-		ogres2.add(ogre);
-		ogres2.add(ogre1);
+		ogres3.add(ogre);
+		ogres3.add(ogre1);
 		
-		variavel = jogo.level2('w', ogres2, 2);
+		variavel = jogo.level2('w', ogres3, 2);
 		assertEquals(variavel, -2);	
 		
 	}

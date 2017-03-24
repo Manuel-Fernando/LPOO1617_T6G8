@@ -1,18 +1,18 @@
 package dkeep.logic;
 
 public class Entidade {
-	
-	int posX, posY;
+
 	char letter;
+	int []pos = new int[2];
 	
 	protected void Movimento(char dir){}
 	
 	protected int getX(){
-		return posX;
+		return pos[0];
 	}
 	
 	protected int getY(){
-		return posY;
+		return pos[1];
 	}
 	
 	protected char getLetter(){

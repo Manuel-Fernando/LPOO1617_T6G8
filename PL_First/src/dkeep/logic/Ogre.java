@@ -10,8 +10,8 @@ public class Ogre extends Entidade{
 	int armPosy=5;
 	
 	public Ogre(int PosXi, int PosYi){
-		posX=PosXi;
-		posY=PosYi; 
+		pos[0]=PosXi;
+		pos[1]=PosYi; 
 		letter='O';
 	}
 	
@@ -60,13 +60,13 @@ public class Ogre extends Entidade{
 			clearOldOgrePosition(m, heroPachage);
 			
 			//se heroi a beira com taco reinicia contagem
-			if(findHero(m, posX, posY) && heroPachage[0]){ dontmove=1;}
+			if(findHero(m, pos[0], pos[1]) && heroPachage[0]){ dontmove=1;}
 			
 			// posicao igual a antiga
 			if(dontmove==1 || dontmove==2){
 				dontmove++;
-				posin[0]=posX;
-				posin[1]=posY;
+				posin[0]=pos[0];
+				posin[1]=pos[1];
 				letter='8';
 			}
 
@@ -75,16 +75,16 @@ public class Ogre extends Entidade{
 	}
 	
 	public void writeOgreNewPosition(int posin[], Map m, boolean[] heroPachage){
-		if (posin[0]==keyPosx && posin[1]==keyPosy && !heroPachage[1]){m.writeElement(posin[0], posin[1], '$');}
+		if (posin[0]==keyPosx && posin[1]==keyPosy && !heroPachage[1]){m.writeElement(posin, '$');}
 		else {
 			if(findHero(m, posin[0], posin[1]) && heroPachage[0]){
 				dontmove=1;
 				letter='8';
 			}
-			m.writeElement(posin[0], posin[1], letter);
+			m.writeElement(posin, letter);
 		}
-		posX=posin[0];
-		posY=posin[1];
+		pos[0]=posin[0];
+		pos[1]=posin[1];
 		
 	}
 	
@@ -95,55 +95,55 @@ public class Ogre extends Entidade{
 		//apagar posicao antiga
 		clearOldClubPosition(m, heroPachage);
 		
-		posClub[0]=posX;
-		posClub[1]=posY;
+		posClub[0]=pos[0];
+		posClub[1]=pos[1];
 		switch (freeClubSpace(m)){
 		case 'w':
-			posClub[0]=posX-1;
+			posClub[0]=pos[0]-1;
 			break;
 		case 'a':
-			posClub[1]=posY-1;
+			posClub[1]=pos[1]-1;
 			break;
 		case 'd':
-			posClub[1]=posY+1;
+			posClub[1]=pos[1]+1;
 			break;
 		case 's':
-			posClub[0]=posX+1;
+			posClub[0]=pos[0]+1;
 			break;			
 		}
-		if (posClub[0] == keyPosx && posClub[1] == keyPosy && !heroPachage[1]){m.writeElement(posClub[0], posClub[1], '$');
-		}else m.writeElement(posClub[0], posClub[1], '*'); 
+		if (posClub[0] == keyPosx && posClub[1] == keyPosy && !heroPachage[1]){m.writeElement(posClub, '$');
+		}else m.writeElement(posClub, '*'); 
 	} 
 
 	public char freeClubSpace(Map m){
 		char direction=randomdirection();
-		while((direction=='w' && (m.searchElement(posX-1, posY)=='X' || m.searchElement(posX-1, posY)=='I'))||
-				(direction=='a' && (m.searchElement(posX, posY-1)=='X' || m.searchElement(posX, posY-1)=='I'))||
-				(direction=='d' && (m.searchElement(posX, posY+1)=='X' || m.searchElement(posX, posY+1)=='I'))||
-				(direction=='s' && (m.searchElement(posX+1, posY)=='X' || m.searchElement(posX+1, posY)=='I'))){
+		while((direction=='w' && (m.searchElement(pos[0]-1, pos[1])=='X' || m.searchElement(pos[0]-1, pos[1])=='I'))||
+				(direction=='a' && (m.searchElement(pos[0], pos[1]-1)=='X' || m.searchElement(pos[0], pos[1]-1)=='I'))||
+				(direction=='d' && (m.searchElement(pos[0], pos[1]+1)=='X' || m.searchElement(pos[0], pos[1]+1)=='I'))||
+				(direction=='s' && (m.searchElement(pos[0]+1, pos[1])=='X' || m.searchElement(pos[0]+1, pos[1])=='I'))){
 			direction=randomdirection();
 		}
 		return direction;
 	}
 
 	public void clearOldClubPosition(Map m, boolean[] heroPachage){
-		if (posClub[0]==keyPosx && posClub[1]==keyPosy && !heroPachage[1] && !(posX==keyPosx && posY==keyPosy)){
-			m.writeElement(posClub[0], posClub[1], 'k');
-		}else if(posClub[0]==armPosx && posClub[1]==armPosy && !heroPachage[0] && !(posX==armPosx && posY==armPosy)){
-			m.writeElement(posClub[0], posClub[1], '+');
-		}else if(!(posClub[0]==posX && posClub[1]==posY)){
-			m.writeElement(posClub[0], posClub[1], ' ');
+		if (posClub[0]==keyPosx && posClub[1]==keyPosy && !heroPachage[1] && !(pos[0]==keyPosx && pos[1]==keyPosy)){
+			m.writeElement(posClub, 'k');
+		}else if(posClub[0]==armPosx && posClub[1]==armPosy && !heroPachage[0] && !(pos[0]==armPosx && pos[1]==armPosy)){
+			m.writeElement(posClub, '+');
+		}else if(!(posClub[0]==pos[0] && posClub[1]==pos[1])){
+			m.writeElement(posClub, ' ');
 		}
 
 	}
 
 	public void clearOldOgrePosition(Map m, boolean[] heroPachage){
-		if (posX==keyPosx && posY== keyPosy && !heroPachage[1]){
-			m.writeElement(posX, posY, 'k');
-		}else if(posX==armPosx && posY==armPosy && !heroPachage[0]){
-			m.writeElement(posX, posY, '+');
-		}else if(m.searchElement(posX, posY) != '*') {
-			m.writeElement(posX, posY, ' ');
+		if (pos[0]==keyPosx && pos[1]== keyPosy && !heroPachage[1]){
+			m.writeElement(pos, 'k');
+		}else if(pos[0]==armPosx && pos[1]==armPosy && !heroPachage[0]){
+			m.writeElement(pos, '+');
+		}else if(m.searchElement(pos[0], pos[1]) != '*') {
+			m.writeElement(pos, ' ');
 		}
 
 	}
@@ -152,23 +152,23 @@ public class Ogre extends Entidade{
 	public char Movimento(int mapLevel, Map m, boolean[] heroPackage){
 
 		char dir=randomdirection();
-		int pos[]={posX,posY};
+		int pos2[]={pos[0],pos[1]};
 
 		switch (dir){
 		case 'w':
-			pos[0]=posX-1;
+			pos2[0]=pos[0]-1;
 			break;
 		case 'a':
-			pos[1]=posY-1;
+			pos2[1]=pos[1]-1;
 			break;
 		case 'd':
-			pos[1]=posY+1;
+			pos2[1]=pos[1]+1;
 			break;
 		case 's':
-			pos[0]=posX+1;
+			pos2[0]=pos[0]+1;
 			break;			
 		}
-		if ((m.searchElement(pos[0], pos[1]) != 'X') && ((m.searchElement(pos[0], pos[1]) != 'I'))){direcao (pos, m, heroPackage);}
+		if ((m.searchElement(pos2[0], pos2[1]) != 'X') && ((m.searchElement(pos2[0], pos2[1]) != 'I'))){direcao (pos2, m, heroPackage);}
 		clubDirection(m, heroPackage);
 		return dir;
 	}

@@ -79,7 +79,7 @@ public class GameWindow extends JFrame{
 		panel.addKeyListener(key);
 		panel.requestFocusInWindow();
 	}
-	
+	 
 	public GameWindow(char [][] b) throws IOException {
 		board = b;
 		jogo.setTabuleiro(board, guard);
@@ -110,6 +110,14 @@ public class GameWindow extends JFrame{
 	public void checkGame (int var) throws IOException{
 		switch (variavel){
 		case -1:
+			frame.repaint();
+			lblYouCanStart.setText("Game Over!!!");
+			btnUp.setEnabled(false);
+			btnDown.setEnabled(false);
+			btnLeft.setEnabled(false);
+			btnRight.setEnabled(false);
+			panel.setEnabled(false);
+			saveGame.setEnabled(false);
 			break;
 		case -3:
 			frame.repaint();

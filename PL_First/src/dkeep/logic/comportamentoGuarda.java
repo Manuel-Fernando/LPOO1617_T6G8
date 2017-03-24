@@ -17,10 +17,10 @@ public class comportamentoGuarda extends Guard {
 		
 		if ((m.searchElement(posinX, posinY) != 'X') && ((m.searchElement(posinX, posinY) != 'I'))){
 			
-			m.writeElement(posX, posY, ' ');
-			posX=posinX;
-			posY=posinY;
-			m.writeElement(posX, posY, letter);
+			m.writeElement(pos, ' ');
+			pos[0]=posinX; 
+			pos[1]=posinY;
+			m.writeElement(pos, letter);
 				
 		}
 	}
@@ -28,16 +28,16 @@ public class comportamentoGuarda extends Guard {
 	protected void movete(char dir, int mapLevel, Map m){
 		switch (dir){
 		case 'w':
-			direcao (posX-1, posY, m, mapLevel);
+			direcao (pos[0]-1, pos[1], m, mapLevel);
 			break;
 		case 'a':
-			direcao (posX, posY-1, m, mapLevel);
+			direcao (pos[0], pos[1]-1, m, mapLevel);
 			break;
 		case 'd':
-			direcao (posX, posY+1, m, mapLevel);
+			direcao (pos[0], pos[1]+1, m, mapLevel);
 			break;
 		case 's':
-			direcao (posX+1, posY, m, mapLevel);
+			direcao (pos[0]+1, pos[1], m, mapLevel);
 			break;			
 		}
 	}

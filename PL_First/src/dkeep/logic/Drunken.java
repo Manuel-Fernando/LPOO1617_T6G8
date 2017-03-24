@@ -13,9 +13,11 @@ public class Drunken extends comportamentoGuarda{
 		char dir;
 
 		Random rn = new Random();
+		
+		int[] XY = {getX(), getY()};
 
-		if (rn.nextInt(2)==0){ //Sleep
-			m.writeElement(getX(), getY(), 'g');
+		if (rn.nextInt(2)==0){ //Sleep 
+			m.writeElement(XY, 'g');
 			return ' ';
 
 		} else {
@@ -25,7 +27,7 @@ public class Drunken extends comportamentoGuarda{
 				i++;
 			}
 			
-			m.writeElement(getX(), getY(), 'G');
+			m.writeElement(XY, 'G');
 			if (i==guardtraject.length){i=0;}
 			movete(dir, mapLevel, m);
 
@@ -59,7 +61,7 @@ public class Drunken extends comportamentoGuarda{
 		char dir;
 		switch (guardtraject[i-1]){
 		case 'w':
-			dir = 'w';
+			dir = 's';
 			break;
 		case 'a':
 			dir = 'd';

@@ -16,8 +16,8 @@ public class Map {
 	 * M�todo para alterar um elemento numa dada posi��o
 	 */
 	
-	protected void writeElement(int x, int y, char element){
-		board[x][y]=element;	
+	protected void writeElement(int []pos, char element){
+		board[pos[0]][pos[1]]=element;	
 	}
 	
 	public void setBoard(char [][]board){

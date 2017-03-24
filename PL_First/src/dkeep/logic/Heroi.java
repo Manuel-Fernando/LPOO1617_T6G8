@@ -1,11 +1,10 @@
 package dkeep.logic;
 
 public class Heroi extends Entidade{
-
 	
 	public Heroi(int PosXi, int PosYi){
-		posX=PosXi;
-		posY=PosYi;
+		pos[0]=PosXi;
+		pos[1]=PosYi;
 		letter='H';
 	}
 	
@@ -24,16 +23,20 @@ public class Heroi extends Entidade{
 			if (m.searchElement(posinX, posinY) == 'k') {
 				for (int i=0; i<m.board.length; i++){
 					for (int j=0; j<m.board[0].length; j++){
-						if(m.searchElement(i, j)=='I' && j==0){
-							m.writeElement(i, j, 'S');
+						if(m.searchElement(i, j)=='I' && j==0){ 
+							
+							int []posij = {i,j};
+							
+							m.writeElement(posij, 'S');
 						}
 					}			
 				}
 			}
-			m.writeElement(posX, posY, ' ');
-			posX=posinX;
-			posY=posinY;
-			m.writeElement(posX, posY, letter);
+			
+			m.writeElement(pos, ' ');
+			pos[0]=posinX;
+			pos[1]=posinY;
+			m.writeElement(pos, letter);
 		
 	}
 
@@ -52,26 +55,27 @@ public class Heroi extends Entidade{
 		if (posinX == 0 || posinY == 0 || posinX == m.board.length-1|| posinY == m.board[0].length-1){
 			openDoorLevel2 (m, posinX, posinY);
 		} else if (m.searchElement(posinX, posinY) != 'I') { 
-			m.writeElement(posX, posY, ' ');
-			posX=posinX;
-			posY=posinY;
-			m.writeElement(posX, posY, letter);
+			m.writeElement(pos, ' ');
+			pos[0]=posinX;
+			pos[1]=posinY;
+			m.writeElement(pos, letter);
 		}
 		
 	}
 	
 	public void openDoorLevel2 (Map m, int posinX, int posinY){
 		if (count == 1){
-			m.writeElement(posX, posY, ' ');
-			posX=posinX;
-			posY=posinY;
-			m.writeElement(posX, posY, letter);
+			m.writeElement(pos, ' ');
+			pos[0]=posinX;
+			pos[1]=posinY;
+			m.writeElement(pos, letter);
 		} else {
 			count=1;
 			for (int i=0; i<m.board.length; i++){
 				for (int j=0; j<m.board[0].length; j++){
 					if(m.searchElement(i, j)=='I' && i==posinX && j==posinY){
-						m.writeElement(i, j, 'S');
+						int []posij = {i,j};
+						m.writeElement(posij, 'S');
 					}
 				}			
 			}
@@ -82,16 +86,16 @@ public class Heroi extends Entidade{
 
 		switch (dir){
 		case 'w':
-			direcao (posX-1, posY, m, mapLevel);
+			direcao (pos[0]-1, pos[1], m, mapLevel);
 			break;
 		case 'a':
-			direcao (posX, posY-1, m, mapLevel);
+			direcao (pos[0], pos[1]-1, m, mapLevel);
 			break;
 		case 'd':
-			direcao (posX, posY+1, m, mapLevel);
+			direcao (pos[0], pos[1]+1, m, mapLevel);
 			break;
 		case 's':
-			direcao (posX+1, posY, m, mapLevel);
+			direcao (pos[0]+1, pos[1], m, mapLevel);
 			break;			
 		}
 

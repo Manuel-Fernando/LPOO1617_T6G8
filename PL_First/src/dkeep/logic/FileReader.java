@@ -7,6 +7,11 @@ import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Classe que lê um ficheiro de texto
+ * @author Carolina e Manuel
+ *
+ */
 public class FileReader {
 	
 	private File file;
@@ -16,12 +21,20 @@ public class FileReader {
 	private String type;
 	private int numOgres;
 	
+	/**
+	 * Contrutor que cria um objeto FileReader
+	 * @throws FileNotFoundException
+	 */
 	public FileReader() throws FileNotFoundException{
 		file = new File("game.txt");
 		input = new Scanner(file); 
 		info = new Vector<String>();
 	}
 	
+	/**
+	 * Método que carrega o jogo que se encontra no ficheiro
+	 * @return char[][] com o mapa do jogo
+	 */
 	public char[][] loadGame(){		
 		int numLines = 0;
 		int numCol = 0;
@@ -41,6 +54,12 @@ public class FileReader {
 		
 	}
 	
+	/**
+	 * Método que preenche o tabuleiro com a informação que se encontra no ficheiro
+	 * @param numLines inteiro para o número de linha do ficheiro
+	 * @param numCol inteiro para o número de colunas que irá ter o mapa
+	 * @return char [][] com o mapa de jogo
+	 */
 	public char[][] copyBoard(int numLines, int numCol){
 		board = new char[numLines-2][numCol];
 		
@@ -58,10 +77,18 @@ public class FileReader {
 		return board;
 	}
 	
+	/**
+	 * Método que retorna o tipo de guarda de jogo
+	 * @return String com o tipo de guarda
+	 */
 	public String getGuardType(){
 		return type;
 	}
 	
+	/**
+	 * Método que retorna o número de ogres do jogo
+	 * @return inteiro com o número de ogres
+	 */
 	public int getNumOgres(){
 		return numOgres;
 	}

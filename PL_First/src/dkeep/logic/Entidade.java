@@ -7,8 +7,15 @@ package dkeep.logic;
  *
  */
 public class Entidade {
-
+	
+	/**
+	 * Letra associada a cada personagem
+	 */
 	char letter;
+	
+	/**
+	 * int[] com a posição em x e y de cada perconagem 
+	 */
 	int []pos = new int[2];
 	
 	/**
@@ -25,7 +32,6 @@ public class Entidade {
 		return pos[0];
 	}
 	
-	
 	/**
 	 * Método que retorna a posição em y da personagem
 	 * @return inteiro com a posição em y 
@@ -33,7 +39,6 @@ public class Entidade {
 	protected int getY(){
 		return pos[1];
 	}
-	
 	
 	/**
 	 * Método que retorna a letra associada a cada personagem

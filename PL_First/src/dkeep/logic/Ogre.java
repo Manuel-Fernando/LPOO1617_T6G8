@@ -2,6 +2,11 @@ package dkeep.logic;
 
 import java.util.Random;
 
+/**
+ * Classe que guarda personagens do tipo Ogre
+ * @author Carolina e Manuel
+ *
+ */
 public class Ogre extends Entidade{
 
 	int keyPosx=1;
@@ -9,22 +14,41 @@ public class Ogre extends Entidade{
 	int armPosx=7;
 	int armPosy=5;
 	
+	/**
+	 * Contrutor que cria o ogre numa determinada posição
+	 * @param PosXi inteiro para a posição em x
+	 * @param PosYi inteiro para a posição em y
+	 */
 	public Ogre(int PosXi, int PosYi){
 		pos[0]=PosXi;
 		pos[1]=PosYi; 
 		letter='O';
 	}
 	
+	/**
+	 * Método para guardar a posição da chave no mapa de jogo
+	 * @param keyPosxi inteiro com a posição em x da chave
+	 * @param keyPosyi inteiro com a posição em y da chave
+	 */
 	public void setKeyPosition(int keyPosxi, int keyPosyi){
 		keyPosx=keyPosxi;
 		keyPosy=keyPosyi; 
 	}
 	
+	/**
+	 * Método para guardar a posição da armadura no mapa de jogo
+	 * @param armPosxi inteiro para a posição em x d aarmadura
+	 * @param armPosyi inteiro para a posição em y da armadura
+	 */
 	public void setArmPosition(int armPosxi,int armPosyi){
 		armPosx=armPosxi;
 		armPosy=armPosyi;
 	}
 	
+	/**
+	 * Método para definir aleatóriamente a direção de movimento do ogre
+	 * @return char com a direção de movimento
+	 */
 	private char randomdirection(){
 		Random rn = new Random();
 		int range = 4 - 1 + 1;
@@ -38,6 +62,13 @@ public class Ogre extends Entidade{
 		return ' ';
 	}
 	
+	/**
+	 * Método para procurar o heroi numa posição adjacente ao ogre
+	 * @param m Map com o mapa de jogo
+	 * @param x inteiro com a posição x do ogre
+	 * @param y inteiro coma posição y do ogre
+	 * @return true se o heroi estiver numa posição adjacente ao ogre
+	 */
 	public boolean findHero(Map m, int x, int y){
 		if((m.searchElement(x+1, y) == 'H') || (m.searchElement(x, y+1) == 'H') || (m.searchElement(x-1, y) == 'H') || (m.searchElement(x, y-1) == 'H')){return true;}
 		if((m.searchElement(x+1, y) == 'A') || (m.searchElement(x, y+1) == 'A') || (m.searchElement(x-1, y) == 'A') || (m.searchElement(x, y-1) == 'A')){return true;}
@@ -48,6 +79,12 @@ public class Ogre extends Entidade{
 	int posClub[]={3,3};
 	int dontmove=0;
 	
+	/**
+	 * Método (...)
+	 * @param posin
+	 * @param m
+	 * @param heroPachage
+	 */
 	private void direcao (int posin[], Map m, boolean[] heroPachage){
 	
 			//se ja passaram as duas jogadas, liberta o ogre
@@ -74,6 +111,12 @@ public class Ogre extends Entidade{
 			writeOgreNewPosition(posin, m, heroPachage);	
 	}
 	
+	/**
+	 * Método que coloca o ogre na nova posição do tabuleiro. Se houver chave passa a $ (....)
+	 * @param posin
+	 * @param m
+	 * @param heroPachage
+	 */
 	public void writeOgreNewPosition(int posin[], Map m, boolean[] heroPachage){
 		if (posin[0]==keyPosx && posin[1]==keyPosy && !heroPachage[1]){m.writeElement(posin, '$');}
 		else {

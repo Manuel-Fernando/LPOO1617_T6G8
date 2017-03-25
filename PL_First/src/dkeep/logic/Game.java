@@ -2,58 +2,84 @@ package dkeep.logic;
 
 import java.util.ArrayList;
 
+/**
+ * Classe que guarda o jogo
+ * @author Carolina e Manuel
+ *
+ */
 public class Game {
-	
+
 	MapLevel1 board1 = new MapLevel1();
 	MapLevel2 board2 = new MapLevel2();
 	MapLevel3 board3 = new MapLevel3();
 	GameState loose = new GameState();
-	
+
 	Guard rookie = new Rookie(1,8);
 	Guard suspicious = new Suspicious(1,8);
 	Guard drunken = new Drunken(1,8);
 	Guard guard3;
-	
+
 	Heroi hero1 = new Heroi(1,1);
 	Heroi hero2 = new Heroi(7,1);
 	Heroi hero3;
-	
+
 	Ogre ogre = new Ogre(1,4); 
 	Ogre ogre1 = new Ogre(1,4);
 	Ogre ogre2 = new Ogre(1,4);
 	Ogre ogre3 = new Ogre(1,4);
 	Ogre ogre4 = new Ogre(1,4);
-	
+
 	int ogreNumber=0;
-	
+
 	ArrayList <Ogre> ogres = new ArrayList <Ogre>(5);
 
 	int nivel = 1;
 	int estado = 0;
-	
+
 	char[][] tabuleiro = board1.board;
-	
+
+	/**
+	 * Método que retorna o mapa de jogo
+	 * @return char[][] com o mapa de jogo
+	 */
 	public char[][] getTabuleiro(){
 		return tabuleiro;
 	}
 
+	/**
+	 * Método que retorna a mapa de jogo do nível 1
+	 * @return char [][] com o mapa de jogo do nível 1
+	 */
 	public char[][] tabuleiro1(){
 		return board1.board;
 	}
-	
+
+	/**
+	 * Método que retorna o mapa de jogo do nível 2
+	 * @return char [][] com o mapa de jogo do nível 2
+	 */
 	public char[][] tabuleiro2(){
 		return board2.board;
 	}
-	
+
+	/**
+	 * Método que retorna o número de ogres do jogo
+	 * @return inteiro com o número de ogres
+	 */
 	public int ogreNumber(){
 		return ogreNumber;
 	}
-	
+
+	/**
+	 * Método que dado um mapa de jogo inicializaas personagens na posição correta
+	 * @param t char [][] com o mapa de jogo
+	 * @param type String com o tipo de guarda
+	 */
 	public void setTabuleiro(char [][] t, String type){
 		tabuleiro = t; 
 		board3.setBoard(tabuleiro);
 		nivel=3;
-		
+
 		for (int i=0; i<tabuleiro.length; i++){
 			for (int j=0; j<tabuleiro[0].length; j++){
 				if(tabuleiro[i][j]=='H'){
@@ -65,8 +91,8 @@ public class Game {
 					hero3.setLetter('A');
 				} else if (tabuleiro[i][j]=='K'){
 					hero3 = new Heroi(i,j); 
-				    hero3.setHeroWithKey(true);
-				    hero3.setLetter('K');
+					hero3.setHeroWithKey(true);
+					hero3.setLetter('K');
 				} else if(tabuleiro[i][j]=='O'){
 					Ogre ogre = new Ogre(i,j);
 					ogres.add(ogre);	
@@ -92,41 +118,58 @@ public class Game {
 						guard3=new Suspicious(1,8);
 						guard3.setposXY(i, j);
 					}
-					
+
 				}
 			}
 		}			
 	}
-	
 
+	/**
+	 * Método com a lógica de jogo para o nível 1
+	 * @param dir char com a direção de movimento
+	 * @param g Guard com o guarda do jogo
+	 * @return inteiro com o estado de jogo (2 se o jogo continua; -1 se o jogo acaba)
+	 */
 	public int level1(char dir, Guard g){		
-			
-			hero1.Movimento(dir, 1, board1);
-			if(loose.WinOrLoose(g.getLetter(), board1, hero1)==1){return 2;}
-			if(loose.WinOrLoose(g.getLetter(), board1, hero1)==-1){return -1;}
-			g.Movimento(1, board1);	
 
-			if(loose.WinOrLoose(g.getLetter(), board1, hero1)==-1){return -1;}
+		hero1.Movimento(dir, 1, board1);
+		if(loose.WinOrLoose(g.getLetter(), board1, hero1)==1){return 2;}
+		if(loose.WinOrLoose(g.getLetter(), board1, hero1)==-1){return -1;}
+		g.Movimento(1, board1);	
 
-			return 1;
+		if(loose.WinOrLoose(g.getLetter(), board1, hero1)==-1){return -1;}
+
+		return 1;
 
 	}
 
+	/**
+	 * Método para a lógica de jogo do nível 2
+	 * @param dir char com a direção de movimento
+	 * @param ogrezz ArrayList de tipo Ogre com os ogres do jogo
+	 * @param numOgres inteiro com o número de ogres
+	 * @return inteiro com o estado de jogo (4 se o jogo continua; -2 se o jogo terminar)
+	 */
 	public int level2(char dir, ArrayList <Ogre> ogrezz, int numOgres){
 
-			hero2.Movimento(dir, 2, board2);
-			if(loose.WinOrLoose((ogrezz.get(0)).getLetter(), board2, hero2)==1){return 4;}
-			if(levelTwoLoose(ogrezz)){return -2;}
-			
-			for(int i=0; i<numOgres; i++){
-				boolean heroPackage[]={hero2.herowithclub,hero2.herowithkey};
-				(ogrezz.get(i)).Movimento(2, board2, heroPackage);
-			}
-			if(levelTwoLoose(ogrezz)){return -2;}
-			
-			return 3; 
+		hero2.Movimento(dir, 2, board2);
+		if(loose.WinOrLoose((ogrezz.get(0)).getLetter(), board2, hero2)==1){return 4;}
+		if(levelTwoLoose(ogrezz)){return -2;}
+
+		for(int i=0; i<numOgres; i++){
+			boolean heroPackage[]={hero2.herowithclub,hero2.herowithkey};
+			(ogrezz.get(i)).Movimento(2, board2, heroPackage);
+		}
+		if(levelTwoLoose(ogrezz)){return -2;}
+
+		return 3; 
 	}
-	
+
+	/**
+	 * Método que verifica o estado de jogo para o nível 2
+	 * @param ogrezz ArrayList do tipo Ogre com os ogres do jogo
+	 * @return boolean true se o jogo termina
+	 */
 	public boolean levelTwoLoose(ArrayList <Ogre> ogrezz){
 		if(!hero2.herowithclub){
 			if(loose.WinOrLoose((ogrezz.get(0)).getLetter(), board2, hero2)==-1){return true;}
@@ -137,22 +180,34 @@ public class Game {
 		return false;
 	}
 
+	/**
+	 * Método para a lógica de jogo do nível criado pelo utilizador
+	 * @param dir char com a direção de movimento
+	 * @param ogrezz ArrayList do tipo Ogre com os ogres do jogo
+	 * @param numOgres inteiro com o número de ogres
+	 * @return inteiro com o estado do jogo (6 se o jogo continua; -3 se o jogo acaba)
+	 */
 	public int level3(char dir, ArrayList <Ogre> ogrezz, int numOgres){
 
 		hero3.Movimento(dir, 2, board3);
 		if(loose.WinOrLoose((ogrezz.get(0)).getLetter(), board3, hero3)==1){return 6;}
 		if(ogreLevel3Loose(ogrezz)){return -3;}
-		 
+
 
 		for(int i=0; i<numOgres; i++){
 			boolean heroPackage[]={hero3.herowithclub,hero3.herowithkey};
 			(ogrezz.get(i)).Movimento(2, board3, heroPackage);
 		}
 		if(ogreLevel3Loose(ogrezz)){return -3;}
-		
+
 		return 5;
-} 
-	
+	} 
+
+	/**
+	 * Método para verificar o estado de jogo do nível criado pelo utilizador
+	 * @param ogrezz ArrayLis do tipo Ogre com os ogres de jogo
+	 * @return boolean true caso o jogo termine
+	 */
 	public boolean ogreLevel3Loose(ArrayList <Ogre> ogrezz){
 		if(!hero3.herowithclub){
 			if(loose.WinOrLoose((ogrezz.get(0)).getLetter(), board3, hero3)==-1){return true;}
@@ -163,8 +218,15 @@ public class Game {
 		return false;
 	}	
 	
+	/**
+	 * Método que aplica as lógicas de jogo tendo em conta o nível 
+	 * @param direc char com a direção de movimento
+	 * @param guardType String com o tipo de guarda
+	 * @param numOgres inteiro com o número de ogres
+	 * @return inteiro com o estado de jogo
+	 */
 	public int jogo(char direc, String guardType, int numOgres){
-		
+
 		if (nivel !=4){
 			Guard guarda=iniciateBadCaracters(guardType);
 			if (nivel==1){
@@ -186,11 +248,14 @@ public class Game {
 				}
 			} 
 		}
-
-		
 		return estado;
 	}
-	
+
+	/**
+	 * Método que inicializa os guardas e ogres do jogo
+	 * @param guardType String com o tipo de guarda
+	 * @return Guard com o guarda inicializado
+	 */
 	public Guard iniciateBadCaracters(String guardType){
 		ogres.add(ogre);
 		ogres.add(ogre1);
@@ -202,7 +267,7 @@ public class Game {
 		if(guardType=="Suspicious"){guarda=suspicious;}
 		else if(guardType=="Rookie"){guarda=rookie;}
 		else if(guardType=="Drunken"){guarda=drunken;}
-		
+
 		return guarda;
 	}
 }

@@ -2,12 +2,28 @@ package dkeep.logic;
 
 import java.util.Random;
 
+/**
+ * Classe que guarda guardas com o comportamento do tipo drunken
+ * @author Carolina e Manuel
+ *
+ */
 public class Drunken extends comportamentoGuarda{
-
+	
+	/**
+	 * Construtor que cria um guarda comportamento do tipo drunken numa determinada posição.
+	 * @param PosXi inteiro com a posição em x
+	 * @param PosYi inteiro com a posção em y
+	 */
 	public Drunken(int PosXi, int PosYi) {
 		super(PosXi, PosYi);
 	}
-
+	
+	/**
+	 * Método que verifica qual a próxima direção de movimento do guarda
+	 *  @param mapLevel inteiro com o nível do jogo
+	 *  @param m Map com o mapa do jogo
+	 *  @return char com a direção do movimento
+	 */
 	public char Movimento (int mapLevel, Map m){
 
 		char dir;
@@ -36,6 +52,10 @@ public class Drunken extends comportamentoGuarda{
 
 	}
 	
+	/**
+	 * Método que verifica qual a próxima direção de movimento após este acordar.
+	 * @return char com a direção de movimento
+	 */
 	public char walkAfterSleep(){
 		char dir;
 		Random rn = new Random(); 
@@ -56,7 +76,10 @@ public class Drunken extends comportamentoGuarda{
 		return dir;
 	}
 	
-	
+	/**
+	 * Método que verifica qual a próxima direção de movimento caso o guarda inverta o sentido do movimento
+	 * @return char com a direção do movimento
+	 */
 	public char invertWalking(){
 		char dir;
 		switch (guardtraject[i-1]){

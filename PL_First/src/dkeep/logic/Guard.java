@@ -1,10 +1,19 @@
 package dkeep.logic;
 
-
+/**
+ * Classe que guarda personagens do tipo guarda
+ * @author Carolina e Manuel
+ *
+ */
 public class Guard extends Entidade{
 	
 	comportamentoGuarda compGuarda;	
-
+	
+	/**
+	 * Contrutor que cria um guarda numa determinada posição e atribui o char 'G' à sua letra
+	 * @param PosXi inteiro para a posição em x
+	 * @param PosYi inteiro para a posição em y
+	 */
 	public Guard(int PosXi, int PosYi){
 		pos[0]=PosXi;
 		pos[1]=PosYi;
@@ -14,6 +23,11 @@ public class Guard extends Entidade{
 	int i=0;
 	char guardtraject[] = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
 	
+	/**
+	 * Método que coloca o guarda numa determinada posição do mapa
+	 * @param PosXi inteiro para a posição em x 
+	 * @param PosYi inteiro para a posição em y
+	 */
 	protected void setposXY(int PosXi, int PosYi){
 		pos[0]=PosXi;
 		pos[1]=PosYi;
@@ -59,11 +73,20 @@ public class Guard extends Entidade{
 
 	}
 	
-	
+	/**
+	 * Contrutor que cria uma personagem do tipo guarda, atribuindo-a um determinado comportamento
+	 * @param cg comportamentoGuarda para o comportamento do guarda
+	 */
 	Guard(comportamentoGuarda cg){
 		compGuarda = cg;
 	}
 	
+	/**
+	 * Método para movimentar o guarda
+	 * @param mapLevel inteiro para o nível do jogo
+	 * @param m Map com o mapa do jogo
+	 * @return char vazio
+	 */
 	protected char Movimento (int mapLevel, Map m){
 
 		compGuarda.movimento();

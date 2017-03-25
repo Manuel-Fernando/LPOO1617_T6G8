@@ -185,6 +185,7 @@ public class InitialMenu extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					FileReader file = new FileReader();
+					
 					try {
 						new GameWindow(file.loadGame(), file.getGuardType(), file.getNumOgres());
 					} catch (IOException e) {

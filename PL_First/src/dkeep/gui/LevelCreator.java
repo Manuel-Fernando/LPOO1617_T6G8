@@ -193,7 +193,6 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 							mapa.setBounds(28, 88, m*36, n*36);
 
 							if ((int)(mapa.getBounds().getWidth()+mapa.getBounds().x+100)>640 || (int)(mapa.getBounds().getHeight()+mapa.getBounds().y+50)>550){
-								System.out.println("aqui");
 								frame.setBounds(100, 100, (int)(mapa.getBounds().getWidth()+mapa.getBounds().x+150), (int)(mapa.getBounds().getHeight()+mapa.getBounds().y+70));
 							}
 
@@ -299,7 +298,7 @@ public class LevelCreator extends JFrame implements MouseMotionListener, MouseLi
 							if ((int) (lblKey.getBounds().y + lblKey.getBounds().getHeight()+ 10) > (int) (mapa.getBounds().y + mapa.getBounds().getHeight()+ 10)){
 								btnNewButton.setBounds(300, (int) (lblKey.getBounds().y + lblKey.getBounds().getHeight()+ 10), 90, 25);
 							} else {
-								btnNewButton.setBounds(300, (int) (mapa.getBounds().y + mapa.getBounds().getHeight()-10), 90, 25);
+								btnNewButton.setBounds(300, (int) (mapa.getBounds().y + mapa.getBounds().getHeight()+3), 90, 25);
 							}
 
 							frame.getContentPane().add(btnNewButton);

@@ -1,10 +1,10 @@
 XXXXXXXX
-X     OX
-X +    X
 X      X
+X  A   X
 X      X
-X    H X
 X  k   X
+X      X
+X     OX
 XXXXXIXX
 Rookie
 1

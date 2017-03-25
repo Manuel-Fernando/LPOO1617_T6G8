@@ -47,6 +47,9 @@ public class GameWindow extends JFrame{
 	private static String guard = "Rookie";
 	private JLabel lblGame;
 	private char [][] board;
+	private int w;
+	private int h;
+	private boolean newLevel = false;
 
 	/**
 	 * Launch the application.
@@ -82,6 +85,9 @@ public class GameWindow extends JFrame{
 	 
 	public GameWindow(char [][] b) throws IOException {
 		board = b;
+		h = b.length;
+		w = b[0].length;
+		newLevel = true;
 		jogo.setTabuleiro(board, guard);
 		number=jogo.ogreNumber();
 		initialize();
@@ -298,7 +304,23 @@ public class GameWindow extends JFrame{
 		frame.getContentPane().add(lblYouCanStart);
 
 		panel = new GameView(jogo.getTabuleiro(), false);
-		panel.setBounds(32, 49, 359, 359);
+		
+		if (newLevel){
+			if (w*36>=359 || h*36>=359){
+				panel.setBounds(32, 49, w*36, h*36);
+				frame.setBounds(100, 100, (int)(panel.getBounds().getWidth()+panel.getBounds().x+220), (int)(panel.getBounds().getHeight()+panel.getBounds().y+70));
+				btnUp.setBounds((int) (panel.getBounds().getWidth()+panel.getBounds().x + 80), 150, 60, 25);
+				btnDown.setBounds((int) (panel.getBounds().getWidth()+panel.getBounds().x + 80), 250, 60, 25);
+				btnRight.setBounds((int) (panel.getBounds().getWidth()+panel.getBounds().x + 130), 200, 60, 25);
+				btnLeft.setBounds((int) (panel.getBounds().getWidth()+panel.getBounds().x + 30), 200, 60, 25);
+				btnExit.setBounds((int) (panel.getBounds().getWidth()+panel.getBounds().x +60), 390, 100, 25);
+				saveGame.setBounds((int) (panel.getBounds().getWidth()+panel.getBounds().x + 60), 340,  100, 25);
+			} else if (w*36<359 || h*36<359){
+				panel.setBounds(32, 49, w*36, h*36);
+			}
+		} else {
+			panel.setBounds(32, 49, 359, 359);
+		}
 		frame.getContentPane().add(panel);
 
 		lblGame = new JLabel("Dungeon Keep");

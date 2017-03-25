@@ -87,6 +87,12 @@ public class GameView extends JPanel{
 				case 'O':
 					g.drawImage(ogre,  j+35*j, i+35*i, 35, 35, this);
 					break;
+				case '8':
+					g.drawImage(ogre,  j+35*j, i+35*i, 35, 35, this);
+					break;
+				case '$':
+					g.drawImage(ogre,  j+35*j, i+35*i, 35, 35, this);
+					break;
 				case '*':
 					g.drawImage(club,  j+35*j, i+35*i, 35, 35, this);
 					break;

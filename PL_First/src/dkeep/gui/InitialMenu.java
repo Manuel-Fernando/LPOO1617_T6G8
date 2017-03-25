@@ -186,12 +186,17 @@ public class InitialMenu extends JFrame {
 				try {
 					FileReader file = new FileReader();
 					
-					try {
-						new GameWindow(file.loadGame(), file.getGuardType(), file.getNumOgres());
-					} catch (IOException e) {
-						e.printStackTrace();
-						JOptionPane.showMessageDialog(frame, "Game not loaded successfully!");
+					if (file.isThere()){
+						JOptionPane.showMessageDialog(frame, "There is no saved file!");
+					} else {
+						try {
+							new GameWindow(file.loadGame(), file.getGuardType(), file.getNumOgres());
+						} catch (IOException e) {
+							e.printStackTrace();
+							JOptionPane.showMessageDialog(frame, "Game not loaded successfully!");
+						}
 					}
+	
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}

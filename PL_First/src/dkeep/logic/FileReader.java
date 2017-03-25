@@ -27,7 +27,8 @@ public class FileReader {
 	 */
 	public FileReader() throws FileNotFoundException{
 		file = new File("game.txt");
-		input = new Scanner(file); 
+		if (file.exists())
+			input = new Scanner(file); 
 		info = new Vector<String>();
 	}
 	
@@ -91,6 +92,18 @@ public class FileReader {
 	 */
 	public int getNumOgres(){
 		return numOgres;
+	}
+	
+	/**
+	 * Método que verifica se o ficheiro existe
+	 * @return true se o ficheiro existir
+	 */
+	public boolean isThere(){		
+		if (!file.exists()){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

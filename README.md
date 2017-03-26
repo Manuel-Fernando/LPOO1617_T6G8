@@ -1,6 +1,6 @@
 # LPOO1617_T6G8
 
-Carolina Rocha
+Carolina da Ponte Rocha 201304026 up201304026@fe.up.pt
 
 Manuel Fernando Sequeira Pereira 201205052 ee12314@fe.up.pt
 

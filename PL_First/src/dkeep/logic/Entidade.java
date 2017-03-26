@@ -28,7 +28,7 @@ public class Entidade {
 	 * Método que retorna a posição em x da personagem
 	 * @return inteiro com a posição em x
 	 */
-	protected int getX(){
+	public int getX(){
 		return pos[0];
 	}
 	
@@ -36,7 +36,7 @@ public class Entidade {
 	 * Método que retorna a posição em y da personagem
 	 * @return inteiro com a posição em y 
 	 */
-	protected int getY(){
+	public int getY(){
 		return pos[1];
 	}
 	
@@ -44,7 +44,7 @@ public class Entidade {
 	 * Método que retorna a letra associada a cada personagem
 	 * @return char com a letra de cada personagem
 	 */
-	protected char getLetter(){
+	public char getLetter(){
 		return letter;
 	}
 	

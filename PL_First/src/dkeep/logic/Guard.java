@@ -38,8 +38,8 @@ public class Guard extends Entidade{
 	 * @param PosXi inteiro para a posição em x 
 	 * @param PosYi inteiro para a posição em y
 	 */
-	protected void setposXY(int PosXi, int PosYi){
-		pos[0]=PosXi;
+	public void setposXY(int PosXi, int PosYi){
+		pos[0]=PosXi;  
 		pos[1]=PosYi;
 		
 		switch(pos[0]){
@@ -102,6 +102,14 @@ public class Guard extends Entidade{
 		compGuarda.movimento();
 		return ' ';
 
+	}
+	
+	/**
+	 * Método para retornar o iterador
+	 * @return inteiro com o iterador
+	 */
+	public int getI(){
+		return i;
 	}
 
 }	

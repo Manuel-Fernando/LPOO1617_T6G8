@@ -7,7 +7,10 @@ package dkeep.logic;
  */
 public class Guard extends Entidade{
 	
-	comportamentoGuarda compGuarda;	
+	/**
+	 * Tipo de guarda
+	 */
+	private comportamentoGuarda compGuarda;	
 	
 	/**
 	 * Contrutor que cria um guarda numa determinada posição e atribui o char 'G' à sua letra
@@ -20,8 +23,15 @@ public class Guard extends Entidade{
 		letter='G'; 
 	}
 
-	int i=0;
-	char guardtraject[] = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
+	/**
+	 * Iterador
+	 */
+	protected int i=0;
+	
+	/**
+	 * Trajeto do guarda
+	 */
+	protected char guardtraject[] = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
 	
 	/**
 	 * Método que coloca o guarda numa determinada posição do mapa

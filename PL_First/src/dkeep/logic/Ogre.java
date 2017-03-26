@@ -9,10 +9,25 @@ import java.util.Random;
  */
 public class Ogre extends Entidade{
 
-	int keyPosx=1;
-	int keyPosy=7;
-	int armPosx=7;
-	int armPosy=5;
+	/**
+	 * Posição em x para a chave
+	 */
+	private int keyPosx=1;
+	
+	/**
+	 * Posição em y para a chave
+	 */
+	private int keyPosy=7;
+	
+	/**
+	 * Posição em x para a armadura
+	 */
+	private int armPosx=7;
+	
+	/**
+	 * Posição em y para a armadura
+	 */
+	private int armPosy=5;
 	
 	/**
 	 * Contrutor que cria o ogre numa determinada posição
@@ -76,14 +91,21 @@ public class Ogre extends Entidade{
 		return false;
 	}
 	
-	int posClub[]={3,3};
-	int dontmove=0;
+	/**
+	 * Posição do club
+	 */
+	private int posClub[]={3,3};
 	
 	/**
-	 * Método (...)
-	 * @param posin
-	 * @param m
-	 * @param heroPachage
+	 * Contador para parar o ogre
+	 */
+	private int dontmove=0;
+	
+	/**
+	 * Método mover o ogre para uma determinada posição e caso o heroi tenha armadura não move o ogre
+	 * @param posin posição em x e y para onde o ogre se vai mover
+	 * @param m Map com o mapa de jogo
+	 * @param heroPachage boolean[] com true na posição 0 se o heroi tem armadura e true na posição 1 se o heroi tem chave
 	 */
 	private void direcao (int posin[], Map m, boolean[] heroPachage){
 	
@@ -91,6 +113,7 @@ public class Ogre extends Entidade{
 			if(dontmove==3){
 				dontmove=0;
 				letter='O';
+				heroPachage[0]=false;
 			}
 			 
 			//apagar posicao antiga
@@ -112,10 +135,10 @@ public class Ogre extends Entidade{
 	}
 	
 	/**
-	 * Método que coloca o ogre na nova posição do tabuleiro. Se houver chave passa a $ (....)
-	 * @param posin
-	 * @param m
-	 * @param heroPachage
+	 * Método que coloca o ogre na nova posição do tabuleiro.
+	 * @param posin posição em x e y para onde o ogre se vai mover
+	 * @param m Map com o mapa de jogo
+	 * @param heroPachage boolean[] com true na posição 0 se o heroi tem armadura e true na posição 1 se o heroi tem chave
 	 */
 	public void writeOgreNewPosition(int posin[], Map m, boolean[] heroPachage){
 		if (posin[0]==keyPosx && posin[1]==keyPosy && !heroPachage[1]){m.writeElement(posin, '$');}
@@ -123,8 +146,9 @@ public class Ogre extends Entidade{
 			if(findHero(m, posin[0], posin[1]) && heroPachage[0]){
 				dontmove=1;
 				letter='8';
-			}
+			} 
 			m.writeElement(posin, letter);
+			
 		}
 		pos[0]=posin[0];
 		pos[1]=posin[1];
@@ -133,6 +157,11 @@ public class Ogre extends Entidade{
 	
 	//Club part
 
+	/**
+	 * Método para mover o club à volta do ogre
+	 * @param m Map com o mapa de jogo
+	 * @param heroPachage boolean[] com true na posição 0 se o heroi tem armadura e true na posição 1 se o heroi tem chave
+	 */
 	private void clubDirection(Map m, boolean[] heroPachage){
 
 		//apagar posicao antiga
@@ -158,6 +187,11 @@ public class Ogre extends Entidade{
 		}else m.writeElement(posClub, '*'); 
 	} 
 
+	/**
+	 * Método para verificar se o club pode mover-se para uma determinada posição
+	 * @param m Map com o mapa de jogo
+	 * @return char com a direção na qual o club se vai mover
+	 */
 	public char freeClubSpace(Map m){
 		char direction=randomdirection();
 		while((direction=='w' && (m.searchElement(pos[0]-1, pos[1])=='X' || m.searchElement(pos[0]-1, pos[1])=='I'))||
@@ -169,6 +203,11 @@ public class Ogre extends Entidade{
 		return direction;
 	}
 
+	/**
+	 * Método para apagar a posição anterior do club
+	 * @param m Map com o mapa de jogo
+	 * @param heroPachage boolean[] com true na posição 0 se o heroi tem armadura e true na posição 1 se o heroi tem chave
+	 */
 	public void clearOldClubPosition(Map m, boolean[] heroPachage){
 		if (posClub[0]==keyPosx && posClub[1]==keyPosy && !heroPachage[1] && !(pos[0]==keyPosx && pos[1]==keyPosy)){
 			m.writeElement(posClub, 'k');
@@ -180,6 +219,11 @@ public class Ogre extends Entidade{
 
 	}
 
+	/**
+	 * Método para apagar a posição anterior do ogre
+	 * @param m Map com o mapa de jogo
+	 * @param heroPachage boolean[] com true na posição 0 se o heroi tem armadura e true na posição 1 se o heroi tem chave
+	 */
 	public void clearOldOgrePosition(Map m, boolean[] heroPachage){
 		if (pos[0]==keyPosx && pos[1]== keyPosy && !heroPachage[1]){
 			m.writeElement(pos, 'k');
@@ -192,6 +236,13 @@ public class Ogre extends Entidade{
 	}
 
 
+	/**
+	 * Método para movimentar o ogre
+	 * @param mapLevel inteiro com o nível de jogo
+	 * @param m Map com o mapa de jogo
+	 * @param heroPackage boolean[] com true na posição 0 se o heroi tem armadura e true na posição 1 se o heroi tem chave
+	 * @return char com a direção
+	 */
 	public char Movimento(int mapLevel, Map m, boolean[] heroPackage){
 
 		char dir=randomdirection();

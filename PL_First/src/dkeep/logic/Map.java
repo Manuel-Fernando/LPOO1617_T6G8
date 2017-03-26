@@ -7,6 +7,9 @@ package dkeep.logic;
  */
 public class Map {
 
+	/**
+	 * Mapa do jogo
+	 */
 	char [][] board; 
 	
 	/**

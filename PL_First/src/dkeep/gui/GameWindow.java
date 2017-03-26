@@ -100,6 +100,9 @@ public class GameWindow extends JFrame{
 	
 	public GameWindow(char [][] b, String type, int n) throws IOException {
 		board = b;
+		h = b.length;
+		w = b[0].length;
+		newLevel = true;
 		guard = type;
 		jogo.setTabuleiro(board, guard);
 		number = n;

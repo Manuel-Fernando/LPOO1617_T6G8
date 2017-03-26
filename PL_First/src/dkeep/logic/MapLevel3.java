@@ -7,6 +7,9 @@ package dkeep.logic;
  */
 public class MapLevel3 extends Map {
 	
+	/**
+	 * Mapa do jogo criado pelo utilizador/ lido do ficheiro
+	 */
 	static char [][]board3;
 	
 	/**

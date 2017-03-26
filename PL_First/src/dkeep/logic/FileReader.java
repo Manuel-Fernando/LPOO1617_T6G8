@@ -14,11 +14,34 @@ import javax.swing.JOptionPane;
  */
 public class FileReader {
 	
+	/**
+	 * File para o ficheiro a ser lido
+	 */
 	private File file;
+	
+	/**
+	 * Scanner para ler o ficheiro
+	 */
 	private Scanner input;
+	
+	/**
+	 * char[][] para guardar o mapa de jogo
+	 */
 	private char[][] board;
+	
+	/**
+	 * Vetor para guardar a informação que é lida do ficheiro
+	 */
 	private Vector<String> info;
+	
+	/**
+	 * String para guardar o tipode guarda
+	 */
 	private String type;
+	
+	/**
+	 * inteiro para guardar o número de ogres do jogo
+	 */
 	private int numOgres;
 	
 	/**

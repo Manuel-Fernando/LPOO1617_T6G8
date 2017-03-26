@@ -18,7 +18,14 @@ public class Suspicious extends comportamentoGuarda {
 		super(PosXi, PosYi);
 	}
 	
+	/**
+	 * Direção de movimento
+	 */
 	char dir;
+	
+	/**
+	 * Trajeto inverso so guarda
+	 */
 	char[] guardInverse = {'d','w','w','w','w','d','d','d','d','d','d','w','a','a','a','a','a','a','a','s','s','s','s','s'};
 	
 	/**

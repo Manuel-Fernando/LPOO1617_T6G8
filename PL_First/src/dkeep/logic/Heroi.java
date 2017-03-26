@@ -18,8 +18,19 @@ public class Heroi extends Entidade{
 		letter='H';
 	}
 	
-	int count = 0;
+	/**
+	 * Contador
+	 */
+	private int count = 0;
+	
+	/**
+	 * Herói com chave
+	 */
 	boolean herowithkey = false;
+	
+	/**
+	 * Herói com armadura
+	 */
 	boolean herowithclub = false;
 	
 	/**

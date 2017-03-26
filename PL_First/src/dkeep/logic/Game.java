@@ -9,33 +9,109 @@ import java.util.ArrayList;
  */
 public class Game {
 
+	/**
+	 * Mapa do nível 1
+	 */
 	MapLevel1 board1 = new MapLevel1();
+	
+	/**
+	 * Mapa do nível 2
+	 */
 	MapLevel2 board2 = new MapLevel2();
+	
+	/**
+	 * Mapa do nível criado pelo utilzador/ lido do ficheiro
+	 */
 	MapLevel3 board3 = new MapLevel3();
+	
+	/**
+	 * Estado de jogo
+	 */
 	GameState loose = new GameState();
 
+	/**
+	 * Guarda do tipo Rookie
+	 */
 	Guard rookie = new Rookie(1,8);
+	
+	/**
+	 * Guarda do tipo Suspicious
+	 */
 	Guard suspicious = new Suspicious(1,8);
+	
+	/**
+	 * Guarda do tipo Drunken
+	 */
 	Guard drunken = new Drunken(1,8);
+	
+	/**
+	 * Guarda para o jogo lido do ficheiro
+	 */
 	Guard guard3;
 
+	/**
+	 * Heroi para o nível 1
+	 */
 	Heroi hero1 = new Heroi(1,1);
+	
+	/**
+	 * Heroi para o nível 2
+	 */
 	Heroi hero2 = new Heroi(7,1);
+	
+	/**
+	 * Heroi para o jogo lido do ficheiro
+	 */
 	Heroi hero3;
 
+	/**
+	 * Ogre
+	 */
 	Ogre ogre = new Ogre(1,4); 
+	
+	/**
+	 * Ogre
+	 */
 	Ogre ogre1 = new Ogre(1,4);
+	
+	/**
+	 * Ogre
+	 */
 	Ogre ogre2 = new Ogre(1,4);
+	
+	/**
+	 * Ogre
+	 */
 	Ogre ogre3 = new Ogre(1,4);
+	
+	/**
+	 * Ogre
+	 */
 	Ogre ogre4 = new Ogre(1,4);
 
+	/**
+	 * Números de ogres do jogo
+	 */
 	int ogreNumber=0;
 
+	/**
+	 * ArrayList com os ogres de jogo
+	 */
 	ArrayList <Ogre> ogres = new ArrayList <Ogre>(5);
 
+	/**
+	 * Nível de jogo
+	 */
 	int nivel = 1;
+	
+	/**
+	 * Estado do jogo
+	 */
 	int estado = 0;
 
+	/**
+	 * Mapa de jogo
+	 */
 	char[][] tabuleiro = board1.board;
 
 	/**
